@@ -1,0 +1,61 @@
+<section id="architecture" class="architecture-section">
+
+  <div class="section-heading">
+    <span class="section-label">SYSTEM ARCHITECTURE</span>
+
+    <h2>How the Application Works</h2>
+
+    <p>
+      A simple full-stack request flow from the Angular client
+      through the Spring Boot API and into the database.
+    </p>
+  </div>
+
+
+  <div class="architecture-panel">
+
+    <div class="architecture-flow">
+
+      <div class="architecture-node">
+        <span class="node-label">CLIENT</span>
+        <strong>Angular 21</strong>
+        <small>localhost:4200</small>
+      </div>
+
+
+      <div class="architecture-connection">
+        <span>HTTP / JSON</span>
+
+        <div class="connection-line"></div>
+
+        <span class="connection-arrow">→</span>
+      </div>
+
+
+      <div class="architecture-node">
+        <span class="node-label">API</span>
+        <strong>Spring Boot</strong>
+        <small>localhost:8080</small>
+      </div>
+
+
+      <div class="architecture-connection">
+        <span>JPA</span>
+
+        <div class="connection-line"></div>
+
+        <span class="connection-arrow">→</span>
+      </div>
+
+
+      <div class="architecture-node">
+        <span class="node-label">DATA</span>
+        <strong>H2 Database</strong>
+        <small>Timeline Events</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

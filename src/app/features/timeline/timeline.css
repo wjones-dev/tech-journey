@@ -1,0 +1,600 @@
+:host {
+  display: block;
+}
+
+
+/* =========================
+   TIMELINE SECTION
+   ========================= */
+
+.timeline-section {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 120px 30px 160px;
+}
+
+
+/* =========================
+   JOURNEY ENTRY
+   ========================= */
+
+.journey-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 80px;
+
+  color: #5ee7ff;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.2rem;
+}
+
+
+.journey-entry-line {
+  width: 1px;
+  height: 70px;
+
+  margin-bottom: 18px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      #5ee7ff
+    );
+
+  box-shadow:
+    0 0 15px rgba(94, 231, 255, 0.7);
+}
+
+
+.journey-entry-dot {
+  width: 8px;
+  height: 8px;
+
+  margin-top: 18px;
+
+  border-radius: 50%;
+
+  background: #5ee7ff;
+
+  box-shadow:
+    0 0 10px #5ee7ff,
+    0 0 25px rgba(94, 231, 255, 0.8);
+}
+
+
+/* =========================
+   SECTION HEADING
+   ========================= */
+
+.section-heading {
+  text-align: center;
+
+  margin-bottom: 100px;
+}
+
+
+.section-label {
+  display: block;
+
+  margin-bottom: 16px;
+
+  color: #5ee7ff;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+}
+
+
+.section-heading h2 {
+  margin: 0;
+
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  letter-spacing: -0.04em;
+}
+
+
+.section-heading p {
+  max-width: 600px;
+
+  margin: 20px auto 0;
+
+  color: #8993a7;
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   TIMELINE PATH
+   ========================= */
+
+.timeline {
+  position: relative;
+}
+
+
+/* Base timeline path */
+
+.timeline::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 50%;
+
+  width: 3px;
+
+  transform: translateX(-50%);
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(94, 231, 255, 0.3) 4%,
+      #5ee7ff 20%,
+      #248eff 48%,
+      #8b5cf6 78%,
+      rgba(139, 92, 246, 0.25) 96%,
+      transparent 100%
+    );
+
+  box-shadow:
+    0 0 10px rgba(94, 231, 255, 0.8),
+    0 0 22px rgba(36, 142, 255, 0.55),
+    0 0 45px rgba(139, 92, 246, 0.25);
+}
+
+
+/* Traveling light */
+
+.timeline::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 9px;
+  height: 90px;
+
+  transform: translateX(-50%);
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.95),
+      #5ee7ff,
+      transparent
+    );
+
+  filter: blur(1px);
+
+  box-shadow:
+    0 0 15px #5ee7ff,
+    0 0 35px rgba(94, 231, 255, 0.8),
+    0 0 65px rgba(36, 142, 255, 0.5);
+
+  animation: timelinePulse 7s linear infinite;
+
+  pointer-events: none;
+}
+
+
+@keyframes timelinePulse {
+
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 96%;
+    opacity: 0;
+  }
+
+}
+
+
+/* =========================
+   TIMELINE ITEMS
+   ========================= */
+
+.timeline-item {
+  position: relative;
+
+  width: 50%;
+
+  margin-bottom: 100px;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+
+.timeline-left {
+  padding-right: 70px;
+
+  text-align: right;
+
+  transform: translateX(-45px);
+}
+
+
+.timeline-right {
+  margin-left: 50%;
+
+  padding-left: 70px;
+
+  text-align: left;
+
+  transform: translateX(45px);
+}
+
+
+.timeline-item.visible {
+  opacity: 1;
+
+  transform: translateX(0);
+}
+
+
+/* =========================
+   TIMELINE MARKERS
+   ========================= */
+
+.timeline-marker {
+  position: absolute;
+
+  top: 35px;
+}
+
+
+.timeline-left .timeline-marker {
+  right: -9px;
+}
+
+
+.timeline-right .timeline-marker {
+  left: -9px;
+}
+
+
+.marker-dot {
+  position: relative;
+
+  z-index: 3;
+
+  width: 18px;
+  height: 18px;
+
+  border: 3px solid #5ee7ff;
+  border-radius: 50%;
+
+  background: #05070d;
+
+  box-shadow:
+    0 0 8px rgba(94, 231, 255, 0.8),
+    0 0 18px rgba(94, 231, 255, 0.45);
+
+  transition:
+    transform 0.4s ease,
+    background 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+
+.marker-dot::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -11px;
+
+  border:
+    1px solid rgba(94, 231, 255, 0.18);
+
+  border-radius: 50%;
+
+  opacity: 0;
+
+  transform: scale(0.6);
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+
+.timeline-item.visible .marker-dot {
+  background: #5ee7ff;
+
+  transform: scale(1.15);
+
+  box-shadow:
+    0 0 12px #5ee7ff,
+    0 0 30px rgba(94, 231, 255, 0.9),
+    0 0 60px rgba(36, 142, 255, 0.45);
+}
+
+
+.timeline-item.visible .marker-dot::after {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+
+/* =========================
+   YEAR
+   ========================= */
+
+.marker-year {
+  position: absolute;
+
+  top: -4px;
+
+  color: #5ee7ff;
+
+  font-weight: 700;
+  letter-spacing: 0.08rem;
+
+  transition:
+    color 0.5s ease,
+    text-shadow 0.5s ease;
+}
+
+
+.timeline-left .marker-year {
+  left: 35px;
+}
+
+
+.timeline-right .marker-year {
+  right: 35px;
+}
+
+
+.timeline-item.visible .marker-year {
+  color: #ffffff;
+
+  text-shadow:
+    0 0 12px rgba(94, 231, 255, 0.8);
+}
+
+
+/* =========================
+   TIMELINE CARD
+   ========================= */
+
+.timeline-card {
+  padding: 28px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  backdrop-filter: blur(15px);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.timeline-card:hover {
+  transform: translateY(-8px);
+
+  border-color:
+    rgba(94, 231, 255, 0.35);
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+
+.card-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+
+.category {
+  display: inline-block;
+
+  padding: 6px 10px;
+
+  border-radius: 6px;
+
+  background:
+    rgba(94, 231, 255, 0.1);
+
+  color: #5ee7ff;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1rem;
+}
+
+
+.event-number {
+  color: rgba(255, 255, 255, 0.2);
+
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+
+
+.timeline-card h3 {
+  margin: 0 0 16px;
+
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+}
+
+
+.event-description {
+  margin-bottom: 24px;
+
+  color: #a5adbd;
+
+  line-height: 1.7;
+}
+
+
+.technology {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding-top: 18px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  color: #d9deea;
+
+  font-size: 0.85rem;
+}
+
+
+.technology-label {
+  color: #626c80;
+
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.12rem;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 800px) {
+
+  .timeline-section {
+    padding:
+      100px 24px
+      120px;
+  }
+
+
+  /* Move timeline path and comet left */
+
+  .timeline::before,
+  .timeline::after {
+    left: 16px;
+  }
+
+
+  .timeline-item,
+  .timeline-left,
+  .timeline-right {
+    width: 100%;
+
+    margin-left: 0;
+
+    padding-left: 55px;
+    padding-right: 0;
+
+    text-align: left;
+  }
+
+
+  .timeline-left {
+    transform: translateX(-25px);
+  }
+
+
+  .timeline-right {
+    transform: translateX(25px);
+  }
+
+
+  .timeline-item.visible {
+    transform: translateX(0);
+  }
+
+
+  .timeline-left .timeline-marker,
+  .timeline-right .timeline-marker {
+    left: 7px;
+    right: auto;
+  }
+
+
+  .timeline-left .marker-year,
+  .timeline-right .marker-year {
+    top: -28px;
+
+    left: 32px;
+    right: auto;
+  }
+
+
+  .timeline-item {
+    margin-bottom: 70px;
+  }
+
+}
+
+
+/* =========================
+   ACCESSIBILITY
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .timeline-item {
+    opacity: 1;
+
+    transform: none;
+
+    transition: none;
+  }
+
+
+  .timeline::after {
+    display: none;
+
+    animation: none;
+  }
+
+}

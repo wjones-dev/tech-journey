@@ -1,0 +1,213 @@
+:host {
+  display: block;
+}
+
+
+.architecture-section {
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  padding:
+    140px 30px
+    180px;
+}
+
+
+.section-heading {
+  text-align: center;
+
+  margin-bottom: 70px;
+}
+
+
+.section-label {
+  display: block;
+
+  color: #5ee7ff;
+
+  letter-spacing: 0.2rem;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  margin-bottom: 16px;
+}
+
+
+.section-heading h2 {
+  margin: 0;
+
+  font-size: clamp(2.5rem, 5vw, 4rem);
+
+  letter-spacing: -0.04em;
+}
+
+
+.section-heading p {
+  max-width: 650px;
+
+  margin:
+    20px auto
+    0;
+
+  color: #8993a7;
+
+  line-height: 1.7;
+}
+
+
+.architecture-panel {
+  padding: 48px 36px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-radius: 24px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(94, 231, 255, 0.08),
+      transparent 45%
+    ),
+    rgba(255, 255, 255, 0.025);
+}
+
+
+.architecture-flow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 22px;
+}
+
+
+.architecture-node {
+  min-width: 190px;
+
+  padding: 24px;
+
+  text-align: center;
+
+  border-radius: 16px;
+
+  border:
+    1px solid
+    rgba(94, 231, 255, 0.18);
+
+  background:
+    rgba(5, 7, 13, 0.65);
+}
+
+
+.node-label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #5ee7ff;
+
+  font-size: 0.64rem;
+  font-weight: 800;
+
+  letter-spacing: 0.15rem;
+}
+
+
+.architecture-node strong {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 1.05rem;
+}
+
+
+.architecture-node small {
+  color: #778196;
+}
+
+
+.architecture-connection {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #687388;
+
+  font-size: 0.66rem;
+}
+
+
+.connection-line {
+  width: 50px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(94, 231, 255, 0.2),
+      #5ee7ff
+    );
+
+  box-shadow:
+    0 0 8px
+    rgba(94, 231, 255, 0.6);
+}
+
+
+.connection-arrow {
+  color: #5ee7ff;
+
+  font-size: 1.1rem;
+}
+
+
+@media (max-width: 800px) {
+
+  .architecture-panel {
+    padding: 32px 20px;
+  }
+
+
+  .architecture-flow {
+    flex-direction: column;
+  }
+
+
+  .architecture-node {
+    width: 100%;
+
+    min-width: 0;
+  }
+
+
+  .architecture-connection {
+    flex-direction: column;
+  }
+
+
+  .connection-line {
+    width: 1px;
+    height: 42px;
+
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(94, 231, 255, 0.2),
+        #5ee7ff
+      );
+  }
+
+
+  .connection-arrow {
+    transform: rotate(90deg);
+  }
+
+}

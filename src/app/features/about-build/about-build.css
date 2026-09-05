@@ -1,0 +1,197 @@
+:host {
+  display: block;
+}
+
+
+/* =========================
+   ABOUT THIS BUILD
+   ========================= */
+
+.build-section {
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  padding:
+    140px 30px
+    180px;
+}
+
+
+.section-heading {
+  text-align: center;
+
+  margin-bottom: 70px;
+}
+
+
+.section-label {
+  display: block;
+
+  color: #5ee7ff;
+
+  letter-spacing: 0.2rem;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  margin-bottom: 16px;
+}
+
+
+.section-heading h2 {
+  margin: 0;
+
+  font-size: clamp(2.5rem, 5vw, 4rem);
+
+  letter-spacing: -0.04em;
+}
+
+
+.section-heading p {
+  max-width: 650px;
+
+  margin:
+    20px auto
+    0;
+
+  color: #8993a7;
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   BUILD CARDS
+   ========================= */
+
+.build-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+
+.build-card {
+  padding: 32px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.build-card:hover {
+  transform: translateY(-6px);
+
+  border-color:
+    rgba(94, 231, 255, 0.3);
+
+  box-shadow:
+    0 20px 50px
+    rgba(0, 0, 0, 0.3);
+}
+
+
+.build-kicker {
+  display: inline-block;
+
+  margin-bottom: 16px;
+
+  color: #5ee7ff;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+
+  letter-spacing: 0.15rem;
+}
+
+
+.build-card h3 {
+  margin:
+    0
+    0
+    16px;
+
+  font-size: 1.6rem;
+}
+
+
+.build-card p {
+  margin:
+    0
+    0
+    24px;
+
+  color: #9da7ba;
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   TECHNOLOGY TAGS
+   ========================= */
+
+.build-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+
+.build-tags span {
+  padding: 7px 10px;
+
+  border-radius: 6px;
+
+  background:
+    rgba(94, 231, 255, 0.08);
+
+  border:
+    1px solid
+    rgba(94, 231, 255, 0.12);
+
+  color: #c9f7ff;
+
+  font-size: 0.72rem;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 800px) {
+
+  .build-section {
+    padding:
+      100px 24px
+      120px;
+  }
+
+
+  .build-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
