@@ -18,7 +18,7 @@ export class TimelineApiService {
 
   private readonly http = inject(HttpClient);
 
-  private readonly apiUrl = 'http://localhost:8080/api/timeline';
+  private readonly apiUrl = '/api/timeline';
 
   getTimeline(): Observable<TimelineEvent[]> {
     return this.http.get<TimelineEvent[]>(this.apiUrl);
