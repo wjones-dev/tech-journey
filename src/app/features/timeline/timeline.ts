@@ -19,7 +19,7 @@ import {
   templateUrl: './timeline.html',
   styleUrl: './timeline.css'
 })
-export class Timeline implements AfterViewInit, OnDestroy {
+export class TimelineComponent implements AfterViewInit, OnDestroy {
 
   private readonly timelineApiService = inject(TimelineApiService);
   private readonly elementRef = inject(ElementRef);
@@ -27,7 +27,6 @@ export class Timeline implements AfterViewInit, OnDestroy {
   timelineEvents = signal<TimelineEvent[]>([]);
 
   private observer?: IntersectionObserver;
-
 
   constructor() {
 
@@ -37,8 +36,6 @@ export class Timeline implements AfterViewInit, OnDestroy {
 
         this.timelineEvents.set(events);
 
-        // Wait for Angular to render timeline items
-        // before attaching the IntersectionObserver.
         setTimeout(() => {
           this.observeTimelineItems();
         });
@@ -53,11 +50,9 @@ export class Timeline implements AfterViewInit, OnDestroy {
 
   }
 
-
   ngAfterViewInit(): void {
     this.observeTimelineItems();
   }
-
 
   private observeTimelineItems(): void {
 
@@ -67,9 +62,7 @@ export class Timeline implements AfterViewInit, OnDestroy {
 
     this.observer?.disconnect();
 
-
     this.observer = new IntersectionObserver(
-
       (entries) => {
 
         entries.forEach((entry) => {
@@ -85,27 +78,20 @@ export class Timeline implements AfterViewInit, OnDestroy {
         });
 
       },
-
       {
         threshold: 0.2
       }
-
     );
-
 
     const items =
       this.elementRef.nativeElement
         .querySelectorAll('.timeline-item');
 
-
     items.forEach((item: Element) => {
-
       this.observer?.observe(item);
-
     });
 
   }
-
 
   ngOnDestroy(): void {
     this.observer?.disconnect();

@@ -516,8 +516,6 @@
   }
 
 
-  /* Move timeline path and comet left */
-
   .timeline::before,
   .timeline::after {
     left: 16px;
@@ -528,13 +526,20 @@
   .timeline-left,
   .timeline-right {
     width: 100%;
+    box-sizing: border-box;
 
     margin-left: 0;
 
-    padding-left: 55px;
-    padding-right: 0;
+    padding-left: 70px;
+    padding-right: 12px;
 
     text-align: left;
+  }
+
+
+  .timeline-card {
+    width: 100%;
+    box-sizing: border-box;
   }
 
 
@@ -562,10 +567,12 @@
 
   .timeline-left .marker-year,
   .timeline-right .marker-year {
-    top: -28px;
+    top: -60px;
 
-    left: 32px;
+    left: 28px;
     right: auto;
+
+    white-space: nowrap;
   }
 
 

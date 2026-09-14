@@ -1,47 +1,83 @@
 <div class="museum">
 
-  <nav class="top-nav">
-    <div class="nav-brand">
-      TECH JOURNEY MUSEUM
-    </div>
+<nav class="top-nav">
 
-    <div class="nav-links">
-      <a href="#timeline">Timeline</a>
-      <a href="#architecture">Architecture</a>
-      <a href="#api-explorer">API Explorer</a>
-      <a href="#lab">Engineering Lab</a>
-      <a href="#about-build">About This Build</a>
-    </div>
-  </nav>
+  <a href="#" class="nav-brand">
+    <img
+      src="favicon.png"
+      alt="Tech Journey Museum comet"
+      class="nav-logo"
+    >
 
-
-  <header class="hero">
-    <div class="hero-content">
-
-      <div class="eyebrow">
-        INTERACTIVE TECHNOLOGY EXPERIENCE
-      </div>
-
-      <h1>
+    <div class="nav-brand-text">
+      <span class="brand-main">
         TECH JOURNEY
-        <span>MUSEUM</span>
-      </h1>
+      </span>
 
-      <p class="hero-description">
-        Explore the technologies, platforms, and ideas that shaped
-        my journey through software engineering.
-      </p>
+      <span class="brand-sub">
+        MUSEUM
+      </span>
+    </div>
+  </a>
+
+  <button
+    class="menu-toggle"
+    type="button"
+    aria-label="Toggle navigation menu"
+    [attr.aria-expanded]="menuOpen"
+    (click)="toggleMenu()"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div
+    class="nav-links"
+    [class.open]="menuOpen"
+  >
+    <a href="#timeline" (click)="closeMenu()">Timeline</a>
+    <a href="#architecture" (click)="closeMenu()">Architecture</a>
+    <a href="#api-explorer" (click)="closeMenu()">API Explorer</a>
+    <a href="#lab" (click)="closeMenu()">Engineering Lab</a>
+    <a href="#about-build" (click)="closeMenu()">About This Build</a>
+  </div>
+
+</nav>
+
+
+<header class="hero">
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      INTERACTIVE TECHNOLOGY EXPERIENCE
+    </div>
+
+    <h1>
+      TECH JOURNEY
+      <span>MUSEUM</span>
+    </h1>
+
+    <p class="hero-description">
+      Explore the technologies, platforms, and ideas that shaped
+      my journey through software engineering.
+    </p>
+
+    <div class="hero-actions">
 
       <a href="#timeline" class="explore-button">
         Explore the Journey
-        <span>↓</span>
+        <span>→</span>
       </a>
 
     </div>
 
-    <div class="hero-orbit orbit-one"></div>
-    <div class="hero-orbit orbit-two"></div>
-  </header>
+  </div>
+
+</header>
 
 
   <app-timeline></app-timeline>
@@ -51,5 +87,14 @@
   <app-about-build></app-about-build>
 
 
+<button
+  class="back-to-top"
+  [class.visible]="showBackToTop"
+  type="button"
+  aria-label="Back to top"
+  (click)="scrollToTop()"
+>
+  ↑
+</button>
 
 </div>
