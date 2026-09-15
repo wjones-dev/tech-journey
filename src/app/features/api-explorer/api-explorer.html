@@ -1,0 +1,280 @@
+<section class="api-explorer">
+  <div class="explorer-shell">
+    <button type="button" class="back-button" (click)="backToTechnology()">
+      <span aria-hidden="true"> ← </span>
+
+      BACK TO TECHNOLOGY
+    </button>
+
+    <header class="explorer-header">
+      <span class="eyebrow"> INTERACTIVE ENGINEERING </span>
+
+      <h1>API Explorer</h1>
+
+      <p>
+        Send requests directly to the Tech Journey REST API and inspect how the Spring Boot backend
+        responds.
+      </p>
+    </header>
+
+    @if (resource(); as technology) {
+      <section class="resource-panel">
+        <div>
+          <span class="section-label"> CURRENT RESOURCE </span>
+
+          <h2>
+            {{ technology.title }}
+          </h2>
+
+          <p>
+            Timeline Event #{{ technology.id }}
+            ·
+            {{ technology.year }}
+            ·
+            {{ technology.category }}
+          </p>
+        </div>
+
+        <div class="resource-tech">
+          <span> TECHNOLOGY </span>
+
+          <strong>
+            {{ technology.technology }}
+          </strong>
+        </div>
+      </section>
+    }
+
+    <div class="explorer-grid">
+      <!-- REQUEST -->
+
+      <section class="request-panel">
+        <div class="panel-heading">
+          <span class="section-label"> REQUEST </span>
+
+          <span class="request-state"> READY </span>
+        </div>
+
+        <div class="request-field">
+          <label> METHOD </label>
+
+          <div class="method-display">
+            <span class="method-get">
+              {{ method() }}
+            </span>
+          </div>
+        </div>
+
+        <div class="request-field">
+          <label> RESOURCE </label>
+
+          <div class="resource-selector">
+            <button
+              type="button"
+              [class.active]="requestMode() === 'all'"
+              (click)="showAllEvents()"
+            >
+              ALL EVENTS
+            </button>
+
+            <button type="button" [class.active]="requestMode() === 'byId'" (click)="showById()">
+              BY ID
+            </button>
+          </div>
+        </div>
+
+        <div class="request-field">
+          <label> ENDPOINT </label>
+
+          @if (requestMode() === 'all') {
+            <div class="endpoint-display">/api/timeline</div>
+          } @else {
+            <div class="endpoint-editor">
+              <span class="endpoint-base"> /api/timeline/ </span>
+
+              <input
+                type="number"
+                class="endpoint-id"
+                [value]="requestId()"
+                (input)="updateRequestId($event)"
+                aria-label="Timeline event ID"
+              />
+            </div>
+          }
+        </div>
+        @if (requestMode() === 'byId') {
+          <div class="demo-actions">
+            <button type="button" class="demo-button" (click)="tryMissingId()">
+              TRY MISSING ID
+            </button>
+
+            <button type="button" class="restore-button" (click)="restoreSelectedResource()">
+              RESTORE {{ resource()?.technology }}
+            </button>
+          </div>
+        }
+
+        <button type="button" class="send-button" [disabled]="loading()" (click)="sendRequest()">
+          @if (loading()) {
+            <span class="spinner"></span>
+
+            SENDING...
+          } @else {
+            SEND REQUEST
+
+            <span aria-hidden="true"> → </span>
+          }
+        </button>
+
+        <div class="request-flow">
+          <span> Angular </span>
+
+          <span>→</span>
+
+          <span> Nginx </span>
+
+          <span>→</span>
+
+          <span> Spring Boot </span>
+        </div>
+      </section>
+
+      <!-- RESPONSE -->
+
+      <section class="response-panel">
+        <div class="panel-heading">
+          <span class="section-label"> RESPONSE </span>
+
+          @if (responseStatus(); as status) {
+            <span
+              class="status-code"
+              [class.status-success]="status >= 200 && status < 300"
+              [class.status-error]="status >= 400"
+            >
+              {{ status }}
+              {{ responseStatusText() }}
+            </span>
+          }
+        </div>
+
+        @if (!responseStatus() && !loading()) {
+          <div class="empty-response">
+            <span class="terminal-symbol"> &gt;_ </span>
+
+            <h3>Ready for a request.</h3>
+
+            <p>Press Send Request to call the live Spring Boot API.</p>
+          </div>
+        }
+
+        @if (loading()) {
+          <div class="loading-response">
+            <span class="spinner large"></span>
+
+            <p>Waiting for Spring Boot...</p>
+          </div>
+        }
+
+        @if (responseStatus()) {
+          <div class="response-meta">
+            <div>
+              <span> STATUS </span>
+
+              <strong>
+                {{ responseStatus() }}
+              </strong>
+            </div>
+
+            <div>
+              <span> TIME </span>
+
+              <strong> {{ responseTime() }} ms </strong>
+            </div>
+
+            <div>
+              <span> SIZE </span>
+
+              <strong> {{ responseSize() ?? 0 }} bytes </strong>
+            </div>
+          </div>
+        }
+
+        @if (formattedResponse()) {
+          <div class="response-tabs">
+            <button type="button" class="response-tab active">BODY</button>
+
+            <button type="button" class="response-tab" disabled>HEADERS</button>
+
+            <button type="button" class="response-tab" disabled>REQUEST</button>
+          </div>
+
+          <pre class="json-response"><code>{{ formattedResponse() }}</code></pre>
+        }
+
+        @if (errorMessage()) {
+          <div class="error-response">
+            <span> REQUEST FAILED </span>
+
+            <p>
+              {{ errorMessage() }}
+            </p>
+          </div>
+        }
+      </section>
+    </div>
+
+    <section class="request-path">
+      <span class="section-label"> REQUEST PATH </span>
+
+      <div class="path">
+        <div class="path-node">
+          <span class="node-number"> 01 </span>
+
+          <strong> Angular </strong>
+
+          <small> HttpClient </small>
+        </div>
+
+        <span class="path-arrow"> → </span>
+
+        <div class="path-node">
+          <span class="node-number"> 02 </span>
+
+          <strong> Nginx </strong>
+
+          <small> Reverse Proxy </small>
+        </div>
+
+        <span class="path-arrow"> → </span>
+
+        <div class="path-node">
+          <span class="node-number"> 03 </span>
+
+          <strong> Spring Boot </strong>
+
+          <small> REST API </small>
+        </div>
+
+        <span class="path-arrow"> → </span>
+
+        <div class="path-node">
+          <span class="node-number"> 04 </span>
+
+          <strong> Service </strong>
+
+          <small> Business Logic </small>
+        </div>
+
+        <span class="path-arrow"> → </span>
+
+        <div class="path-node">
+          <span class="node-number"> 05 </span>
+
+          <strong> Repository </strong>
+
+          <small> Timeline Data </small>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>

@@ -1,0 +1,177 @@
+@if (event(); as technology) {
+  <section class="technology-detail">
+    <div class="detail-shell">
+      <button type="button" class="back-button" (click)="backToTimeline()">
+        <span aria-hidden="true"> ← </span>
+
+        BACK TO TIMELINE
+      </button>
+
+      <div class="detail-hero">
+        <div class="detail-heading">
+          <span class="eyebrow">
+            {{ technology.category }}
+          </span>
+
+          <div class="title-row">
+            <h1>
+              {{ technology.title }}
+            </h1>
+
+            <span class="year">
+              {{ technology.year }}
+            </span>
+          </div>
+
+          <p class="hero-description">
+            {{ technology.description }}
+          </p>
+        </div>
+
+        <div class="visual-panel">
+          <div class="visual-glow"></div>
+
+          @if (detail(); as technologyDetail) {
+            @if (technologyDetail.imageUrl) {
+              <img
+                class="technology-image"
+                [src]="technologyDetail.imageUrl"
+                [alt]="technologyDetail.imageAlt ?? technologyDetail.heading"
+              />
+            } @else {
+              <div class="technology-mark">
+                {{ technologyDetail.visualLabel }}
+              </div>
+            }
+
+            @if (technologyDetail.visualCaption) {
+              <span class="visual-caption">
+                {{ technologyDetail.visualCaption }}
+              </span>
+            }
+          } @else {
+            <div class="technology-mark">
+              {{ technology.technology }}
+            </div>
+          }
+
+          <div class="technology-navigation">
+            <div class="nav-side nav-previous">
+              @if (previousEvent(); as previous) {
+                <button
+                  type="button"
+                  class="technology-nav-button"
+                  (click)="navigateToTechnology(previous)"
+                >
+                  <span class="nav-arrow"> ‹ </span>
+
+                  <span class="nav-info">
+                    <span class="nav-year">
+                      {{ previous.year }}
+                    </span>
+
+                    <span class="nav-title">
+                      {{ previous.title }}
+                    </span>
+                  </span>
+                </button>
+              }
+            </div>
+
+            <div class="nav-side nav-next">
+              @if (nextEvent(); as next) {
+                <button
+                  type="button"
+                  class="technology-nav-button next"
+                  (click)="navigateToTechnology(next)"
+                >
+                  <span class="nav-info">
+                    <span class="nav-year">
+                      {{ next.year }}
+                    </span>
+
+                    <span class="nav-title">
+                      {{ next.title }}
+                    </span>
+                  </span>
+
+                  <span class="nav-arrow"> › </span>
+                </button>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      @if (detail(); as technologyDetail) {
+        <div class="detail-grid">
+          <article class="info-panel">
+            <span class="panel-label"> THE TECHNOLOGY </span>
+
+            <h2>
+              {{ technologyDetail.heading }}
+            </h2>
+
+            <p>
+              {{ technologyDetail.technologyDescription }}
+            </p>
+          </article>
+
+          <article class="info-panel">
+            <span class="panel-label"> WHY IT MATTERS </span>
+
+            <h2>Part of the Journey</h2>
+
+            <p>
+              {{ technologyDetail.whyItMatters }}
+            </p>
+          </article>
+        </div>
+
+        <section class="concept-section">
+          <span class="panel-label"> ENGINEERING CONCEPTS </span>
+
+          <div class="concept-grid">
+            @for (concept of concepts(); track concept; let index = $index) {
+              <div class="concept-card">
+                <span class="concept-number">
+                  {{ (index + 1).toString().padStart(2, '0') }}
+                </span>
+
+                <strong>
+                  {{ concept }}
+                </strong>
+              </div>
+            }
+          </div>
+        </section>
+      }
+
+      <div class="technology-meta">
+        <span class="meta-label"> TIMELINE TECHNOLOGY </span>
+
+        <span class="meta-value">
+          {{ technology.technology }}
+        </span>
+      </div>
+
+      <div class="detail-actions">
+        <button type="button" class="primary-action" (click)="viewApiData()">
+          VIEW API DATA
+
+          <span aria-hidden="true"> → </span>
+        </button>
+
+        @if (detail()?.labType === 'java') {
+          <button type="button" class="secondary-action" [disabled]="!detail()?.labAvailable">
+            ENTER JAVA LAB
+
+            @if (!detail()?.labAvailable) {
+              <span class="coming-soon"> COMING SOON </span>
+            }
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+}

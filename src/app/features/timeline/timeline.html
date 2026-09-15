@@ -1,101 +1,68 @@
 <section id="timeline" class="timeline-section">
-
   <div class="journey-entry">
-
     <div class="journey-entry-line"></div>
 
-    <span>
-      BEGIN JOURNEY
-    </span>
+    <span> BEGIN JOURNEY </span>
 
     <div class="journey-entry-dot"></div>
-
   </div>
 
-
   <div class="section-heading">
-
-    <span class="section-label">
-      TECHNOLOGY THROUGH TIME
-    </span>
+    <span class="section-label"> TECHNOLOGY THROUGH TIME </span>
 
     <h2>The Journey</h2>
 
-    <p>
-      From early computing and gaming to cloud-native development
-      and artificial intelligence.
-    </p>
-
+    <p>From early computing and gaming to cloud-native development and artificial intelligence.</p>
   </div>
 
-
   <div class="timeline">
-
     @for (event of timelineEvents(); track event.id; let index = $index) {
-
       <div
         class="timeline-item"
         [class.timeline-left]="index % 2 === 0"
-        [class.timeline-right]="index % 2 !== 0">
-
+        [class.timeline-right]="index % 2 !== 0"
+      >
         <div class="timeline-marker">
-
           <div class="marker-dot"></div>
 
           <span class="marker-year">
             {{ event.year }}
           </span>
-
         </div>
 
-
         <article class="timeline-card">
-
           <div class="card-top">
-
-            <span
-              class="category"
-              [attr.data-category]="event.category">
-
+            <span class="category" [attr.data-category]="event.category">
               {{ event.category }}
-
             </span>
 
-            <span class="event-number">
-              #{{ index + 1 }}
-            </span>
-
+            <span class="event-number"> #{{ index + 1 }} </span>
           </div>
-
 
           <h3>
             {{ event.title }}
           </h3>
 
-
           <p class="event-description">
             {{ event.description }}
           </p>
 
-
           <div class="technology">
-
-            <span class="technology-label">
-              TECHNOLOGY
-            </span>
+            <span class="technology-label"> TECHNOLOGY </span>
 
             <span>
               {{ event.technology }}
             </span>
-
           </div>
 
+          <div class="card-actions">
+            <button type="button" class="explore-link" (click)="exploreTechnology(event)">
+              EXPLORE
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
         </article>
-
       </div>
-
     }
-
   </div>
-
 </section>
