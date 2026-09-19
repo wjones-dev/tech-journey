@@ -1,46 +1,308 @@
 <section class="engineering-lab">
 
-<div class="lab-background-effects" aria-hidden="true">
+  <!-- =======================================================
+       BACKGROUND EFFECTS
+       ======================================================= -->
+  <div
+    class="lab-background-effects"
+    aria-hidden="true"
+  >
 
-<div class="sky-zone">
-    <span class="bird bird-one"></span>
+    <!-- Flying bird animation -->
+    <div class="sky-zone">
+      <span class="bird bird-one"></span>
+    </div>
+
+
+    <!-- Spinning holographic globe -->
+    <div class="holo-globe">
+      <div class="globe-surface"></div>
+    </div>
+
   </div>
 
-  <div class="holo-globe">
-    <div class="globe-surface"></div>
-  </div>
 
-</div>
-
+  <!-- =======================================================
+       ENGINEERING LAB CONTENT
+       ======================================================= -->
   <div class="lab-content">
 
-    <!-- <header class="lab-header">
 
-      <div class="lab-eyebrow">
-        WELCOME TO THE
-      </div>
+    <!-- =====================================================
+         COLLAPSED DRAWER LAUNCHER
+         ===================================================== -->
 
-      <h1>
-        ENGINEERING
-        <span>LAB</span>
-      </h1>
+    @if (!experimentDrawerOpen()) {
 
-      <div class="lab-tagline">
-        EXPLORE. EXPERIMENT. UNDERSTAND. ENGINEER.
-      </div>
+      <!--
+        Keeps the laboratory environment unobstructed until
+        the visitor chooses to explore the experiments.
+      -->
+      <button
+        type="button"
+        class="experiment-drawer-launcher"
+        (click)="toggleExperimentDrawer()"
+      >
+        <span>
+          EXPLORE EXPERIMENTS
+        </span>
 
-      <p class="lab-description">
-        Hands-on Java and Spring engineering experiments.
-        Real concepts. Real code. Real results.
-      </p>
+        <span
+          class="drawer-arrow"
+          aria-hidden="true"
+        >
+          ↑
+        </span>
+      </button>
 
-    </header> -->
+    }
 
-    <div class="lab-experiments">
 
-      <!-- Lab cards will go here -->
+    <!-- =====================================================
+         EXPERIMENT DRAWER
+         ===================================================== -->
 
-    </div>
+    @if (experimentDrawerOpen()) {
+
+      <section class="experiment-drawer">
+
+
+        <!-- =================================================
+             DRAWER HEADER
+             ================================================= -->
+        <header class="experiment-drawer-header">
+
+          <div>
+
+            @if (activeExperiment() === null) {
+
+              <span class="drawer-eyebrow">
+                ENGINEERING LAB
+              </span>
+
+              <h2>
+                Choose an Experiment
+              </h2>
+
+            } @else {
+
+              <span class="drawer-eyebrow">
+                EXPERIMENT 01
+              </span>
+
+              <h2>
+                Java Data Processing
+              </h2>
+
+            }
+
+          </div>
+
+
+          <!-- Close the entire drawer -->
+          <button
+            type="button"
+            class="drawer-close-button"
+            aria-label="Close Engineering Lab experiments"
+            (click)="closeExperimentDrawer()"
+          >
+            ×
+          </button>
+
+        </header>
+
+
+        <!-- =================================================
+             EXPERIMENT LAUNCHER VIEW
+             ================================================= -->
+
+        @if (activeExperiment() === null) {
+
+          <div class="lab-experiments">
+
+
+            <!-- =============================================
+                 EXPERIMENT 01
+                 Java Collections • Streams • Lambdas
+                 ============================================= -->
+            <article class="experiment-card">
+
+              <div class="experiment-number">
+                01
+              </div>
+
+              <div class="experiment-content">
+
+                <span class="experiment-eyebrow">
+                  JAVA DATA PROCESSING
+                </span>
+
+                <h3>
+                  Collections • Streams • Lambdas
+                </h3>
+
+                <p class="experiment-description">
+                  Process real Tech Journey data through a live
+                  Java Stream pipeline.
+                </p>
+
+                <button
+                  type="button"
+                  class="experiment-run-button"
+                  (click)="openJavaStreamExperiment()"
+                >
+                  RUN EXPERIMENT
+
+                  <span aria-hidden="true">
+                    →
+                  </span>
+                </button>
+
+              </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 EXPERIMENT 02
+                 Spring Boot Request Lifecycle
+                 ============================================= -->
+            <article class="experiment-card">
+
+              <div class="experiment-number">
+                02
+              </div>
+
+              <div class="experiment-content">
+
+                <span class="experiment-eyebrow">
+                  SPRING BOOT REQUEST LIFECYCLE
+                </span>
+
+                <h3>
+                  REST • Service • Data
+                </h3>
+
+                <p class="experiment-description">
+                  Follow a request through Controller, Service,
+                  JPA, H2, DTO mapping, and exception handling.
+                </p>
+
+                <button
+                  type="button"
+                  class="experiment-run-button experiment-coming-soon"
+                  disabled
+                >
+                  COMING SOON
+                </button>
+
+              </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 EXPERIMENT 03
+                 Spring Security / JWT
+                 ============================================= -->
+            <article class="experiment-card">
+
+              <div class="experiment-number">
+                03
+              </div>
+
+              <div class="experiment-content">
+
+                <span class="experiment-eyebrow">
+                  SPRING SECURITY / JWT
+                </span>
+
+                <h3>
+                  Authentication • Authorization
+                </h3>
+
+                <p class="experiment-description">
+                  Explore valid, missing, expired, and
+                  unauthorized token scenarios.
+                </p>
+
+                <button
+                  type="button"
+                  class="experiment-run-button experiment-coming-soon"
+                  disabled
+                >
+                  COMING SOON
+                </button>
+
+              </div>
+
+            </article>
+
+          </div>
+
+        }
+
+
+        <!-- =================================================
+             EXPERIMENT 01 CONSOLE SHELL
+             ================================================= -->
+
+        @if (activeExperiment() === 'JAVA_STREAM') {
+
+          <div class="experiment-console-shell">
+
+            <!--
+              This is intentionally only the console shell.
+
+              The next step will add:
+              - Dataset
+              - Category
+              - Sort direction
+              - Transform
+              - Limit
+              - RUN JAVA STREAM
+              - Pipeline visualization
+              - Metrics
+              - Results
+            -->
+
+            <button
+              type="button"
+              class="back-to-experiments-button"
+              (click)="backToExperiments()"
+            >
+              ← BACK TO EXPERIMENTS
+            </button>
+
+
+            <div class="console-placeholder">
+
+              <span class="console-label">
+                JAVA STREAM CONSOLE
+              </span>
+
+              <h3>
+                Collections • Streams • Lambdas
+              </h3>
+
+              <p>
+                Configure and execute a real Java Stream pipeline
+                against the Tech Journey timeline dataset.
+              </p>
+
+              <div class="console-status">
+                Console controls coming next.
+              </div>
+
+            </div>
+
+          </div>
+
+        }
+
+      </section>
+
+    }
 
   </div>
 
