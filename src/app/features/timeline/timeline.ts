@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, inject, signal } from '@angular/core';
 
-import { TimelineApiService, TimelineEvent } from './timeline-api.service';
 import { Router } from '@angular/router';
+import { TimelineApiService, TimelineEvent } from '../../core/services/timeline-api.service';
 
 @Component({
   selector: 'app-timeline',

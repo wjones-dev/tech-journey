@@ -9,7 +9,7 @@
 .timeline-section {
   max-width: 1250px;
   margin: 0 auto;
-  padding: 120px 30px 160px;
+  padding: 120px 30px 0px;
 }
 
 /* =========================
@@ -118,16 +118,14 @@
 
   transform: translateX(-50%);
 
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(94, 231, 255, 0.3) 4%,
-    #5ee7ff 20%,
-    #248eff 48%,
-    #8b5cf6 78%,
-    rgba(139, 92, 246, 0.25) 96%,
-    transparent 100%
-  );
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(94, 231, 255, 0.3) 4%,
+      #5ee7ff 20%,
+      #248eff 48%,
+      #8b5cf6 78%,
+      rgba(139, 92, 246, 0.25) 96%,
+      transparent 100%);
 
   box-shadow:
     0 0 10px rgba(94, 231, 255, 0.8),
@@ -152,13 +150,11 @@
 
   border-radius: 999px;
 
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(255, 255, 255, 0.95),
-    #5ee7ff,
-    transparent
-  );
+  background: linear-gradient(to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.95),
+      #5ee7ff,
+      transparent);
 
   filter: blur(1px);
 

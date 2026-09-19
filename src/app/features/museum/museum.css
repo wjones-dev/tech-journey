@@ -23,7 +23,289 @@
     'Segoe UI',
     sans-serif;
 
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+/* =========================
+   HERO BACKGROUND ANIMATION
+   ========================= */
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+
   overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+/* =========================
+   COMET / LIGHT PATH SHIMMER
+   ========================= */
+
+.comet-shimmer {
+  position: absolute;
+
+  left: 80%;
+  top: -70px;
+
+  /* DESKTOP STOP POINT */
+  --comet-stop: 40%;
+
+  width: 4px;
+  height: 70px;
+
+  border-radius: 100%;
+
+  background:
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(94, 231, 255, 0.15) 20%,
+      rgba(140, 245, 255, 0.9) 50%,
+      rgba(94, 231, 255, 0.18) 80%,
+      transparent 100%);
+
+  box-shadow:
+    0 0 8px rgba(94, 231, 255, 0.45),
+    0 0 18px rgba(46, 163, 255, 0.3);
+
+  opacity: 0;
+
+  animation: cometShimmer 10s ease-in-out infinite;
+}
+
+
+@keyframes cometShimmer {
+
+  0%,
+  65% {
+    top: -70px;
+    opacity: 0;
+  }
+
+  69% {
+    opacity: 0.25;
+  }
+
+  75% {
+    opacity: 0.9;
+  }
+
+  88% {
+    top: var(--comet-stop);
+    opacity: 0.85;
+  }
+
+  91% {
+    top: var(--comet-stop);
+    opacity: 0;
+  }
+
+  100% {
+    top: var(--comet-stop);
+    opacity: 0;
+  }
+}
+
+
+/* =========================
+   TWINKLING STARS
+   ========================= */
+
+.twinkle-star {
+  position: absolute;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  box-shadow:
+    0 0 4px rgba(255, 255, 255, 0.55),
+    0 0 8px rgba(94, 231, 255, 0.18);
+
+  opacity: 0.25;
+}
+
+
+/* Individual star locations */
+
+.star-1 {
+  top: 17%;
+  left: 18%;
+
+  animation: starTwinkle 5.8s ease-in-out infinite;
+}
+
+
+.star-2 {
+  top: 31%;
+  left: 38%;
+
+  animation: starTwinkle 7.1s ease-in-out 1.4s infinite;
+}
+
+
+.star-3 {
+  top: 21%;
+  left: 61%;
+
+  animation: starTwinkle 6.4s ease-in-out 2.8s infinite;
+}
+
+
+.star-4 {
+  top: 39%;
+  left: 72%;
+
+  animation: starTwinkle 8.2s ease-in-out 0.8s infinite;
+}
+
+
+.star-5 {
+  top: 25%;
+  left: 91%;
+
+  animation: starTwinkle 6.9s ease-in-out 4s infinite;
+}
+
+
+@keyframes starTwinkle {
+
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(0.8);
+  }
+
+  45% {
+    opacity: 0.32;
+    transform: scale(1);
+  }
+
+  52% {
+    opacity: 0.8;
+    transform: scale(1.45);
+  }
+
+  60% {
+    opacity: 0.28;
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   GLOBE COMET IMPACT
+   ========================= */
+
+.globe-impact {
+  position: absolute;
+
+  /*
+    Position this over the globe.
+    We can fine-tune these three values.
+  */
+  left: 79.5%;
+  top: 72%;
+
+  width: 360px;
+  height: 360px;
+
+  transform: translate(-50%, -50%) scale(0.88);
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(94, 231, 255, 0);
+
+  background:
+    radial-gradient(circle,
+      transparent 55%,
+      rgba(94, 231, 255, 0.04) 67%,
+      rgba(94, 231, 255, 0.14) 73%,
+      transparent 79%);
+
+  box-shadow:
+    0 0 0 rgba(94, 231, 255, 0);
+
+  opacity: 0;
+
+  animation: globeImpact 10s ease-out infinite;
+}
+
+
+@keyframes globeImpact {
+
+  0%,
+  87% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%) scale(0.88);
+
+    border-color:
+      rgba(94, 231, 255, 0);
+
+    box-shadow:
+      0 0 0 rgba(94, 231, 255, 0);
+  }
+
+
+  /*
+    Comet makes contact
+  */
+  90% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%) scale(0.92);
+
+    border-color:
+      rgba(160, 245, 255, 0.75);
+
+    box-shadow:
+      0 0 18px rgba(94, 231, 255, 0.55),
+      0 0 45px rgba(46, 163, 255, 0.35),
+      0 0 85px rgba(46, 163, 255, 0.18);
+  }
+
+
+  /*
+    Energy spreads around Earth
+  */
+  94% {
+    opacity: 0.65;
+
+    transform:
+      translate(-50%, -50%) scale(1.03);
+
+    border-color:
+      rgba(94, 231, 255, 0.28);
+
+    box-shadow:
+      0 0 28px rgba(94, 231, 255, 0.35),
+      0 0 65px rgba(46, 163, 255, 0.22),
+      0 0 110px rgba(46, 163, 255, 0.12);
+  }
+
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%) scale(1.08);
+
+    border-color:
+      rgba(94, 231, 255, 0);
+
+    box-shadow:
+      0 0 40px rgba(94, 231, 255, 0);
+  }
 }
 
 /* =========================
@@ -38,20 +320,26 @@
   display: flex;
   align-items: center;
 
-  padding: 80px 7%;
+  padding: 100px 7%;
 
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       rgba(3, 8, 18, 0.96) 0%,
       rgba(3, 8, 18, 0.72) 35%,
-      rgba(3, 8, 18, 0.12) 70%
-    ),
+      rgba(3, 8, 18, 0.12) 70%),
     url('/images/hero-space-bg.png');
 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size:
+    100% 100%,
+    100% auto;
+
+  background-position:
+    center,
+    center top;
+
+  background-repeat:
+    no-repeat,
+    no-repeat;
 }
 
 .hero-content {
@@ -532,14 +820,12 @@
     padding: 150px 24px 80px;
 
     background:
-      linear-gradient(
-        180deg,
+      linear-gradient(180deg,
         rgba(3, 8, 18, 0.28) 0%,
         rgba(3, 8, 18, 0.5) 28%,
         rgba(3, 8, 18, 0.84) 46%,
         rgba(3, 8, 18, 0.72) 68%,
-        rgba(3, 8, 18, 0.2) 100%
-      ),
+        rgba(3, 8, 18, 0.2) 100%),
       url('/images/hero-space-mobile.png');
 
     background-size: cover;
@@ -553,6 +839,11 @@
     width: 100%;
 
     max-width: 520px;
+  }
+
+  .comet-shimmer {
+    --comet-stop: 55%;
+    left: 60%;
   }
 
   .eyebrow {

@@ -128,15 +128,41 @@
           </article>
         </div>
 
+        <div class="technology-meta">
+          <span class="meta-label"> TIMELINE TECHNOLOGY </span>
+
+          <span class="meta-value">
+            {{ technology.technology }}
+          </span>
+        </div>
+
+        <div class="detail-actions">
+          <button type="button" class="primary-action" (click)="viewApiData()">
+            VIEW API DATA
+
+            <span aria-hidden="true"> → </span>
+          </button>
+
+          @if (detail()?.labType === 'java') {
+            <button type="button" class="secondary-action" [disabled]="!detail()?.labAvailable">
+              ENTER JAVA LAB
+
+              @if (!detail()?.labAvailable) {
+                <span class="coming-soon"> COMING SOON </span>
+              }
+            </button>
+          }
+        </div>
+
         <section class="concept-section">
           <span class="panel-label"> ENGINEERING CONCEPTS </span>
 
           <div class="concept-grid">
             @for (concept of concepts(); track concept; let index = $index) {
               <div class="concept-card">
-                <span class="concept-number">
+                <!-- <span class="concept-number">
                   {{ (index + 1).toString().padStart(2, '0') }}
-                </span>
+                </span> -->
 
                 <strong>
                   {{ concept }}
@@ -146,32 +172,6 @@
           </div>
         </section>
       }
-
-      <div class="technology-meta">
-        <span class="meta-label"> TIMELINE TECHNOLOGY </span>
-
-        <span class="meta-value">
-          {{ technology.technology }}
-        </span>
-      </div>
-
-      <div class="detail-actions">
-        <button type="button" class="primary-action" (click)="viewApiData()">
-          VIEW API DATA
-
-          <span aria-hidden="true"> → </span>
-        </button>
-
-        @if (detail()?.labType === 'java') {
-          <button type="button" class="secondary-action" [disabled]="!detail()?.labAvailable">
-            ENTER JAVA LAB
-
-            @if (!detail()?.labAvailable) {
-              <span class="coming-soon"> COMING SOON </span>
-            }
-          </button>
-        }
-      </div>
     </div>
   </section>
 }

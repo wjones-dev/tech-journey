@@ -1,10 +1,18 @@
 <section class="api-explorer">
   <div class="explorer-shell">
+    <!-- =========================
+         BACK
+         ========================= -->
+
     <button type="button" class="back-button" (click)="backToTechnology()">
       <span aria-hidden="true"> ← </span>
 
       BACK TO TECHNOLOGY
     </button>
+
+    <!-- =========================
+         HEADER
+         ========================= -->
 
     <header class="explorer-header">
       <span class="eyebrow"> INTERACTIVE ENGINEERING </span>
@@ -15,7 +23,13 @@
         Send requests directly to the Tech Journey REST API and inspect how the Spring Boot backend
         responds.
       </p>
+
+      <button type="button" class="help-button" (click)="openHelpModal()">EXPLORER GUIDE</button>
     </header>
+
+    <!-- =========================
+         CURRENT TIMELINE RESOURCE
+         ========================= -->
 
     @if (resource(); as technology) {
       <section class="resource-panel">
@@ -45,8 +59,32 @@
       </section>
     }
 
+    <!-- =========================
+         API MODE
+         ========================= -->
+
+    <div class="api-mode-selector">
+      <button type="button" [class.active]="apiMode() === 'museum'" (click)="showMuseumApi()">
+        <span class="api-mode-label"> MUSEUM API </span>
+
+        <small> Real timeline data · Read only </small>
+      </button>
+
+      <button type="button" [class.active]="apiMode() === 'sandbox'" (click)="showSandboxApi()">
+        <span class="api-mode-label"> CRUD SANDBOX </span>
+
+        <small> Interactive demo data </small>
+      </button>
+    </div>
+
+    <!-- =========================
+         EXPLORER
+         ========================= -->
+
     <div class="explorer-grid">
-      <!-- REQUEST -->
+      <!-- =========================
+           REQUEST
+           ========================= -->
 
       <section class="request-panel">
         <div class="panel-heading">
@@ -55,64 +93,278 @@
           <span class="request-state"> READY </span>
         </div>
 
-        <div class="request-field">
-          <label> METHOD </label>
+        <!-- =========================
+             MUSEUM API REQUEST
+             ========================= -->
 
-          <div class="method-display">
-            <span class="method-get">
-              {{ method() }}
-            </span>
+        @if (apiMode() === 'museum') {
+          <div class="request-field">
+            <label> METHOD </label>
+
+            <div class="method-display">
+              <span class="method-get">
+                {{ method() }}
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div class="request-field">
-          <label> RESOURCE </label>
+          <div class="request-field">
+            <label> RESOURCE </label>
 
-          <div class="resource-selector">
-            <button
-              type="button"
-              [class.active]="requestMode() === 'all'"
-              (click)="showAllEvents()"
-            >
-              ALL EVENTS
-            </button>
+            <div class="resource-selector">
+              <button
+                type="button"
+                [class.active]="requestMode() === 'all'"
+                (click)="showAllEvents()"
+              >
+                ALL EVENTS
+              </button>
 
-            <button type="button" [class.active]="requestMode() === 'byId'" (click)="showById()">
-              BY ID
-            </button>
+              <button type="button" [class.active]="requestMode() === 'byId'" (click)="showById()">
+                BY ID
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div class="request-field">
-          <label> ENDPOINT </label>
+          <div class="request-field">
+            <label> ENDPOINT </label>
 
-          @if (requestMode() === 'all') {
-            <div class="endpoint-display">/api/timeline</div>
-          } @else {
-            <div class="endpoint-editor">
-              <span class="endpoint-base"> /api/timeline/ </span>
+            @if (requestMode() === 'all') {
+              <div class="endpoint-display">/api/timeline</div>
+            } @else {
+              <div class="endpoint-editor">
+                <span class="endpoint-base"> /api/timeline/ </span>
 
-              <input
-                type="number"
-                class="endpoint-id"
-                [value]="requestId()"
-                (input)="updateRequestId($event)"
-                aria-label="Timeline event ID"
-              />
+                <input
+                  type="number"
+                  class="endpoint-id"
+                  [value]="requestId()"
+                  (input)="updateRequestId($event)"
+                  aria-label="Timeline event ID"
+                />
+              </div>
+            }
+          </div>
+
+          @if (requestMode() === 'byId') {
+            <div class="demo-actions">
+              <button type="button" class="demo-button" (click)="tryMissingId()">
+                TRY MISSING ID
+              </button>
+
+              <button type="button" class="restore-button" (click)="restoreSelectedResource()">
+                RESTORE {{ resource()?.technology }}
+              </button>
             </div>
           }
-        </div>
-        @if (requestMode() === 'byId') {
-          <div class="demo-actions">
-            <button type="button" class="demo-button" (click)="tryMissingId()">
-              TRY MISSING ID
-            </button>
-
-            <button type="button" class="restore-button" (click)="restoreSelectedResource()">
-              RESTORE {{ resource()?.technology }}
-            </button>
-          </div>
         }
+
+        <!-- =========================
+             SANDBOX POST REQUEST
+             ========================= -->
+
+        @else {
+          <div class="sandbox-badge">DEMO SANDBOX</div>
+
+          <!-- =========================
+       METHOD
+       ========================= -->
+
+          <div class="request-field">
+            <label> METHOD </label>
+
+            <div class="resource-selector">
+              <button
+                type="button"
+                [class.active]="sandboxMethod() === 'GET'"
+                (click)="showSandboxGet()"
+              >
+                GET
+              </button>
+
+              <button
+                type="button"
+                [class.active]="sandboxMethod() === 'POST'"
+                (click)="showSandboxPost()"
+              >
+                POST
+              </button>
+
+              <button
+                type="button"
+                [class.active]="sandboxMethod() === 'PUT'"
+                (click)="showSandboxPut()"
+              >
+                PUT
+              </button>
+
+              <button
+                type="button"
+                [class.active]="sandboxMethod() === 'DELETE'"
+                (click)="showSandboxDelete()"
+              >
+                DELETE
+              </button>
+            </div>
+          </div>
+
+          <!-- =========================
+     SANDBOX GET
+     ========================= -->
+
+          @if (sandboxMethod() === 'GET') {
+            <div class="request-field">
+              <label> RESOURCE </label>
+
+              <div class="resource-selector">
+                <button
+                  type="button"
+                  [class.active]="sandboxGetMode() === 'all'"
+                  (click)="showAllSandboxEvents()"
+                >
+                  ALL EVENTS
+                </button>
+
+                <button
+                  type="button"
+                  [class.active]="sandboxGetMode() === 'byId'"
+                  (click)="showSandboxById()"
+                >
+                  BY ID
+                </button>
+              </div>
+            </div>
+
+            <div class="request-field">
+              <label> ENDPOINT </label>
+
+              @if (sandboxGetMode() === 'all') {
+                <div class="endpoint-display">/api/sandbox/events</div>
+              } @else {
+                <div class="endpoint-editor">
+                  <span class="endpoint-base"> /api/sandbox/events/ </span>
+
+                  <input
+                    type="number"
+                    class="endpoint-id"
+                    [value]="sandboxRecordId() ?? ''"
+                    (input)="updateSandboxRecordId($event)"
+                    aria-label="Sandbox event ID"
+                  />
+                </div>
+              }
+            </div>
+          }
+
+          <!-- =========================
+     SANDBOX DELETE
+     ========================= -->
+          @else if (sandboxMethod() === 'DELETE') {
+            <div class="request-field">
+              <label> ENDPOINT </label>
+
+              <div class="endpoint-editor">
+                <span class="endpoint-base"> /api/sandbox/events/ </span>
+
+                <input
+                  type="number"
+                  class="endpoint-id"
+                  [value]="sandboxRecordId() ?? ''"
+                  (input)="updateSandboxRecordId($event)"
+                  aria-label="Sandbox event ID"
+                />
+              </div>
+            </div>
+
+            <div class="request-field">
+              <label> REQUEST BODY </label>
+
+              <div class="endpoint-display">None — DELETE uses the record ID in the endpoint.</div>
+            </div>
+          }
+
+          <!-- =========================
+     SANDBOX POST / PUT
+     ========================= -->
+
+          @else {
+            <div class="request-field">
+              <label> ENDPOINT </label>
+
+              @if (sandboxMethod() === 'PUT') {
+                <div class="endpoint-editor">
+                  <span class="endpoint-base"> /api/sandbox/events/ </span>
+
+                  <input
+                    type="number"
+                    class="endpoint-id"
+                    [value]="sandboxRecordId() ?? ''"
+                    (input)="updateSandboxRecordId($event)"
+                    aria-label="Sandbox event ID"
+                  />
+                </div>
+              } @else {
+                <div class="endpoint-display">/api/sandbox/events</div>
+              }
+            </div>
+
+            <!-- YEAR -->
+
+            <div class="request-field">
+              <label> YEAR </label>
+
+              <input type="number" [value]="sandboxYear()" (input)="updateSandboxYear($event)" />
+            </div>
+
+            <!-- CATEGORY -->
+
+            <div class="request-field">
+              <label> CATEGORY </label>
+
+              <div class="endpoint-display">
+                {{ sandboxCategory() }}
+              </div>
+            </div>
+
+            <!-- TITLE -->
+
+            <div class="request-field">
+              <label> TITLE </label>
+
+              <input type="text" [value]="sandboxTitle()" (input)="updateSandboxTitle($event)" />
+            </div>
+
+            <!-- TECHNOLOGY -->
+
+            <div class="request-field">
+              <label> TECHNOLOGY </label>
+
+              <input
+                type="text"
+                [value]="sandboxTechnology()"
+                (input)="updateSandboxTechnology($event)"
+              />
+            </div>
+
+            <!-- DESCRIPTION -->
+
+            <div class="request-field">
+              <label> DESCRIPTION </label>
+
+              <textarea
+                rows="4"
+                [value]="sandboxDescription()"
+                (input)="updateSandboxDescription($event)"
+              >
+              </textarea>
+            </div>
+          }
+        }
+
+        <!-- =========================
+             SEND REQUEST
+             Shared by both APIs
+             ========================= -->
 
         <button type="button" class="send-button" [disabled]="loading()" (click)="sendRequest()">
           @if (loading()) {
@@ -126,20 +378,26 @@
           }
         </button>
 
+        <!-- =========================
+             REQUEST FLOW
+             ========================= -->
+
         <div class="request-flow">
           <span> Angular </span>
 
-          <span>→</span>
+          <span> → </span>
 
           <span> Nginx </span>
 
-          <span>→</span>
+          <span> → </span>
 
           <span> Spring Boot </span>
         </div>
       </section>
 
-      <!-- RESPONSE -->
+      <!-- =========================
+           RESPONSE
+           ========================= -->
 
       <section class="response-panel">
         <div class="panel-heading">
@@ -157,6 +415,8 @@
           }
         </div>
 
+        <!-- EMPTY RESPONSE -->
+
         @if (!responseStatus() && !loading()) {
           <div class="empty-response">
             <span class="terminal-symbol"> &gt;_ </span>
@@ -167,6 +427,8 @@
           </div>
         }
 
+        <!-- LOADING -->
+
         @if (loading()) {
           <div class="loading-response">
             <span class="spinner large"></span>
@@ -174,6 +436,8 @@
             <p>Waiting for Spring Boot...</p>
           </div>
         }
+
+        <!-- RESPONSE METADATA -->
 
         @if (responseStatus()) {
           <div class="response-meta">
@@ -199,17 +463,68 @@
           </div>
         }
 
-        @if (formattedResponse()) {
+        <!-- JSON RESPONSE -->
+
+        @if (responseStatus()) {
           <div class="response-tabs">
-            <button type="button" class="response-tab active">BODY</button>
+            <button
+              type="button"
+              class="response-tab"
+              [class.active]="activeResponseTab() === 'response'"
+              (click)="showResponseBody()"
+            >
+              RESPONSE BODY
+            </button>
 
-            <button type="button" class="response-tab" disabled>HEADERS</button>
-
-            <button type="button" class="response-tab" disabled>REQUEST</button>
+            <button
+              type="button"
+              class="response-tab"
+              [class.active]="activeResponseTab() === 'request'"
+              (click)="showRequestPayload()"
+            >
+              REQUEST PAYLOAD
+            </button>
           </div>
 
-          <pre class="json-response"><code>{{ formattedResponse() }}</code></pre>
+          @if (activeResponseTab() === 'response') {
+            @if (formattedResponse()) {
+              <pre class="json-response"><code>{{ formattedResponse() }}</code></pre>
+            } @else {
+              <div class="empty-response">
+                <span class="terminal-symbol"> &gt;_ </span>
+
+                <h3>No response body.</h3>
+
+                <p>This request completed without returning a response payload.</p>
+              </div>
+            }
+          }
+
+          @if (activeResponseTab() === 'request') {
+            <div class="request-payload-info">
+              <strong>
+                {{ lastRequestMethod() }}
+                {{ lastRequestEndpoint() }}
+              </strong>
+            </div>
+
+            @if (formattedRequestPayload()) {
+              <pre class="json-response"><code>{{ formattedRequestPayload() }}</code></pre>
+            } @else {
+              <div class="empty-response">
+                <span class="terminal-symbol"> &gt;_ </span>
+
+                <h3>No request payload.</h3>
+
+                <p>
+                  {{ lastRequestMethod() }} uses the endpoint to identify the requested resource.
+                </p>
+              </div>
+            }
+          }
         }
+
+        <!-- ERROR -->
 
         @if (errorMessage()) {
           <div class="error-response">
@@ -223,12 +538,16 @@
       </section>
     </div>
 
+    <!-- =========================
+         REQUEST PATH
+         ========================= -->
+
     <section class="request-path">
       <span class="section-label"> REQUEST PATH </span>
 
       <div class="path">
         <div class="path-node">
-          <span class="node-number"> 01 </span>
+          <span class="node-number"></span>
 
           <strong> Angular </strong>
 
@@ -238,7 +557,7 @@
         <span class="path-arrow"> → </span>
 
         <div class="path-node">
-          <span class="node-number"> 02 </span>
+          <span class="node-number"></span>
 
           <strong> Nginx </strong>
 
@@ -248,7 +567,7 @@
         <span class="path-arrow"> → </span>
 
         <div class="path-node">
-          <span class="node-number"> 03 </span>
+          <span class="node-number"></span>
 
           <strong> Spring Boot </strong>
 
@@ -258,7 +577,7 @@
         <span class="path-arrow"> → </span>
 
         <div class="path-node">
-          <span class="node-number"> 04 </span>
+          <span class="node-number"></span>
 
           <strong> Service </strong>
 
@@ -268,7 +587,7 @@
         <span class="path-arrow"> → </span>
 
         <div class="path-node">
-          <span class="node-number"> 05 </span>
+          <span class="node-number"></span>
 
           <strong> Repository </strong>
 
@@ -277,4 +596,121 @@
       </div>
     </section>
   </div>
+
+  @if (showDeleteConfirm()) {
+    <div class="modal-backdrop">
+      <div class="confirm-modal">
+        <span class="section-label"> CONFIRM DELETE </span>
+
+        <h3>Delete Sandbox Record #{{ sandboxRecordId() }}?</h3>
+
+        <p>This only deletes the sandbox record. Your Tech Journey timeline stays unchanged.</p>
+
+        <div class="modal-actions">
+          <button type="button" class="restore-button" (click)="cancelSandboxDelete()">
+            CANCEL
+          </button>
+
+          <button type="button" class="delete-confirm-button" (click)="confirmSandboxDelete()">
+            DELETE RECORD
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (showHelpModal()) {
+    <div class="modal-backdrop" (click)="closeHelpModal()">
+      <div class="help-modal" (click)="$event.stopPropagation()">
+        <span class="section-label"> API EXPLORER GUIDE </span>
+
+        <h2>How to Use the API Explorer</h2>
+
+        <p class="help-intro">
+          Explore real Tech Journey data or experiment safely with temporary sandbox records.
+        </p>
+
+        <div class="help-section">
+          <h3>MUSEUM API</h3>
+
+          <p>The Museum API contains the real timeline data displayed throughout Tech Journey.</p>
+
+          <ul>
+            <li>Use <strong>GET ALL EVENTS</strong> to view the complete timeline JSON.</li>
+
+            <li>Use <strong>GET BY ID</strong> to retrieve a specific timeline event.</li>
+
+            <li>Museum data is read-only.</li>
+          </ul>
+        </div>
+
+        <div class="help-section">
+          <h3>CRUD SANDBOX</h3>
+
+          <p>
+            The sandbox lets you experiment with API operations without changing the real Tech
+            Journey timeline.
+          </p>
+
+          <ul>
+            <li><strong>POST</strong> — Create a new sandbox record.</li>
+
+            <li>
+              <strong>GET</strong> — Retrieve one sandbox record by ID or view all sandbox records.
+            </li>
+
+            <li><strong>PUT</strong> — Update an existing sandbox record using its ID.</li>
+
+            <li><strong>DELETE</strong> — Remove a sandbox record using its ID.</li>
+          </ul>
+        </div>
+
+        <div class="help-section">
+          <h3>FINDING SANDBOX RECORDS</h3>
+
+          <p>
+            Select <strong>GET → ALL EVENTS</strong> to view the complete sandbox JSON collection
+            and see the IDs of records currently available.
+          </p>
+
+          <p>You can then enter one of those IDs when using GET, PUT, or DELETE.</p>
+        </div>
+
+        <div class="help-section">
+          <h3>VERIFY YOUR CHANGES</h3>
+
+          <ul>
+            <li>After <strong>POST</strong>, use GET by ID to retrieve the new record.</li>
+
+            <li>After <strong>PUT</strong>, use GET by ID to verify your changes.</li>
+
+            <li>
+              After <strong>DELETE</strong>, use GET by ID and expect
+              <strong>404 Not Found</strong>, or use GET ALL EVENTS to confirm the record is gone.
+            </li>
+          </ul>
+        </div>
+
+        <div class="help-section">
+          <h3>REQUEST & RESPONSE</h3>
+
+          <p>
+            After sending a request, inspect the HTTP status, execution time, response size,
+            response body, and request payload.
+          </p>
+
+          <p>
+            POST and PUT send JSON request payloads. GET and DELETE identify resources through the
+            endpoint and do not send a request body.
+          </p>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="help-close-button" (click)="closeHelpModal()">
+            START EXPLORING
+          </button>
+        </div>
+      </div>
+    </div>
+  }
 </section>

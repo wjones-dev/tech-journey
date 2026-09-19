@@ -1,8 +1,8 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TimelineApiService, TimelineEvent } from '../timeline/timeline-api.service';
 import { TechnologyDetail } from './technology-detail.model';
 import { TECHNOLOGY_DETAILS } from './technology-detail.data';
+import { TimelineApiService, TimelineEvent } from '../../core/services/timeline-api.service';
 
 @Component({
   selector: 'app-technology-detail',
