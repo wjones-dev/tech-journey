@@ -1,20 +1,20 @@
 <section class="engineering-lab">
 
-  <!-- =======================================================
+  <!-- =========================
        BACKGROUND EFFECTS
-       ======================================================= -->
+       ========================= -->
+
   <div
     class="lab-background-effects"
     aria-hidden="true"
   >
 
-    <!-- Flying bird animation -->
     <div class="sky-zone">
       <span class="bird bird-one"></span>
+      <span class="bird bird-two"></span>
     </div>
 
 
-    <!-- Spinning holographic globe -->
     <div class="holo-globe">
       <div class="globe-surface"></div>
     </div>
@@ -22,27 +22,25 @@
   </div>
 
 
-  <!-- =======================================================
-       ENGINEERING LAB CONTENT
-       ======================================================= -->
+  <!-- =========================
+       LAB CONTENT
+       ========================= -->
+
   <div class="lab-content">
 
 
-    <!-- =====================================================
-         COLLAPSED DRAWER LAUNCHER
-         ===================================================== -->
+    <!-- =========================
+         EXPERIMENT DRAWER LAUNCHER
+         ========================= -->
 
     @if (!experimentDrawerOpen()) {
 
-      <!--
-        Keeps the laboratory environment unobstructed until
-        the visitor chooses to explore the experiments.
-      -->
       <button
         type="button"
         class="experiment-drawer-launcher"
         (click)="toggleExperimentDrawer()"
       >
+
         <span>
           EXPLORE EXPERIMENTS
         </span>
@@ -53,41 +51,88 @@
         >
           ↑
         </span>
+
       </button>
 
     }
 
 
-    <!-- =====================================================
+    <!-- =========================
          EXPERIMENT DRAWER
-         ===================================================== -->
+         ========================= -->
 
     @if (experimentDrawerOpen()) {
 
       <section class="experiment-drawer">
 
 
-        <!-- =================================================
+        <!-- =========================
              DRAWER HEADER
-             ================================================= -->
+             ========================= -->
+
         <header class="experiment-drawer-header">
+
+
+          <!-- =========================
+               HEADER TITLE
+               ========================= -->
 
           <div>
 
-            @if (activeExperiment() === null) {
+            <!--
+              LEVEL 1
+              No technology selected yet.
+            -->
+
+            @if (
+              selectedLab() === null &&
+              activeExperiment() === null
+            ) {
 
               <span class="drawer-eyebrow">
                 ENGINEERING LAB
               </span>
 
               <h2>
+                Choose a Technology
+              </h2>
+
+            }
+
+
+            <!--
+              LEVEL 2
+              Java selected.
+              Show Java experiment choices.
+            -->
+
+            @else if (
+              selectedLab() === 'JAVA' &&
+              activeExperiment() === null
+            ) {
+
+              <span class="drawer-eyebrow">
+                JAVA LAB
+              </span>
+
+              <h2>
                 Choose an Experiment
               </h2>
 
-            } @else {
+            }
+
+
+            <!--
+              LEVEL 3
+              Java Stream experiment running.
+            -->
+
+            @else if (
+              activeExperiment() === 'JAVA_STREAM'
+            ) {
 
               <span class="drawer-eyebrow">
-                EXPERIMENT 01
+                JAVA • EXPERIMENT 01
               </span>
 
               <h2>
@@ -96,40 +141,383 @@
 
             }
 
+
+            <!--
+              LEVEL 3
+              Atari experiment running.
+            -->
+
+            @else if (
+              activeExperiment() === 'ATARI'
+            ) {
+
+              <span class="drawer-eyebrow">
+                ATARI LAB
+              </span>
+
+              <h2>
+                Atari 2600
+              </h2>
+
+            }
+
           </div>
 
 
-          <!-- Close the entire drawer -->
-          <button
-            type="button"
-            class="drawer-close-button"
-            aria-label="Close Engineering Lab experiments"
-            (click)="closeExperimentDrawer()"
-          >
-            ×
-          </button>
+          <!-- =========================
+               HEADER ACTIONS
+               ========================= -->
+
+          <div class="drawer-header-actions">
+
+
+            <!-- =========================
+                 LAB GUIDE
+                 ========================= -->
+
+            <button
+              type="button"
+              class="lab-guide-button"
+              [class.lab-guide-button-active]="labGuideOpen()"
+              [attr.aria-expanded]="labGuideOpen()"
+              (click)="toggleLabGuide()"
+            >
+
+              LAB GUIDE
+
+              <span aria-hidden="true">
+                →
+              </span>
+
+            </button>
+
+
+            <!-- =========================
+                 CLOSE DRAWER
+                 ========================= -->
+
+            <button
+              type="button"
+              class="drawer-close-button"
+              aria-label="Close Engineering Lab experiments"
+              (click)="closeExperimentDrawer()"
+            >
+              ×
+            </button>
+
+          </div>
 
         </header>
 
 
-        <!-- =================================================
-             EXPERIMENT LAUNCHER VIEW
-             ================================================= -->
+        <!-- =========================
+             LAB GUIDE
+             ========================= -->
 
-        @if (activeExperiment() === null) {
+        @if (labGuideOpen()) {
+
+          <section class="lab-guide">
+
+
+            <!-- =========================
+                 GUIDE INTRO
+                 ========================= -->
+
+            <div class="lab-guide-header">
+
+              <span class="drawer-eyebrow">
+                HOW THE LAB WORKS
+              </span>
+
+              <h3>
+                Play. Understand. Engineer.
+              </h3>
+
+              <p>
+                Each Engineering Lab experiment follows the same path.
+                Start by interacting with the technology, observe what
+                happens behind the scenes, then inspect how it was built.
+              </p>
+
+            </div>
+
+
+            <!-- =========================
+                 GUIDE STEPS
+                 ========================= -->
+
+            <div class="lab-guide-steps">
+
+
+              <!-- =========================
+                   PLAY
+                   ========================= -->
+
+              <article class="lab-guide-step">
+
+                <span class="lab-guide-step-number">
+                  01
+                </span>
+
+                <div>
+
+                  <strong>
+                    PLAY
+                  </strong>
+
+                  <p>
+                    Configure a scenario and run the experiment.
+                  </p>
+
+                </div>
+
+              </article>
+
+
+              <span
+                class="lab-guide-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+
+              <!-- =========================
+                   UNDERSTAND
+                   ========================= -->
+
+              <article class="lab-guide-step">
+
+                <span class="lab-guide-step-number">
+                  02
+                </span>
+
+                <div>
+
+                  <strong>
+                    UNDERSTAND
+                  </strong>
+
+                  <p>
+                    Follow the pipeline, request flow, metrics,
+                    or results.
+                  </p>
+
+                </div>
+
+              </article>
+
+
+              <span
+                class="lab-guide-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+
+              <!-- =========================
+                   ENGINEER
+                   ========================= -->
+
+              <article class="lab-guide-step">
+
+                <span class="lab-guide-step-number">
+                  03
+                </span>
+
+                <div>
+
+                  <strong>
+                    ENGINEER
+                  </strong>
+
+                  <p>
+                    Inspect the implementation behind the behavior.
+                  </p>
+
+                </div>
+
+              </article>
+
+            </div>
+
+
+            <!-- =========================
+                 GUIDE FOOTER
+                 ========================= -->
+
+            <p class="lab-guide-footer">
+              The technology changes from experiment to experiment.
+              The learning path stays the same.
+            </p>
+
+          </section>
+
+        }
+
+
+        <!-- =========================
+             LAB CATEGORY SELECTION
+             ========================= -->
+
+        @if (
+          selectedLab() === null &&
+          activeExperiment() === null
+        ) {
+
+          <div class="lab-categories">
+
+
+            <!-- =========================
+                 JAVA
+                 ========================= -->
+
+            <article class="lab-category-card">
+
+              <div class="lab-category-number">
+                01
+              </div>
+
+
+              <div class="lab-category-content">
+
+                <span class="experiment-eyebrow">
+                  SOFTWARE ENGINEERING
+                </span>
+
+                <h3>
+                  Java
+                </h3>
+
+                <p class="experiment-description">
+                  Explore Java data processing, Spring request flow,
+                  security, and backend engineering concepts.
+                </p>
+
+
+                <div class="lab-category-meta">
+                  3 EXPERIMENTS
+                </div>
+
+
+                <button
+                  type="button"
+                  class="experiment-run-button"
+                  (click)="selectJavaLab()"
+                >
+
+                  VIEW EXPERIMENTS
+
+                  <span aria-hidden="true">
+                    →
+                  </span>
+
+                </button>
+
+              </div>
+
+            </article>
+
+
+            <!-- =========================
+                 ATARI
+                 ========================= -->
+
+            <article class="lab-category-card">
+
+              <div class="lab-category-number">
+                02
+              </div>
+
+
+              <div class="lab-category-content">
+
+                <span class="experiment-eyebrow">
+                  GAMING TECHNOLOGY
+                </span>
+
+                <h3>
+                  Atari 2600
+                </h3>
+
+                <p class="experiment-description">
+                  Explore how early cartridge-based game systems worked
+                  and compare their architecture with modern gaming systems.
+                </p>
+
+
+                <div class="lab-category-meta">
+                  1 EXPERIMENT
+                </div>
+
+
+                <button
+                  type="button"
+                  class="experiment-run-button"
+                  (click)="openAtariExperiment()"
+                >
+
+                  RUN EXPERIMENT
+
+                  <span aria-hidden="true">
+                    →
+                  </span>
+
+                </button>
+
+              </div>
+
+            </article>
+
+          </div>
+
+        }
+
+
+        <!-- =========================
+             JAVA EXPERIMENT SELECTION
+             ========================= -->
+
+        @if (
+          selectedLab() === 'JAVA' &&
+          activeExperiment() === null
+        ) {
+
+
+          <!-- =========================
+               BACK TO TECHNOLOGIES
+               ========================= -->
+
+          <button
+            type="button"
+            class="drawer-back-button"
+            (click)="backToLabCategories()"
+          >
+
+            <span aria-hidden="true">
+              ←
+            </span>
+
+            ALL TECHNOLOGIES
+
+          </button>
+
 
           <div class="lab-experiments">
 
 
-            <!-- =============================================
+            <!-- =========================
                  EXPERIMENT 01
-                 Java Collections • Streams • Lambdas
-                 ============================================= -->
+                 JAVA DATA PROCESSING
+                 ========================= -->
+
             <article class="experiment-card">
 
               <div class="experiment-number">
                 01
               </div>
+
 
               <div class="experiment-content">
 
@@ -146,16 +534,19 @@
                   Java Stream pipeline.
                 </p>
 
+
                 <button
                   type="button"
                   class="experiment-run-button"
                   (click)="openJavaStreamExperiment()"
                 >
+
                   RUN EXPERIMENT
 
                   <span aria-hidden="true">
                     →
                   </span>
+
                 </button>
 
               </div>
@@ -163,15 +554,17 @@
             </article>
 
 
-            <!-- =============================================
+            <!-- =========================
                  EXPERIMENT 02
-                 Spring Boot Request Lifecycle
-                 ============================================= -->
+                 SPRING REQUEST LIFECYCLE
+                 ========================= -->
+
             <article class="experiment-card">
 
               <div class="experiment-number">
                 02
               </div>
+
 
               <div class="experiment-content">
 
@@ -188,6 +581,7 @@
                   JPA, H2, DTO mapping, and exception handling.
                 </p>
 
+
                 <button
                   type="button"
                   class="experiment-run-button experiment-coming-soon"
@@ -201,15 +595,17 @@
             </article>
 
 
-            <!-- =============================================
+            <!-- =========================
                  EXPERIMENT 03
-                 Spring Security / JWT
-                 ============================================= -->
+                 SPRING SECURITY / JWT
+                 ========================= -->
+
             <article class="experiment-card">
 
               <div class="experiment-number">
                 03
               </div>
+
 
               <div class="experiment-content">
 
@@ -226,6 +622,7 @@
                   unauthorized token scenarios.
                 </p>
 
+
                 <button
                   type="button"
                   class="experiment-run-button experiment-coming-soon"
@@ -243,62 +640,37 @@
         }
 
 
-        <!-- =================================================
-             EXPERIMENT 01 CONSOLE SHELL
-             ================================================= -->
+        <!-- =========================
+             ACTIVE EXPERIMENT
+             JAVA STREAM
+             ========================= -->
 
-        @if (activeExperiment() === 'JAVA_STREAM') {
+        @if (
+          activeExperiment() === 'JAVA_STREAM'
+        ) {
 
-          <div class="experiment-console-shell">
-
-            <!--
-              This is intentionally only the console shell.
-
-              The next step will add:
-              - Dataset
-              - Category
-              - Sort direction
-              - Transform
-              - Limit
-              - RUN JAVA STREAM
-              - Pipeline visualization
-              - Metrics
-              - Results
-            -->
-
-            <button
-              type="button"
-              class="back-to-experiments-button"
-              (click)="backToExperiments()"
-            >
-              ← BACK TO EXPERIMENTS
-            </button>
-
-
-            <div class="console-placeholder">
-
-              <span class="console-label">
-                JAVA STREAM CONSOLE
-              </span>
-
-              <h3>
-                Collections • Streams • Lambdas
-              </h3>
-
-              <p>
-                Configure and execute a real Java Stream pipeline
-                against the Tech Journey timeline dataset.
-              </p>
-
-              <div class="console-status">
-                Console controls coming next.
-              </div>
-
-            </div>
-
-          </div>
+          <app-java-stream-experiment
+            (back)="backFromJavaExperiment()"
+          />
 
         }
+
+
+        <!-- =========================
+             ACTIVE EXPERIMENT
+             ATARI
+             ========================= -->
+
+        @if (
+          activeExperiment() === 'ATARI'
+        ) {
+
+          <app-atari-lab
+            (back)="backFromAtariExperiment()"
+          />
+
+        }
+
 
       </section>
 

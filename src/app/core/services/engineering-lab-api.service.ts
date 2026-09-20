@@ -2,8 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { JavaStreamExperimentRequest } from '../../features/engineering-lab/models/java-stream-experiment-request.model';
-import { JavaStreamExperimentResponse } from '../../features/engineering-lab/models/java-stream-experiment-response.model';
+import { JavaStreamExperimentRequest } from '../../features/engineering-lab/experiments/java-stream/models/java-stream-experiment-request.model';
+import { JavaStreamExperimentResponse } from '../../features/engineering-lab/experiments/java-stream/models/java-stream-experiment-response.model';
 
 
 /**

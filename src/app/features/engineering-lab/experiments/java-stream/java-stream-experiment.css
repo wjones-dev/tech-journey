@@ -1,0 +1,1261 @@
+
+/* =========================
+   JAVA CONSOLE
+   ========================= */
+
+.experiment-console-shell {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  min-height: 220px;
+
+  gap: 22px;
+}
+
+.back-to-experiments-button {
+  align-self: flex-start;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.12rem;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-to-experiments-button:hover {
+  color: #087eae;
+
+  transform:
+    translateX(-3px);
+}
+
+.java-console-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 24px;
+}
+
+.java-console-header h3 {
+  margin:
+    6px 0 8px;
+
+  font-size:
+    clamp(1.35rem, 2vw, 1.8rem);
+}
+
+.java-console-header p {
+  max-width: 680px;
+
+  margin: 0;
+
+  line-height: 1.6;
+}
+
+.console-label,
+.output-label {
+  color: #72e6ff;
+
+  font-size: 0.67rem;
+  font-weight: 800;
+
+  letter-spacing: 0.18rem;
+}
+
+.console-live-badge {
+  flex-shrink: 0;
+
+  padding:
+    8px 12px;
+
+  border:
+    1px solid rgba(114, 230, 255, 0.35);
+
+  border-radius: 999px;
+
+  background:
+    rgba(114, 230, 255, 0.08);
+
+  color: #72e6ff;
+
+  font-size: 0.62rem;
+  font-weight: 800;
+
+  letter-spacing: 0.11rem;
+}
+
+
+/* =========================
+   CONSOLE LAYOUT
+   ========================= */
+
+.java-console-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 0.8fr)
+    minmax(0, 1.5fr);
+
+  min-width: 0;
+
+  gap: 20px;
+}
+
+.java-console-controls,
+.java-console-output {
+  min-width: 0;
+
+  padding: 22px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 18px;
+
+  background:
+    rgba(5, 12, 24, 0.72);
+
+  backdrop-filter:
+    blur(14px);
+}
+
+.console-section-heading {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 13px;
+
+  margin-bottom: 22px;
+}
+
+.console-section-heading > span {
+  display: grid;
+
+  width: 34px;
+  height: 34px;
+
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border:
+    1px solid rgba(114, 230, 255, 0.24);
+
+  border-radius: 10px;
+
+  background:
+    rgba(114, 230, 255, 0.06);
+
+  color: #72e6ff;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.console-section-heading h4 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 1rem;
+}
+
+.console-section-heading p {
+  margin:
+    4px 0 0;
+
+  color:
+    rgba(255, 255, 255, 0.48);
+
+  font-size: 0.78rem;
+}
+
+
+/* =========================
+   CONSOLE CONTROLS
+   ========================= */
+
+.console-control {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  margin-bottom: 18px;
+}
+
+.console-control label {
+  color:
+    rgba(255, 255, 255, 0.72);
+
+  font-size: 0.65rem;
+  font-weight: 800;
+
+  letter-spacing: 0.11rem;
+}
+
+.console-control select,
+.console-control input,
+.console-readonly-control {
+  width: 100%;
+
+  min-height: 43px;
+
+  padding:
+    10px 12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  color: #ffffff;
+
+  font-family: inherit;
+}
+
+.console-control select {
+  cursor: pointer;
+}
+
+.console-control select option {
+  background: #101829;
+
+  color: #ffffff;
+}
+
+.console-control select:focus,
+.console-control input:focus {
+  border-color:
+    rgba(114, 230, 255, 0.7);
+
+  box-shadow:
+    0 0 0 3px rgba(114, 230, 255, 0.08);
+}
+
+.console-readonly-control {
+  display: flex;
+  align-items: center;
+
+  color:
+    rgba(255, 255, 255, 0.72);
+}
+
+.console-control small {
+  color:
+    rgba(255, 255, 255, 0.38);
+
+  font-size: 0.69rem;
+
+  line-height: 1.45;
+}
+
+
+/* =========================
+   RUN BUTTON
+   ========================= */
+
+.run-java-stream-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  gap: 10px;
+
+  margin-top: 8px;
+
+  padding:
+    13px 18px;
+
+  border:
+    1px solid rgba(114, 230, 255, 0.38);
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(35, 175, 255, 0.18),
+      rgba(128, 94, 255, 0.18)
+    );
+
+  color: #ffffff;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  letter-spacing: 0.1rem;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.run-java-stream-button:hover:not(:disabled) {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(114, 230, 255, 0.72);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(35, 175, 255, 0.26),
+      rgba(128, 94, 255, 0.26)
+    );
+}
+
+.run-java-stream-button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+.console-spinner {
+  width: 13px;
+  height: 13px;
+
+  border:
+    2px solid rgba(255, 255, 255, 0.25);
+
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation:
+    consoleSpin 0.7s linear infinite;
+}
+
+@keyframes consoleSpin {
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+
+
+/* =========================
+   ERROR
+   ========================= */
+
+.console-error {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  margin-top: 14px;
+
+  padding:
+    12px 14px;
+
+  border:
+    1px solid rgba(255, 100, 100, 0.24);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 72, 72, 0.08);
+
+  color:
+    rgba(255, 255, 255, 0.82);
+
+  font-size: 0.75rem;
+}
+
+.console-error strong {
+  color: #ff8f8f;
+
+  font-size: 0.65rem;
+
+  letter-spacing: 0.09rem;
+}
+
+
+/* =========================
+   PIPELINE
+   ========================= */
+
+.pipeline-panel {
+  margin-bottom: 18px;
+}
+
+.pipeline-stages {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+.pipeline-stage {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 88px;
+  min-height: 58px;
+
+  padding:
+    9px 11px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 9px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  opacity: 0.35;
+
+  transition:
+    opacity 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+
+    appearance: none;
+
+  font: inherit;
+
+  color: inherit;
+
+  cursor: pointer;
+}
+
+.pipeline-stage:focus-visible {
+  outline:
+    2px solid rgba(114, 230, 255, 0.72);
+
+  outline-offset: 3px;
+}
+
+
+.pipeline-stage-code-selected {
+  border-color:
+    rgba(114, 230, 255, 0.92);
+
+  background:
+    rgba(114, 230, 255, 0.15);
+
+  box-shadow:
+    0 0 22px rgba(114, 230, 255, 0.16);
+}
+
+.pipeline-stage-name {
+  color:
+    rgba(255, 255, 255, 0.7);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.63rem;
+  font-weight: 700;
+
+  letter-spacing: 0.04rem;
+}
+
+.pipeline-stage-detail {
+  margin-top: 5px;
+
+  color:
+    rgba(255, 255, 255, 0.38);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.58rem;
+
+  white-space: nowrap;
+}
+
+.pipeline-stage-active {
+  opacity: 1;
+
+  border-color:
+    rgba(114, 230, 255, 0.32);
+
+  background:
+    rgba(114, 230, 255, 0.07);
+}
+
+.pipeline-stage-active .pipeline-stage-name {
+  color: #ffffff;
+}
+
+.pipeline-stage-active .pipeline-stage-detail {
+  color:
+    rgba(114, 230, 255, 0.82);
+}
+
+.pipeline-stage-inactive .pipeline-stage-detail {
+  color:
+    rgba(255, 255, 255, 0.26);
+}
+
+.pipeline-stage-recent {
+  border-color:
+    rgba(114, 230, 255, 0.78);
+
+  background:
+    rgba(114, 230, 255, 0.13);
+
+  box-shadow:
+    0 0 18px rgba(114, 230, 255, 0.14);
+
+  animation:
+    pipelineStagePulse 1.4s ease;
+}
+
+.pipeline-arrow {
+  color:
+    rgba(255, 255, 255, 0.16);
+
+  font-size: 0.8rem;
+
+  transition:
+    color 0.25s ease;
+}
+
+.pipeline-arrow-active {
+  color:
+    rgba(114, 230, 255, 0.55);
+}
+
+@keyframes pipelineStagePulse {
+  0% {
+    transform:
+      scale(1);
+  }
+
+  35% {
+    transform:
+      scale(1.045);
+
+    box-shadow:
+      0 0 25px rgba(114, 230, 255, 0.24);
+  }
+
+  100% {
+    transform:
+      scale(1);
+  }
+
+
+  
+}
+
+
+/* =========================
+   METRICS
+   ========================= */
+
+.stream-metrics {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+.stream-metric {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding: 12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+.stream-metric span {
+  color:
+    rgba(255, 255, 255, 0.42);
+
+  font-size: 0.58rem;
+  font-weight: 700;
+
+  letter-spacing: 0.07rem;
+}
+
+.stream-metric strong {
+  color: #ffffff;
+
+  font-size: 1rem;
+}
+
+
+/* =========================
+   RESULTS
+   ========================= */
+
+.stream-results-panel {
+  min-width: 0;
+}
+
+.results-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+}
+
+.result-count {
+  color:
+    rgba(255, 255, 255, 0.38);
+
+  font-size: 0.68rem;
+}
+
+.stream-results {
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+
+  max-height: 280px;
+
+  padding-right: 4px;
+
+  overflow-y: auto;
+}
+
+.stream-result-object {
+  padding: 13px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.075);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+.result-object-header {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.result-year {
+  color: #72e6ff;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.75rem;
+}
+
+.result-object-header strong {
+  color: #ffffff;
+
+  font-size: 0.85rem;
+}
+
+.result-category {
+  display: inline-block;
+
+  margin-top: 7px;
+
+  color:
+    rgba(158, 139, 255, 0.9);
+
+  font-size: 0.61rem;
+  font-weight: 800;
+
+  letter-spacing: 0.08rem;
+}
+
+.stream-result-object p {
+  margin:
+    8px 0;
+
+  color:
+    rgba(255, 255, 255, 0.55);
+
+  font-size: 0.74rem;
+
+  line-height: 1.5;
+}
+
+.stream-result-object code {
+  color:
+    rgba(114, 230, 255, 0.8);
+
+  font-size: 0.7rem;
+}
+
+.stream-result-string {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding:
+    10px 12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 8px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+.result-index {
+  display: grid;
+
+  width: 23px;
+  height: 23px;
+
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 6px;
+
+  background:
+    rgba(114, 230, 255, 0.08);
+
+  color:
+    rgba(114, 230, 255, 0.7);
+
+  font-size: 0.62rem;
+}
+
+.stream-result-string code {
+  color:
+    rgba(255, 255, 255, 0.78);
+
+  font-size: 0.74rem;
+}
+
+
+/* =========================
+   EMPTY OUTPUT
+   ========================= */
+
+.console-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 300px;
+
+  padding: 30px;
+
+  text-align: center;
+
+  border:
+    1px dashed rgba(255, 255, 255, 0.09);
+
+  border-radius: 14px;
+
+  background:
+    rgba(255, 255, 255, 0.015);
+}
+
+.empty-state-icon {
+  margin-bottom: 12px;
+
+  color:
+    rgba(114, 230, 255, 0.72);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 1.5rem;
+}
+
+.console-empty-state h4 {
+  margin:
+    0 0 7px;
+
+  color: #ffffff;
+}
+
+.console-empty-state p {
+  max-width: 400px;
+
+  margin: 0;
+
+  color:
+    rgba(255, 255, 255, 0.46);
+
+  font-size: 0.78rem;
+
+  line-height: 1.55;
+}
+
+.empty-pipeline {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 20px;
+
+  color:
+    rgba(114, 230, 255, 0.48);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.68rem;
+}
+
+/* =========================
+   ENGINEER / IMPLEMENTATION
+   ========================= */
+
+.implementation-panel {
+  min-width: 0;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 18px;
+
+  background:
+    rgba(5, 12, 24, 0.72);
+
+  backdrop-filter:
+    blur(14px);
+
+  overflow: hidden;
+}
+
+
+.implementation-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  gap: 24px;
+
+  padding: 22px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  font: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease;
+}
+
+
+.implementation-toggle:hover {
+  background:
+    rgba(114, 230, 255, 0.025);
+}
+
+
+.implementation-toggle:focus-visible {
+  outline:
+    2px solid rgba(114, 230, 255, 0.72);
+
+  outline-offset: -2px;
+}
+
+
+.implementation-heading {
+  margin-bottom: 0;
+}
+
+
+.implementation-toggle-action {
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  gap: 10px;
+
+  color:
+    rgba(114, 230, 255, 0.82);
+
+  font-size: 0.62rem;
+  font-weight: 800;
+
+  letter-spacing: 0.09rem;
+}
+
+
+.implementation-chevron {
+  display: inline-block;
+
+  font-size: 0.82rem;
+
+  transition:
+    transform 0.25s ease;
+}
+
+
+.implementation-chevron-open {
+  transform:
+    rotate(180deg);
+}
+
+
+/* =========================
+   IMPLEMENTATION CONTENT
+   ========================= */
+
+.implementation-content {
+  padding:
+    0 22px 22px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  animation:
+    implementationReveal 0.25s ease;
+}
+
+
+@keyframes implementationReveal {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+.implementation-description {
+  padding:
+    20px 0 14px;
+}
+
+
+.implementation-description p {
+  max-width: 760px;
+
+  margin:
+    7px 0 0;
+
+  color:
+    rgba(255, 255, 255, 0.48);
+
+  font-size: 0.76rem;
+
+  line-height: 1.55;
+}
+
+
+/* =========================
+   JAVA CODE WINDOW
+   ========================= */
+
+.implementation-code-shell {
+  min-width: 0;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 13px;
+
+  background:
+    rgba(1, 6, 15, 0.72);
+}
+
+
+.implementation-code-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 38px;
+
+  padding:
+    8px 13px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color:
+    rgba(255, 255, 255, 0.44);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.65rem;
+}
+
+
+.implementation-stage-chip {
+  padding:
+    4px 8px;
+
+  border:
+    1px solid rgba(114, 230, 255, 0.28);
+
+  border-radius: 999px;
+
+  background:
+    rgba(114, 230, 255, 0.08);
+
+  color: #72e6ff;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.56rem;
+  font-weight: 700;
+
+  letter-spacing: 0.06rem;
+}
+
+
+.implementation-code {
+  max-width: 100%;
+
+  margin: 0;
+
+  padding:
+    16px 0;
+
+  overflow-x: auto;
+
+  color:
+    rgba(255, 255, 255, 0.78);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.72rem;
+
+  line-height: 1.7;
+
+  tab-size: 2;
+}
+
+
+.implementation-code-line {
+  display: block;
+
+  min-height: 1.7em;
+
+  padding:
+    0 16px;
+
+  border-left:
+    2px solid transparent;
+
+  white-space: pre;
+
+  transition:
+    color 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+
+.implementation-code-line-highlighted {
+  border-left-color:
+    #72e6ff;
+
+  background:
+    rgba(114, 230, 255, 0.1);
+
+  color: #ffffff;
+
+  box-shadow:
+    inset 8px 0 14px rgba(114, 230, 255, 0.025);
+}
+
+
+.implementation-code-line-skipped {
+  color:
+    rgba(255, 255, 255, 0.28);
+
+  font-style: italic;
+}
+
+
+.implementation-code-line-skipped.implementation-code-line-highlighted {
+  color:
+    rgba(114, 230, 255, 0.72);
+}
+
+
+.implementation-help {
+  margin:
+    11px 0 0;
+
+  color:
+    rgba(255, 255, 255, 0.34);
+
+  font-size: 0.68rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 800px) {
+
+  .java-console-header {
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .java-console-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .java-console-controls,
+  .java-console-output {
+    padding: 17px;
+  }
+
+  .stream-metrics {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .pipeline-stages {
+    align-items: stretch;
+
+    gap: 6px;
+  }
+
+  .pipeline-stage {
+    min-width: 72px;
+    min-height: 52px;
+
+    padding:
+      7px 8px;
+  }
+
+  .pipeline-stage-name {
+    font-size: 0.56rem;
+  }
+
+  .pipeline-stage-detail {
+    font-size: 0.53rem;
+  }
+
+  .pipeline-arrow {
+    align-self: center;
+
+    font-size: 0.65rem;
+  }
+
+    .implementation-toggle {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 14px;
+
+    padding: 17px;
+  }
+
+
+  .implementation-toggle-action {
+    width: 100%;
+
+    justify-content: space-between;
+  }
+
+
+  .implementation-content {
+    padding:
+      0 17px 17px;
+  }
+
+
+  .implementation-code {
+    font-size: 0.64rem;
+  }
+
+
+  .implementation-code-line {
+    padding:
+      0 12px;
+  }
+
+  
+}

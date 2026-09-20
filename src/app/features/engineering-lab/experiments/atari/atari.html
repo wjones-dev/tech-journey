@@ -1,0 +1,712 @@
+<section class="atari-lab">
+
+  <!-- =========================
+       LAB HEADER
+       ========================= -->
+
+  <header class="lab-header">
+
+    <div class="header-copy">
+
+      <span class="eyebrow">
+        HISTORICAL ENGINEERING LAB
+      </span>
+
+      <h1>
+        Atari 2600
+      </h1>
+
+      <h2>
+        How Did Early Hardware Create a Video Game?
+      </h2>
+
+      <p>
+        Move a simple player across the screen and watch how
+        controller input, game instructions, video hardware and
+        display timing work together to create a frame.
+      </p>
+
+    </div>
+
+
+    <div class="lab-badge">
+
+      <span class="badge-dot"></span>
+
+      ANGULAR SIMULATION
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =========================
+       PLAY
+       ========================= -->
+
+  <section class="lab-layer play-layer">
+
+    <div class="layer-heading">
+
+      <div class="layer-number">
+        01
+      </div>
+
+      <div>
+
+        <span class="layer-label">
+          PLAY
+        </span>
+
+        <h2>
+          Control the Frame
+        </h2>
+
+        <p>
+          Choose the player's movement, speed and color,
+          then run one simulated frame.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="play-grid">
+
+
+      <!-- CONTROL PANEL -->
+
+      <div class="control-panel">
+
+        <div class="control-group">
+
+          <span class="control-label">
+            PLAYER MOVEMENT
+          </span>
+
+          <div class="direction-controls">
+
+            <button
+              type="button"
+              class="direction-button"
+              [class.selected]="selectedDirection() === 'LEFT'"
+              [disabled]="simulationRunning()"
+              (click)="selectDirection('LEFT')">
+
+              <span aria-hidden="true">
+                ←
+              </span>
+
+              MOVE LEFT
+
+            </button>
+
+
+            <button
+              type="button"
+              class="direction-button"
+              [class.selected]="selectedDirection() === 'RIGHT'"
+              [disabled]="simulationRunning()"
+              (click)="selectDirection('RIGHT')">
+
+              MOVE RIGHT
+
+              <span aria-hidden="true">
+                →
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="control-group">
+
+          <span class="control-label">
+            SPEED
+          </span>
+
+          <div class="speed-controls">
+
+            @for (
+              speed of speeds;
+              track speed
+            ) {
+
+              <button
+                type="button"
+                class="speed-button"
+                [class.selected]="selectedSpeed() === speed"
+                [disabled]="simulationRunning()"
+                (click)="selectSpeed(speed)">
+
+                {{ speed }}
+
+              </button>
+
+            }
+
+          </div>
+
+        </div>
+
+
+
+        <div class="control-group">
+
+          <span class="control-label">
+            PLAYER COLOR
+          </span>
+
+          <div class="color-controls">
+
+            @for (
+              color of colorOptions;
+              track color.value
+            ) {
+
+              <button
+                type="button"
+                class="color-button"
+                [class.selected]="playerColor() === color.value"
+                [attr.aria-label]="'Select ' + color.label"
+                [attr.title]="color.label"
+                (click)="selectColor(color.value)">
+
+                <span
+                  class="color-swatch"
+                  [style.background]="color.value">
+                </span>
+
+              </button>
+
+            }
+
+          </div>
+
+        </div>
+
+
+
+        <button
+          type="button"
+          class="run-frame-button"
+          [disabled]="simulationRunning()"
+          (click)="runFrame()">
+
+          @if (simulationRunning()) {
+
+            <span class="run-indicator"></span>
+
+            PROCESSING FRAME
+
+          } @else {
+
+            <span aria-hidden="true">
+              ▶
+            </span>
+
+            RUN FRAME
+
+          }
+
+        </button>
+
+
+        <div class="frame-status">
+
+          <span>
+            FRAME
+          </span>
+
+          <strong>
+            {{ frameCount() }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- SIMULATED TELEVISION -->
+
+      <div class="television-area">
+
+        <div class="television">
+
+          <div
+            class="television-screen"
+            [class.processing]="simulationRunning()">
+
+            <div class="screen-grid"></div>
+
+            <div
+              class="player-sprite"
+              [style.left.%]="playerPosition()"
+              [style.background]="playerColor()">
+
+              <span class="sprite-highlight"></span>
+
+            </div>
+
+
+            <div class="ground-line"></div>
+
+
+            @if (simulationRunning()) {
+
+              <div class="scanline"></div>
+
+            }
+
+          </div>
+
+
+          <div class="television-controls">
+
+            <span></span>
+
+            <span></span>
+
+          </div>
+
+        </div>
+
+
+        <div class="screen-readout">
+
+          <span>
+            INPUT
+          </span>
+
+          <strong>
+            {{ selectedDirection() }}
+          </strong>
+
+          <span class="readout-divider"></span>
+
+          <span>
+            SPEED
+          </span>
+
+          <strong>
+            {{ selectedSpeed() }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       UNDERSTAND
+       ========================= -->
+
+  <section class="lab-layer understand-layer">
+
+    <div class="layer-heading">
+
+      <div class="layer-number">
+        02
+      </div>
+
+      <div>
+
+        <span class="layer-label">
+          UNDERSTAND
+        </span>
+
+        <h2>
+          Follow the Hardware
+        </h2>
+
+        <p>
+          Each frame moves through a simplified version of the
+          system that connected the joystick to the television.
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="pipeline">
+
+      @for (
+        stage of architectureStages;
+        track stage.id;
+        let last = $last
+      ) {
+
+        <div class="pipeline-stage-wrapper">
+
+          <article
+            class="pipeline-stage"
+            [class.active]="isStageActive(stage.id)">
+
+            <div class="stage-status">
+
+              @if (isStageActive(stage.id)) {
+
+                <span class="active-pulse"></span>
+
+              } @else {
+
+                <span class="inactive-dot"></span>
+
+              }
+
+            </div>
+
+
+            <div class="stage-copy">
+
+              <strong>
+                {{ stage.label }}
+              </strong>
+
+              <p>
+                {{ stage.description }}
+              </p>
+
+            </div>
+
+          </article>
+
+
+          @if (!last) {
+
+            <div
+              class="pipeline-arrow"
+              aria-hidden="true">
+
+              <span>
+                ↓
+              </span>
+
+            </div>
+
+          
+
+        }
+        </div>
+
+      }
+
+    </div>
+
+
+
+    <aside class="constraint-callout">
+
+      <span class="callout-label">
+        ENGINEERING CONSTRAINT
+      </span>
+
+      <p>
+        Early developers had very little memory and computing
+        power. Software and television timing were tightly
+        connected, so producing even a simple game required
+        careful control of limited hardware resources.
+      </p>
+
+    </aside>
+
+  </section>
+
+
+
+  <!-- =========================
+       ENGINEER
+       ========================= -->
+
+  <section class="lab-layer engineer-layer">
+
+    <div class="layer-heading engineer-heading">
+
+      <div class="layer-number">
+        03
+      </div>
+
+      <div>
+
+        <span class="layer-label">
+          ENGINEER
+        </span>
+
+        <h2>
+          Explore the Hardware
+        </h2>
+
+        <p>
+          Go beneath the simulation and examine the major
+          responsibilities inside the system.
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <button
+      type="button"
+      class="engineer-toggle"
+      [class.open]="engineerExpanded()"
+      [attr.aria-expanded]="engineerExpanded()"
+      (click)="toggleEngineer()">
+
+      <span>
+        {{ engineerExpanded()
+          ? 'HIDE ENGINEERING'
+          : 'VIEW ENGINEERING'
+        }}
+      </span>
+
+      <span
+        class="toggle-icon"
+        aria-hidden="true">
+
+        {{ engineerExpanded()
+          ? '−'
+          : '+'
+        }}
+
+      </span>
+
+    </button>
+
+
+
+    @if (engineerExpanded()) {
+
+      <div class="engineer-content">
+
+
+        <!-- COMPONENT EXPLORER -->
+
+        <div class="hardware-explorer">
+
+          <div class="hardware-navigation">
+
+            <span class="engineer-subheading">
+              SYSTEM COMPONENTS
+            </span>
+
+
+            <div class="component-buttons">
+
+              @for (
+                component of engineeringComponents;
+                track component.id
+              ) {
+
+                <button
+                  type="button"
+                  class="component-button"
+                  [class.selected]="
+                    selectedEngineeringComponent()?.id
+                    === component.id
+                  "
+                  (click)="
+                    selectEngineeringComponent(component)
+                  ">
+
+                  {{ component.label }}
+
+                </button>
+
+              }
+
+            </div>
+
+          </div>
+
+
+
+          @if (
+            selectedEngineeringComponent();
+            as component
+          ) {
+
+            <article class="component-detail">
+
+              <span class="detail-eyebrow">
+                COMPONENT RESPONSIBILITY
+              </span>
+
+              <h3>
+                {{ component.label }}
+              </h3>
+
+              <p>
+                {{ component.description }}
+              </p>
+
+            </article>
+
+          }
+
+        </div>
+
+
+
+        <!-- THEN VS NOW -->
+
+        <div class="then-now">
+
+          <div class="then-now-heading">
+
+            <span class="engineer-subheading">
+              THEN → NOW
+            </span>
+
+            <h3>
+              The Same Problem at a Different Scale
+            </h3>
+
+          </div>
+
+
+
+          <div class="comparison-table">
+
+            <div class="comparison-header">
+
+              <span>
+                ATARI ERA
+              </span>
+
+              <span></span>
+
+              <span>
+                MODERN CONSOLE
+              </span>
+
+            </div>
+
+
+            <div class="comparison-row">
+
+              <span>
+                Tiny memory
+              </span>
+
+              <strong>
+                →
+              </strong>
+
+              <span>
+                Gigabytes of memory
+              </span>
+
+            </div>
+
+
+            <div class="comparison-row">
+
+              <span>
+                ROM cartridge
+              </span>
+
+              <strong>
+                →
+              </strong>
+
+              <span>
+                SSD / digital storage
+              </span>
+
+            </div>
+
+
+            <div class="comparison-row">
+
+              <span>
+                Simple graphics
+              </span>
+
+              <strong>
+                →
+              </strong>
+
+              <span>
+                GPU-driven 3D rendering
+              </span>
+
+            </div>
+
+
+            <div class="comparison-row">
+
+              <span>
+                Joystick
+              </span>
+
+              <strong>
+                →
+              </strong>
+
+              <span>
+                Wireless multi-input controller
+              </span>
+
+            </div>
+
+
+            <div class="comparison-row">
+
+              <span>
+                CRT television
+              </span>
+
+              <strong>
+                →
+              </strong>
+
+              <span>
+                4K / HDR display
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- MAIN LESSON -->
+
+        <div class="main-lesson">
+
+          <span>
+            MAIN LESSON
+          </span>
+
+          <p>
+            Early game developers created experiences by working
+            directly within severe hardware and timing constraints.
+          </p>
+
+        </div>
+
+      </div>
+
+    }
+
+  </section>
+
+</section>

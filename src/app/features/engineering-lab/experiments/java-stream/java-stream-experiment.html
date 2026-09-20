@@ -1,0 +1,767 @@
+<div class="experiment-console-shell">
+
+  <!-- =========================
+       BACK TO EXPERIMENTS
+       ========================= -->
+
+  <button
+    type="button"
+    class="back-to-experiments-button"
+    (click)="backToExperiments()"
+  >
+    ← BACK TO EXPERIMENTS
+  </button>
+
+
+  <!-- =========================
+       JAVA CONSOLE HEADER
+       ========================= -->
+
+  <div class="java-console-header">
+
+    <div>
+
+      <span class="console-label">
+        JAVA STREAM CONSOLE
+      </span>
+
+      <h3>
+        Collections • Streams • Lambdas
+      </h3>
+
+      <p>
+        Configure and execute a real Java Stream pipeline
+        against the Tech Journey timeline dataset.
+      </p>
+
+    </div>
+
+
+    <div class="console-live-badge">
+      LIVE BACKEND
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       PLAY + UNDERSTAND
+       ========================= -->
+
+  <div class="java-console-layout">
+
+
+    <!-- =========================
+         01 — PLAY
+         CONFIGURE PIPELINE
+         ========================= -->
+
+    <section class="java-console-controls">
+
+      <div class="console-section-heading">
+
+        <span>
+          01
+        </span>
+
+        <div>
+
+          <h4>
+            Configure Pipeline
+          </h4>
+
+          <p>
+            Choose how Java should process the collection.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- DATASET -->
+
+      <div class="console-control">
+
+        <label>
+          DATASET
+        </label>
+
+        <div class="console-readonly-control">
+          Tech Journey Timeline
+        </div>
+
+        <small>
+          Live timeline records loaded from the Spring Boot API.
+        </small>
+
+      </div>
+
+
+      <!-- CATEGORY FILTER -->
+
+      <div class="console-control">
+
+        <label for="java-category">
+          CATEGORY FILTER
+        </label>
+
+        <select
+          id="java-category"
+          [value]="selectedCategory()"
+          (change)="onCategoryChange($event)"
+        >
+
+          <option value="ALL">
+            All Categories
+          </option>
+
+          <option value="GAMING">
+            Gaming
+          </option>
+
+          <option value="MUSIC">
+            Music
+          </option>
+
+          <option value="COMPUTING">
+            Computing
+          </option>
+
+          <option value="INTERNET">
+            Internet
+          </option>
+
+          <option value="MOBILE">
+            Mobile
+          </option>
+
+          <option value="STREAMING">
+            Streaming
+          </option>
+
+          <option value="CLOUD">
+            Cloud
+          </option>
+
+          <option value="FRONTEND">
+            Frontend
+          </option>
+
+          <option value="DEVOPS">
+            DevOps
+          </option>
+
+          <option value="ENTERPRISE">
+            Enterprise
+          </option>
+
+          <option value="AI">
+            AI
+          </option>
+
+        </select>
+
+        <small>
+          Demonstrates Stream.filter().
+        </small>
+
+      </div>
+
+
+      <!-- SORT -->
+
+      <div class="console-control">
+
+        <label for="java-sort-direction">
+          SORT BY YEAR
+        </label>
+
+        <select
+          id="java-sort-direction"
+          [value]="selectedSortDirection()"
+          (change)="onSortDirectionChange($event)"
+        >
+
+          <option value="ASC">
+            Oldest → Newest
+          </option>
+
+          <option value="DESC">
+            Newest → Oldest
+          </option>
+
+        </select>
+
+        <small>
+          Demonstrates Stream.sorted().
+        </small>
+
+      </div>
+
+
+      <!-- MAP / TRANSFORM -->
+
+      <div class="console-control">
+
+        <label for="java-result-type">
+          TRANSFORM RESULT
+        </label>
+
+        <select
+          id="java-result-type"
+          [value]="selectedResultType()"
+          (change)="onResultTypeChange($event)"
+        >
+
+          <option value="FULL_OBJECT">
+            Full Timeline Object
+          </option>
+
+          <option value="TITLE">
+            Title Only
+          </option>
+
+          <option value="TECHNOLOGY">
+            Technology Only
+          </option>
+
+        </select>
+
+        <small>
+          Demonstrates Stream.map().
+        </small>
+
+      </div>
+
+
+      <!-- LIMIT -->
+
+      <div class="console-control">
+
+        <label for="java-limit">
+          LIMIT RESULTS
+        </label>
+
+        <input
+          id="java-limit"
+          type="number"
+          min="1"
+          placeholder="No limit"
+          [value]="selectedLimit() ?? ''"
+          (input)="onLimitChange($event)"
+        />
+
+        <small>
+          Leave blank to return the complete result set.
+        </small>
+
+      </div>
+
+
+      <!-- RUN EXPERIMENT -->
+
+      <button
+        type="button"
+        class="run-java-stream-button"
+        [disabled]="loading()"
+        (click)="runJavaStreamExperiment()"
+      >
+
+        @if (loading()) {
+
+          <span class="console-spinner"></span>
+
+          EXECUTING STREAM...
+
+        } @else {
+
+          RUN JAVA STREAM
+
+          <span aria-hidden="true">
+            →
+          </span>
+
+        }
+
+      </button>
+
+
+      <!-- ERROR -->
+
+      @if (errorMessage()) {
+
+        <div
+          class="console-error"
+          role="alert"
+        >
+
+          <strong>
+            EXECUTION ERROR
+          </strong>
+
+          <span>
+            {{ errorMessage() }}
+          </span>
+
+        </div>
+
+      }
+
+    </section>
+
+
+    <!-- =========================
+         02 — UNDERSTAND
+         PIPELINE OUTPUT
+         ========================= -->
+
+    <section class="java-console-output">
+
+      <div class="console-section-heading">
+
+        <span>
+          02
+        </span>
+
+        <div>
+
+          <h4>
+            Pipeline Output
+          </h4>
+
+          <p>
+            Inspect what happened inside the Java Stream.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      @if (javaStreamResponse(); as response) {
+
+
+        <!-- PIPELINE -->
+
+        <div class="pipeline-panel">
+
+          <span class="output-label">
+            PIPELINE
+          </span>
+
+
+          <div class="pipeline-stages">
+
+            @for (
+              stage of pipelineStages;
+              track stage;
+              let last = $last
+            ) {
+
+              <button
+                type="button"
+                class="pipeline-stage"
+                [class.pipeline-stage-active]="
+                  isPipelineStageActive(stage)
+                "
+                [class.pipeline-stage-inactive]="
+                  !isPipelineStageActive(stage)
+                "
+                [class.pipeline-stage-recent]="
+                  lastConfiguredStage() === stage &&
+                  isPipelineStageActive(stage)
+                "
+                [class.pipeline-stage-code-selected]="
+                  activeImplementationStage() === stage
+                "
+                [title]="getPipelineStageDescription(stage)"
+                [attr.aria-pressed]="
+                  activeImplementationStage() === stage
+                "
+                (mouseenter)="previewImplementationStage(stage)"
+                (mouseleave)="clearImplementationPreview()"
+                (focus)="previewImplementationStage(stage)"
+                (blur)="clearImplementationPreview()"
+                (click)="selectImplementationStage(stage)"
+              >
+
+                <span class="pipeline-stage-name">
+                  {{ stage }}
+                </span>
+
+                <span class="pipeline-stage-detail">
+                  {{ getPipelineStageDetail(stage) }}
+                </span>
+
+              </button>
+
+
+              @if (!last) {
+
+                <span
+                  class="pipeline-arrow"
+                  [class.pipeline-arrow-active]="
+                    isPipelineStageActive(stage)
+                  "
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+
+              }
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- METRICS -->
+
+        <div class="stream-metrics">
+
+          <div class="stream-metric">
+
+            <span>
+              ORIGINAL
+            </span>
+
+            <strong>
+              {{ response.originalCount }}
+            </strong>
+
+          </div>
+
+
+          <div class="stream-metric">
+
+            <span>
+              FILTERED
+            </span>
+
+            <strong>
+              {{ response.filteredCount }}
+            </strong>
+
+          </div>
+
+
+          <div class="stream-metric">
+
+            <span>
+              FINAL
+            </span>
+
+            <strong>
+              {{ response.finalCount }}
+            </strong>
+
+          </div>
+
+
+          <div class="stream-metric">
+
+            <span>
+              EXECUTION
+            </span>
+
+            <strong>
+              {{ response.executionTimeMs }} ms
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- RESULTS -->
+
+        <div class="stream-results-panel">
+
+          <div class="results-heading">
+
+            <span class="output-label">
+              RESULTS
+            </span>
+
+            <span class="result-count">
+              {{ response.finalCount }}
+              returned
+            </span>
+
+          </div>
+
+
+          <div class="stream-results">
+
+            @for (
+              result of response.results;
+              track $index
+            ) {
+
+              @if (
+                selectedResultType() === 'FULL_OBJECT'
+              ) {
+
+                <article class="stream-result-object">
+
+                  <div class="result-object-header">
+
+                    <span class="result-year">
+                      {{ $any(result).year }}
+                    </span>
+
+                    <strong>
+                      {{ $any(result).title }}
+                    </strong>
+
+                  </div>
+
+
+                  <span class="result-category">
+                    {{ $any(result).category }}
+                  </span>
+
+
+                  <p>
+                    {{ $any(result).description }}
+                  </p>
+
+
+                  <code>
+                    {{ $any(result).technology }}
+                  </code>
+
+                </article>
+
+              } @else {
+
+                <div class="stream-result-string">
+
+                  <span class="result-index">
+                    {{ $index + 1 }}
+                  </span>
+
+                  <code>
+                    {{ result }}
+                  </code>
+
+                </div>
+
+              }
+
+            }
+
+          </div>
+
+        </div>
+
+
+      } @else {
+
+
+        <!-- EMPTY STATE -->
+
+        <div class="console-empty-state">
+
+          <div class="empty-state-icon">
+            &gt;_
+          </div>
+
+          <h4>
+            Pipeline Ready
+          </h4>
+
+          <p>
+            Configure the Stream pipeline and select
+            <strong>Run Java Stream</strong>
+            to execute the experiment.
+          </p>
+
+
+          <div class="empty-pipeline">
+
+            <span>
+              Collection
+            </span>
+
+            <span>
+              →
+            </span>
+
+            <span>
+              Stream
+            </span>
+
+            <span>
+              →
+            </span>
+
+            <span>
+              Result
+            </span>
+
+          </div>
+
+        </div>
+
+      }
+
+    </section>
+
+  </div>
+
+
+  <!-- =========================
+       03 — ENGINEER
+       VIEW IMPLEMENTATION
+       ========================= -->
+
+  <section class="implementation-panel">
+
+
+    <!-- COLLAPSIBLE HEADER -->
+
+    <button
+      type="button"
+      class="implementation-toggle"
+      [attr.aria-expanded]="implementationExpanded()"
+      (click)="toggleImplementation()"
+    >
+
+      <div class="console-section-heading implementation-heading">
+
+        <span>
+          03
+        </span>
+
+        <div>
+
+          <h4>
+            View Implementation
+          </h4>
+
+          <p>
+            Connect the visual pipeline to the Java Stream operations behind it.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <span class="implementation-toggle-action">
+
+        @if (implementationExpanded()) {
+
+          HIDE IMPLEMENTATION
+
+        } @else {
+
+          VIEW IMPLEMENTATION
+
+        }
+
+
+        <span
+          class="implementation-chevron"
+          [class.implementation-chevron-open]="
+            implementationExpanded()
+          "
+          aria-hidden="true"
+        >
+          ↓
+        </span>
+
+      </span>
+
+    </button>
+
+
+    <!-- IMPLEMENTATION CONTENT -->
+
+    @if (implementationExpanded()) {
+
+      <div class="implementation-content">
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="implementation-description">
+
+          <span class="output-label">
+            JAVA IMPLEMENTATION
+          </span>
+
+          <p>
+            This implementation is generated from the current
+            PLAY configuration. Change the filter, sort,
+            transform, or limit controls to see the Stream
+            pipeline change.
+          </p>
+
+        </div>
+
+
+        <!-- JAVA CODE WINDOW -->
+
+        <div class="implementation-code-shell">
+
+
+          <!-- CODE TOOLBAR -->
+
+          <div class="implementation-code-toolbar">
+
+            <span>
+              Java
+            </span>
+
+
+            @if (
+              activeImplementationStage();
+              as stage
+            ) {
+
+              <span class="implementation-stage-chip">
+                {{ stage }}
+              </span>
+
+            }
+
+          </div>
+
+
+          <!-- GENERATED JAVA IMPLEMENTATION -->
+
+          <pre class="implementation-code"><code>@for (
+  line of implementationLines();
+  track $index
+) {<span
+  class="implementation-code-line"
+  [class.implementation-code-line-highlighted]="
+    isImplementationLineHighlighted(line.stage)
+  "
+  [class.implementation-code-line-skipped]="
+    !line.enabled
+  "
+>{{ line.text }}</span>}</code></pre>
+
+        </div>
+
+
+        <!-- HELP TEXT -->
+
+        <p class="implementation-help">
+          Hover or select a pipeline stage above to connect
+          the execution step with its Java implementation.
+        </p>
+
+      </div>
+
+    }
+
+  </section>
+
+</div>
