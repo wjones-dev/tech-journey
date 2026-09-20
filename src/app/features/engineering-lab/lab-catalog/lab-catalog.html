@@ -1,0 +1,70 @@
+<!-- =========================
+     LAB TECHNOLOGY CATALOG
+     ========================= -->
+
+<div class="lab-categories">
+
+  @for (
+    technology of technologies;
+    track technology.key
+  ) {
+
+    <article class="lab-category-card">
+
+
+      <!-- =========================
+           TIMELINE YEAR
+           ========================= -->
+
+      <div class="lab-category-number">
+  {{ technology.period }}
+</div>
+
+
+      <!-- =========================
+           TECHNOLOGY CONTENT
+           ========================= -->
+
+      <div class="lab-category-content">
+
+        <span class="experiment-eyebrow">
+          {{ technology.eyebrow }}
+        </span>
+
+
+        <h3>
+          {{ technology.title }}
+        </h3>
+
+
+        <p class="experiment-description">
+          {{ technology.description }}
+        </p>
+
+
+        <div class="lab-category-meta">
+          {{ experimentLabel(technology.experimentCount) }}
+        </div>
+
+
+        <button
+          type="button"
+          class="experiment-run-button"
+          (click)="selectTechnology(technology)"
+        >
+
+          {{ technology.buttonLabel }}
+
+          <span aria-hidden="true">
+            →
+          </span>
+
+        </button>
+
+      </div>
+
+    </article>
+
+  }
+
+</div>

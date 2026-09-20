@@ -1,0 +1,418 @@
+<!-- =========================
+     LAB TECHNOLOGY
+     ========================= -->
+
+
+<!-- =========================
+     BACK TO TECHNOLOGIES
+     ========================= -->
+
+<button
+  type="button"
+  class="drawer-back-button"
+  (click)="backToTechnologies()"
+>
+
+  <span aria-hidden="true">
+    ←
+  </span>
+
+  ALL TECHNOLOGIES
+
+</button>
+
+
+<!-- =========================
+     PERSONAL TECHNOLOGY
+     ========================= -->
+
+@if (technology() === 'PERSONAL_TECHNOLOGY') {
+
+  <div class="lab-experiments">
+
+    @for (
+      experiment of personalTechnologyExperiments;
+      track experiment.key
+    ) {
+
+      <article class="experiment-card">
+
+
+        <div class="experiment-number">
+          {{ experiment.number }}
+        </div>
+
+
+        <div class="experiment-content">
+
+          <span class="experiment-eyebrow">
+            {{ experiment.eyebrow }}
+          </span>
+
+
+          <h3>
+            {{ experiment.title }}
+          </h3>
+
+
+          <p class="experiment-description">
+            {{ experiment.description }}
+          </p>
+
+
+          @if (experiment.available) {
+
+            <button
+              type="button"
+              class="experiment-run-button"
+              (click)="selectExperiment(experiment)"
+            >
+
+              RUN EXPERIMENT
+
+              <span aria-hidden="true">
+                →
+              </span>
+
+            </button>
+
+          } @else {
+
+            <button
+              type="button"
+              class="
+                experiment-run-button
+                experiment-coming-soon
+              "
+              disabled
+            >
+              COMING SOON
+            </button>
+
+          }
+
+        </div>
+
+      </article>
+
+    }
+
+  </div>
+
+}
+
+
+<!-- =========================
+     WEB EXPERIMENTS
+     ========================= -->
+
+@if (technology() === 'WEB') {
+
+  <div class="lab-experiments">
+
+    @for (
+      experiment of webExperiments;
+      track experiment.key
+    ) {
+
+      <article class="experiment-card">
+
+
+        <div class="experiment-number">
+          {{ experiment.number }}
+        </div>
+
+
+        <div class="experiment-content">
+
+          <span class="experiment-eyebrow">
+            {{ experiment.eyebrow }}
+          </span>
+
+
+          <h3>
+            {{ experiment.title }}
+          </h3>
+
+
+          <p class="experiment-description">
+            {{ experiment.description }}
+          </p>
+
+
+          @if (experiment.available) {
+
+            <button
+              type="button"
+              class="experiment-run-button"
+              (click)="selectExperiment(experiment)"
+            >
+
+              RUN EXPERIMENT
+
+              <span aria-hidden="true">
+                →
+              </span>
+
+            </button>
+
+          } @else {
+
+            <button
+              type="button"
+              class="
+                experiment-run-button
+                experiment-coming-soon
+              "
+              disabled
+            >
+              COMING SOON
+            </button>
+
+          }
+
+        </div>
+
+      </article>
+
+    }
+
+  </div>
+
+}
+
+
+<!-- =========================
+     JAVA EXPERIMENTS
+     ========================= -->
+
+@if (technology() === 'JAVA') {
+
+  <div class="lab-experiments">
+
+    @for (
+      experiment of javaExperiments;
+      track experiment.key
+    ) {
+
+      <article class="experiment-card">
+
+
+        <div class="experiment-number">
+          {{ experiment.number }}
+        </div>
+
+
+        <div class="experiment-content">
+
+          <span class="experiment-eyebrow">
+            {{ experiment.eyebrow }}
+          </span>
+
+
+          <h3>
+            {{ experiment.title }}
+          </h3>
+
+
+          <p class="experiment-description">
+            {{ experiment.description }}
+          </p>
+
+
+          @if (experiment.available) {
+
+            <button
+              type="button"
+              class="experiment-run-button"
+              (click)="selectExperiment(experiment)"
+            >
+
+              RUN EXPERIMENT
+
+              <span aria-hidden="true">
+                →
+              </span>
+
+            </button>
+
+          } @else {
+
+            <button
+              type="button"
+              class="
+                experiment-run-button
+                experiment-coming-soon
+              "
+              disabled
+            >
+              COMING SOON
+            </button>
+
+          }
+
+        </div>
+
+      </article>
+
+    }
+
+  </div>
+
+}
+
+<!-- =========================
+     CLOUD & DEVOPS EXPERIMENTS
+     ========================= -->
+
+@if (technology() === 'CLOUD_DEVOPS') {
+
+  <div class="lab-experiments">
+
+    @for (
+      experiment of cloudDevOpsExperiments;
+      track experiment.key
+    ) {
+
+      <article class="experiment-card">
+
+        <div class="experiment-number">
+          {{ experiment.number }}
+        </div>
+
+
+        <div class="experiment-content">
+
+          <span class="experiment-eyebrow">
+            {{ experiment.eyebrow }}
+          </span>
+
+
+          <h3>
+            {{ experiment.title }}
+          </h3>
+
+
+          <p class="experiment-description">
+            {{ experiment.description }}
+          </p>
+
+
+          @if (experiment.available) {
+
+            <button
+              type="button"
+              class="experiment-run-button"
+              (click)="selectExperiment(experiment)"
+            >
+
+              RUN EXPERIMENT
+
+              <span aria-hidden="true">
+                →
+              </span>
+
+            </button>
+
+          } @else {
+
+            <button
+              type="button"
+              class="
+                experiment-run-button
+                experiment-coming-soon
+              "
+              disabled
+            >
+              COMING SOON
+            </button>
+
+          }
+
+        </div>
+
+      </article>
+
+    }
+
+  </div>
+
+}
+
+<!-- =========================
+     AI EXPERIMENTS
+     ========================= -->
+
+@if (technology() === 'AI') {
+
+  <div class="lab-experiments">
+
+    @for (
+      experiment of aiExperiments;
+      track experiment.key
+    ) {
+
+      <article class="experiment-card">
+
+        <div class="experiment-number">
+          {{ experiment.number }}
+        </div>
+
+
+        <div class="experiment-content">
+
+          <span class="experiment-eyebrow">
+            {{ experiment.eyebrow }}
+          </span>
+
+
+          <h3>
+            {{ experiment.title }}
+          </h3>
+
+
+          <p class="experiment-description">
+            {{ experiment.description }}
+          </p>
+
+
+          @if (experiment.available) {
+
+            <button
+              type="button"
+              class="experiment-run-button"
+              (click)="selectExperiment(experiment)"
+            >
+
+              RUN EXPERIMENT
+
+              <span aria-hidden="true">
+                →
+              </span>
+
+            </button>
+
+          } @else {
+
+            <button
+              type="button"
+              class="
+                experiment-run-button
+                experiment-coming-soon
+              "
+              disabled
+            >
+              COMING SOON
+            </button>
+
+          }
+
+        </div>
+
+      </article>
+
+    }
+
+  </div>
+
+}

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpringRequestLifecycle } from './spring-request-lifecycle';
+import { RequestLifecycle } from './request-lifecycle';
 
-describe('SpringRequestLifecycle', () => {
-  let component: SpringRequestLifecycle;
-  let fixture: ComponentFixture<SpringRequestLifecycle>;
+describe('RequestLifecycle', () => {
+  let component: RequestLifecycle;
+  let fixture: ComponentFixture<RequestLifecycle>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SpringRequestLifecycle],
+      imports: [RequestLifecycle],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SpringRequestLifecycle);
+    fixture = TestBed.createComponent(RequestLifecycle);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

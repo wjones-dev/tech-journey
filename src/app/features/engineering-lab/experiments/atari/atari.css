@@ -396,6 +396,12 @@
     0 0 0 2px rgba(105, 230, 255, 0.18);
 }
 
+.color-button:disabled {
+  cursor: default;
+
+  opacity: 0.55;
+}
+
 
 .color-swatch {
   width: 20px;
@@ -508,8 +514,7 @@
 .television-area {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+justify-content: flex-start;  align-items: center;
 
   min-height: 370px;
 
@@ -737,6 +742,312 @@
 
 .screen-readout strong {
   color: #a8dce6;
+}
+
+/* =========================
+   LIVE FRAME PATH
+   ========================= */
+
+.live-frame-path {
+  width:
+    min(100%, 720px);
+
+  margin-top: 22px;
+
+  padding:
+    16px 18px 18px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.075);
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(105, 230, 255, 0.035),
+      rgba(0, 0, 0, 0.16)
+    );
+
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.live-frame-path.running {
+  border-color:
+    rgba(105, 230, 255, 0.22);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(105, 230, 255, 0.055),
+      rgba(0, 0, 0, 0.18)
+    );
+
+  box-shadow:
+    0 0 28px rgba(105, 230, 255, 0.04);
+}
+
+
+/* HEADER */
+
+.live-frame-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 16px;
+}
+
+
+.live-frame-header > div:first-child {
+  min-width: 0;
+}
+
+
+.live-frame-eyebrow {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #69e6ff;
+
+  font-size: 0.58rem;
+  font-weight: 900;
+
+  letter-spacing: 0.12rem;
+}
+
+
+.live-frame-header strong {
+  display: block;
+
+  color: #a9bbc8;
+
+  font-size: 0.69rem;
+  font-weight: 600;
+}
+
+
+/* STATUS */
+
+.live-frame-status {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  flex-shrink: 0;
+
+  color: #708899;
+
+  font-size: 0.57rem;
+  font-weight: 900;
+
+  letter-spacing: 0.08rem;
+}
+
+
+.live-frame-path.running
+.live-frame-status {
+  color: #91e8f6;
+}
+
+
+.live-status-ready {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #435b6c;
+}
+
+
+.live-status-pulse {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #69e6ff;
+
+  box-shadow:
+    0 0 11px rgba(105, 230, 255, 0.95);
+
+  animation:
+    activePulse 0.7s ease-in-out infinite alternate;
+}
+
+
+/* PIPELINE */
+
+.live-pipeline {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+}
+
+
+.live-stage-wrapper {
+  display: flex;
+  align-items: center;
+
+  flex:
+    1 1 0;
+
+  min-width: 0;
+}
+
+
+.live-stage-wrapper:last-child {
+  flex:
+    0 0 auto;
+}
+
+
+.live-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 58px;
+
+  gap: 7px;
+
+  opacity: 0.48;
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+
+.live-stage-dot {
+  width: 11px;
+  height: 11px;
+
+  flex-shrink: 0;
+
+  border:
+    2px solid #405667;
+
+  border-radius: 50%;
+
+  background: #17212a;
+
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+
+.live-stage-label {
+  max-width: 76px;
+
+  overflow: hidden;
+
+  color: #6f8495;
+
+  font-size: 0.54rem;
+  font-weight: 900;
+
+  line-height: 1.2;
+
+  text-align: center;
+  text-overflow: ellipsis;
+
+  letter-spacing: 0.045rem;
+
+  white-space: nowrap;
+
+  transition:
+    color 180ms ease;
+}
+
+
+/*
+ * Only illuminate an active stage while a frame is
+ * currently processing.
+ *
+ * activeStage remains useful to the larger UNDERSTAND
+ * pipeline, but the compact path visually resets to
+ * READY once processing is complete.
+ */
+.live-frame-path.running
+.live-stage.active {
+  opacity: 1;
+
+  transform:
+    translateY(-2px);
+}
+
+
+.live-frame-path.running
+.live-stage.active
+.live-stage-dot {
+  border-color: #8ff2ff;
+
+  background: #69e6ff;
+
+  transform:
+    scale(1.18);
+
+  box-shadow:
+    0 0 6px rgba(105, 230, 255, 0.95),
+    0 0 16px rgba(105, 230, 255, 0.55);
+}
+
+
+.live-frame-path.running
+.live-stage.active
+.live-stage-label {
+  color: #d7f9ff;
+}
+
+
+/* CONNECTORS */
+
+.live-stage-connector {
+  position: relative;
+
+  height: 2px;
+
+  flex:
+    1 1 auto;
+
+  min-width: 18px;
+
+  margin:
+    0 4px;
+
+  background:
+    rgba(105, 230, 255, 0.12);
+}
+
+
+.live-stage-connector span {
+  position: absolute;
+
+  top: 50%;
+  right: -2px;
+
+  color:
+    rgba(105, 230, 255, 0.3);
+
+  font-size: 0.63rem;
+
+  transform:
+    translateY(-54%);
 }
 
 
@@ -1435,6 +1746,91 @@
 
   .comparison-row {
     font-size: 0.62rem;
+  }
+
+    .live-frame-path {
+    margin-top: 18px;
+
+    padding:
+      15px 13px;
+  }
+
+
+  .live-frame-header {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 9px;
+
+    margin-bottom: 15px;
+  }
+
+
+  .live-frame-status {
+    align-self: flex-start;
+  }
+
+
+  /*
+   * Six stages are too cramped in one horizontal row
+   * on smaller screens, so the compact visualization
+   * becomes a simple 3 x 2 hardware grid.
+   */
+  .live-pipeline {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 9px;
+  }
+
+
+  .live-stage-wrapper,
+  .live-stage-wrapper:last-child {
+    display: block;
+
+    min-width: 0;
+  }
+
+
+  .live-stage {
+    min-width: 0;
+
+    min-height: 64px;
+
+    padding:
+      9px 6px;
+
+    border:
+      1px solid rgba(255, 255, 255, 0.055);
+
+    border-radius: 9px;
+
+    background:
+      rgba(0, 0, 0, 0.12);
+  }
+
+
+  .live-frame-path.running
+  .live-stage.active {
+    border-color:
+      rgba(105, 230, 255, 0.28);
+
+    background:
+      rgba(105, 230, 255, 0.055);
+  }
+
+
+  .live-stage-label {
+    max-width: 100%;
+
+    white-space: normal;
+  }
+
+
+  .live-stage-connector {
+    display: none;
   }
 
 }

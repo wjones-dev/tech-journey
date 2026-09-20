@@ -6,6 +6,14 @@
 
   <header class="lab-header">
 
+    <button
+  type="button"
+  class="back-to-experiments-button"
+  (click)="backToExperiments()">
+  ← BACK TO EXPERIMENTS
+</button>
+  
+
     <div class="header-copy">
 
       <span class="eyebrow">
@@ -76,7 +84,9 @@
     <div class="play-grid">
 
 
-      <!-- CONTROL PANEL -->
+      <!-- =========================
+           CONTROL PANEL
+           ========================= -->
 
       <div class="control-panel">
 
@@ -174,6 +184,7 @@
                 type="button"
                 class="color-button"
                 [class.selected]="playerColor() === color.value"
+                [disabled]="simulationRunning()"
                 [attr.aria-label]="'Select ' + color.label"
                 [attr.title]="color.label"
                 (click)="selectColor(color.value)">
@@ -234,7 +245,9 @@
 
 
 
-      <!-- SIMULATED TELEVISION -->
+      <!-- =========================
+           SIMULATED TELEVISION
+           ========================= -->
 
       <div class="television-area">
 
@@ -245,6 +258,7 @@
             [class.processing]="simulationRunning()">
 
             <div class="screen-grid"></div>
+
 
             <div
               class="player-sprite"
@@ -279,6 +293,10 @@
         </div>
 
 
+        <!-- =========================
+             CURRENT INPUT READOUT
+             ========================= -->
+
         <div class="screen-readout">
 
           <span>
@@ -298,6 +316,103 @@
           <strong>
             {{ selectedSpeed() }}
           </strong>
+
+        </div>
+
+
+
+        <!-- =========================
+             LIVE FRAME PATH
+             ========================= -->
+
+        <div
+          class="live-frame-path"
+          [class.running]="simulationRunning()">
+
+
+          <div class="live-frame-header">
+
+            <div>
+
+              <span class="live-frame-eyebrow">
+                LIVE FRAME PATH
+              </span>
+
+              <strong>
+                Watch the signal move through the hardware
+              </strong>
+
+            </div>
+
+
+            <div class="live-frame-status">
+
+              @if (simulationRunning()) {
+
+                <span class="live-status-pulse"></span>
+
+                <span>
+                  PROCESSING FRAME {{ frameCount() + 1 }}
+                </span>
+
+              } @else {
+
+                <span class="live-status-ready"></span>
+
+                <span>
+                  READY
+                </span>
+
+              }
+
+            </div>
+
+          </div>
+
+
+
+          <div class="live-pipeline">
+
+            @for (
+              stage of architectureStages;
+              track stage.id;
+              let last = $last
+            ) {
+
+              <div class="live-stage-wrapper">
+
+                <div
+                  class="live-stage"
+                  [class.active]="isStageActive(stage.id)">
+
+                  <span class="live-stage-dot"></span>
+
+                  <span class="live-stage-label">
+                    {{ stage.label }}
+                  </span>
+
+                </div>
+
+
+                @if (!last) {
+
+                  <div
+                    class="live-stage-connector"
+                    aria-hidden="true">
+
+                    <span>
+                      →
+                    </span>
+
+                  </div>
+
+                }
+
+              </div>
+
+            }
+
+          </div>
 
         </div>
 
@@ -398,9 +513,8 @@
 
             </div>
 
-          
+          }
 
-        }
         </div>
 
       }
@@ -469,9 +583,10 @@
       (click)="toggleEngineer()">
 
       <span>
-        {{ engineerExpanded()
-          ? 'HIDE ENGINEERING'
-          : 'VIEW ENGINEERING'
+        {{
+          engineerExpanded()
+            ? 'HIDE ENGINEERING'
+            : 'VIEW ENGINEERING'
         }}
       </span>
 
@@ -479,9 +594,10 @@
         class="toggle-icon"
         aria-hidden="true">
 
-        {{ engineerExpanded()
-          ? '−'
-          : '+'
+        {{
+          engineerExpanded()
+            ? '−'
+            : '+'
         }}
 
       </span>
@@ -495,7 +611,9 @@
       <div class="engineer-content">
 
 
-        <!-- COMPONENT EXPLORER -->
+        <!-- =========================
+             COMPONENT EXPLORER
+             ========================= -->
 
         <div class="hardware-explorer">
 
@@ -563,7 +681,9 @@
 
 
 
-        <!-- THEN VS NOW -->
+        <!-- =========================
+             THEN VS NOW
+             ========================= -->
 
         <div class="then-now">
 
@@ -688,7 +808,9 @@
 
 
 
-        <!-- MAIN LESSON -->
+        <!-- =========================
+             MAIN LESSON
+             ========================= -->
 
         <div class="main-lesson">
 

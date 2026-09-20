@@ -7,7 +7,7 @@ import {
   signal
 } from '@angular/core';
 
-import { EngineeringLabApiService } from '../../../../core/services/engineering-lab-api.service';
+import { EngineeringLabApiService } from '../../../../../core/services/engineering-lab-api.service';
 
 import { JavaStreamExperimentRequest } from './models/java-stream-experiment-request.model';
 import {

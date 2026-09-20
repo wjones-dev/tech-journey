@@ -2,6 +2,7 @@ import {
   Component,
   DestroyRef,
   inject,
+  output,
   signal
 } from '@angular/core';
 
@@ -113,6 +114,8 @@ export class AtariLabComponent {
 
   readonly selectedEngineeringComponent =
     signal<EngineeringComponent | null>(null);
+
+    readonly back = output<void>();
 
 
   readonly speeds: AtariSpeed[] = [
@@ -474,6 +477,12 @@ export class AtariLabComponent {
       === stageId
     );
 
+  }
+
+  
+  backToExperiments(): void {
+
+    this.back.emit();
   }
 
 

@@ -632,14 +632,6 @@
    EXPERIMENT CARDS
    ========================= */
 
-.lab-experiments {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-
-  gap: 14px;
-}
 
 .experiment-card {
   display: flex;
@@ -951,107 +943,6 @@
 
 
 /* =========================
-   LAB CATEGORIES
-   ========================= */
-
-.lab-categories {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 16px;
-}
-
-
-.lab-category-card {
-  display: flex;
-  align-items: flex-start;
-
-  min-width: 0;
-
-  gap: 18px;
-
-  padding: 22px;
-
-  border:
-    1px solid rgba(24, 127, 177, 0.18);
-
-  border-radius: 18px;
-
-  background:
-    rgba(255, 255, 255, 0.56);
-
-  box-shadow:
-    0 8px 22px rgba(30, 91, 125, 0.08);
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
-}
-
-
-.lab-category-card:hover {
-  transform:
-    translateY(-3px);
-
-  background:
-    rgba(255, 255, 255, 0.74);
-
-  box-shadow:
-    0 14px 32px rgba(30, 91, 125, 0.14);
-}
-
-
-.lab-category-number {
-  flex:
-    0 0 auto;
-
-  color: #08aeea;
-
-  font-size: 2.3rem;
-  font-weight: 800;
-
-  line-height: 1;
-}
-
-
-.lab-category-content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-
-  min-width: 0;
-}
-
-
-.lab-category-content h3 {
-  margin:
-    0 0 8px;
-
-  color: #102d4c;
-
-  font-size: 1.25rem;
-
-  line-height: 1.3;
-}
-
-
-.lab-category-meta {
-  margin:
-    0 0 14px;
-
-  color: #087eae;
-
-  font-size: 0.63rem;
-  font-weight: 800;
-
-  letter-spacing: 0.1rem;
-}
-
-
-/* =========================
    DRAWER BACK BUTTON
    ========================= */
 
@@ -1140,18 +1031,8 @@
     overflow-y: auto;
   }
 
-  .lab-experiments {
-    grid-template-columns: 1fr;
-  }
+ 
 
-  .experiment-card {
-    gap: 13px;
-  }
-
-  .experiment-eyebrow,
-  .experiment-content h3 {
-    min-height: 0;
-  }
 
   .holo-globe {
     top: 45%;
@@ -1223,6 +1104,10 @@
   box-shadow:
     0 14px 32px rgba(30, 91, 125, 0.14);
 }
+
+
+
+
 
 
 .lab-category-number {
