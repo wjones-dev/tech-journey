@@ -501,12 +501,6 @@
    EXPLORE EXPERIMENTS
    ========================= */
 
-.experiment-drawer-launcher {
-  /*
-   * Positioning now comes from
-   * .lab-launcher-dock.
-   */
-}
 
 
 .drawer-arrow {
@@ -1209,7 +1203,7 @@
 
     flex-direction: column-reverse;
 
-    gap: 8px;
+    gap: 22px;
 
     bottom: 22px;
   }
@@ -1223,7 +1217,7 @@
 
 
   .museum-home-launcher {
-    width: auto;
+    width: 100%;
 
     align-self: flex-start;
 
