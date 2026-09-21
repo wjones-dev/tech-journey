@@ -1,0 +1,397 @@
+<section class="lab-experiment computer-lab">
+  <!-- =========================
+       HEADER
+       ========================= -->
+
+  <header class="lab-header">
+    <button type="button" class="back-to-experiments-button" (click)="backToExperiments()">
+      ← BACK TO EXPERIMENTS
+    </button>
+
+    <div class="header-copy">
+      <span class="eyebrow"> PERSONAL TECHNOLOGY • 1985 </span>
+
+      <h1>Home Computers</h1>
+
+      <h2>What Happens Inside a Computer?</h2>
+
+      <p>
+        Perform a simple computer action and follow how input, software, memory, processing, storage
+        and display work together to produce a result.
+      </p>
+    </div>
+
+    <div class="lab-badge">
+      <span class="badge-dot"></span>
+
+      BUILT WITH ANGULAR
+    </div>
+  </header>
+
+  <!-- =========================
+       PLAY
+       ========================= -->
+
+  <section class="lab-layer play-layer">
+    <div class="layer-heading">
+      <div class="layer-number">01</div>
+
+      <div>
+        <span class="layer-label"> PLAY </span>
+
+        <h2>Run the Computer</h2>
+
+        <p>Choose an action and watch one simplified computer operation move through the system.</p>
+      </div>
+    </div>
+
+    <div class="play-grid">
+      <!-- CONTROLS -->
+
+      <div class="control-panel">
+        <span class="control-label"> COMPUTER ACTION </span>
+
+        <div class="action-controls">
+          @for (action of actions; track action.id) {
+            <button
+              type="button"
+              class="action-button"
+              [class.selected]="selectedAction() === action.id"
+              [disabled]="simulationRunning()"
+              (click)="selectAction(action.id)"
+            >
+              <strong>
+                {{ action.label }}
+              </strong>
+
+              <span>
+                {{ action.description }}
+              </span>
+            </button>
+          }
+        </div>
+
+        <button
+          type="button"
+          class="run-button"
+          [disabled]="simulationRunning()"
+          (click)="runComputer()"
+        >
+          @if (simulationRunning()) {
+            <span class="run-indicator"></span>
+
+            PROCESSING
+          } @else {
+            <span aria-hidden="true"> ▶ </span>
+
+            RUN COMPUTER
+          }
+        </button>
+
+        <div class="operation-status">
+          <span> OPERATIONS </span>
+
+          <strong>
+            {{ operationCount() }}
+          </strong>
+        </div>
+      </div>
+
+      <!-- COMPUTER VISUAL -->
+
+      <div class="computer-area">
+        <div class="computer" [class.processing]="simulationRunning()">
+          <div class="monitor">
+            <div class="monitor-screen">
+              <div class="screen-glow"></div>
+
+              <pre>{{ screenMessage() }}</pre>
+
+              @if (simulationRunning()) {
+                <div class="screen-scanline"></div>
+              }
+            </div>
+          </div>
+
+          <div class="computer-base">
+            <span class="drive-slot"></span>
+
+            <span class="power-light"></span>
+          </div>
+
+          <div class="keyboard">
+            @for (
+              key of [
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+                24, 25, 26, 27, 28, 29, 30,
+              ];
+              track key
+            ) {
+              <span></span>
+            }
+          </div>
+        </div>
+
+        <!-- LIVE SYSTEM PATH -->
+
+        <div class="live-system-path" [class.running]="simulationRunning()">
+          <div class="live-system-header">
+            <div>
+              <span class="live-system-eyebrow"> LIVE SYSTEM PATH </span>
+
+              <strong> Watch the operation move through the computer </strong>
+            </div>
+
+            <div class="live-system-status">
+              @if (simulationRunning()) {
+                <span class="status-pulse"></span>
+
+                PROCESSING
+              } @else {
+                <span class="status-ready"></span>
+
+                READY
+              }
+            </div>
+          </div>
+
+          <div class="live-pipeline">
+            @for (stage of architectureStages; track stage.id; let last = $last) {
+              <div class="live-stage-wrapper">
+                <div class="live-stage" [class.active]="isStageActive(stage.id)">
+                  <span class="live-stage-dot"></span>
+
+                  <span class="live-stage-label">
+                    {{ stage.label }}
+                  </span>
+                </div>
+
+                @if (!last) {
+                  <div class="live-stage-connector" aria-hidden="true">→</div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       UNDERSTAND
+       ========================= -->
+
+  <section class="lab-layer understand-layer">
+    <div class="layer-heading">
+      <div class="layer-number">02</div>
+
+      <div>
+        <span class="layer-label"> UNDERSTAND </span>
+
+        <h2>Follow the Computer</h2>
+
+        <p>A simple action depends on several parts of the system working together.</p>
+      </div>
+    </div>
+
+    <div class="pipeline">
+      @for (stage of architectureStages; track stage.id; let last = $last) {
+        <div class="pipeline-stage-wrapper">
+          <article class="pipeline-stage" [class.active]="isStageActive(stage.id)">
+            <div class="stage-status">
+              @if (isStageActive(stage.id)) {
+                <span class="active-pulse"></span>
+              } @else {
+                <span class="inactive-dot"></span>
+              }
+            </div>
+
+            <div class="stage-copy">
+              <strong>
+                {{ stage.label }}
+              </strong>
+
+              <p>
+                {{ stage.description }}
+              </p>
+            </div>
+          </article>
+
+          @if (!last) {
+            <div class="pipeline-arrow" aria-hidden="true">↓</div>
+          }
+        </div>
+      }
+    </div>
+
+    <aside class="constraint-callout">
+      <span class="callout-label"> ENGINEERING CONSTRAINT </span>
+
+      <p>
+        Early home computers worked with tiny amounts of memory, limited processing power and slow
+        storage. Software had to accomplish useful work within hardware limits that are tiny
+        compared with modern computers.
+      </p>
+    </aside>
+  </section>
+
+  <!-- =========================
+       ENGINEER
+       ========================= -->
+
+  <section class="lab-layer engineer-layer">
+    <div class="layer-heading engineer-heading">
+      <div class="layer-number">03</div>
+
+      <div>
+        <span class="layer-label"> ENGINEER </span>
+
+        <h2>Explore the Computer</h2>
+
+        <p>
+          Examine the major responsibilities inside the system and see how they evolved into today's
+          computers.
+        </p>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="engineer-toggle"
+      [class.open]="engineerExpanded()"
+      [attr.aria-expanded]="engineerExpanded()"
+      (click)="toggleEngineer()"
+    >
+      <span>
+        {{ engineerExpanded() ? 'HIDE ENGINEERING' : 'VIEW ENGINEERING' }}
+      </span>
+
+      <span class="toggle-icon" aria-hidden="true">
+        {{ engineerExpanded() ? '−' : '+' }}
+      </span>
+    </button>
+
+    @if (engineerExpanded()) {
+      <div class="engineer-content">
+        <!-- COMPONENT EXPLORER -->
+
+        <div class="hardware-explorer">
+          <div class="hardware-navigation">
+            <span class="engineer-subheading"> SYSTEM COMPONENTS </span>
+
+            <div class="component-buttons">
+              @for (component of engineeringComponents; track component.id) {
+                <button
+                  type="button"
+                  class="component-button"
+                  [class.selected]="selectedEngineeringComponent()?.id === component.id"
+                  (click)="selectEngineeringComponent(component)"
+                >
+                  {{ component.label }}
+                </button>
+              }
+            </div>
+          </div>
+
+          @if (selectedEngineeringComponent(); as component) {
+            <article class="component-detail">
+              <span class="detail-eyebrow"> COMPONENT RESPONSIBILITY </span>
+
+              <h3>
+                {{ component.label }}
+              </h3>
+
+              <p>
+                {{ component.description }}
+              </p>
+            </article>
+          }
+        </div>
+
+        <!-- THEN VS NOW -->
+
+        <div class="then-now">
+          <div class="then-now-heading">
+            <span class="engineer-subheading"> THEN → NOW </span>
+
+            <h3>The Same Responsibilities at a Different Scale</h3>
+          </div>
+
+          <div class="comparison-table">
+            <div class="comparison-header">
+              <span> HOME COMPUTER ERA </span>
+
+              <span></span>
+
+              <span> MODERN LAPTOP </span>
+            </div>
+
+            <div class="comparison-row">
+              <span> Kilobytes of RAM </span>
+
+              <strong>→</strong>
+
+              <span> Gigabytes of RAM </span>
+            </div>
+
+            <div class="comparison-row">
+              <span> Floppy / cassette storage </span>
+
+              <strong>→</strong>
+
+              <span> SSD / NVMe storage </span>
+            </div>
+
+            <div class="comparison-row">
+              <span> Single simple processor </span>
+
+              <strong>→</strong>
+
+              <span> Multi-core CPU </span>
+            </div>
+
+            <div class="comparison-row">
+              <span> CRT display </span>
+
+              <strong>→</strong>
+
+              <span> High-resolution display </span>
+            </div>
+
+            <div class="comparison-row">
+              <span> Local programs </span>
+
+              <strong>→</strong>
+
+              <span> Local + cloud applications </span>
+            </div>
+
+            <div class="comparison-row">
+              <span> Desktop workstation </span>
+
+              <strong>→</strong>
+
+              <span> Portable laptop </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN LESSON -->
+
+        <div class="main-lesson">
+          <span> MAIN LESSON </span>
+
+          <p>
+            Modern computers are enormously more powerful, but the fundamental responsibilities
+            remain familiar: accept input, execute instructions, manage memory and storage, and
+            present useful output to the user.
+          </p>
+        </div>
+      </div>
+    }
+  </section>
+
+  <button type="button" class="back-to-experiments-button" (click)="backToExperiments()">
+    ← BACK TO EXPERIMENTS
+  </button>
+</section>

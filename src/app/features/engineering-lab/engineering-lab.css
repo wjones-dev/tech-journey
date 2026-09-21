@@ -402,17 +402,42 @@
    DRAWER LAUNCHER
    ========================= */
 
-.experiment-drawer-launcher {
+/* =========================
+   LAB LAUNCHER DOCK
+   ========================= */
+
+.lab-launcher-dock {
   position: absolute;
 
   left: 50%;
-  bottom: clamp(22px, 4vh, 42px);
+  bottom:
+    clamp(22px, 4vh, 42px);
 
   transform:
     translateX(-50%);
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 16px;
+
+  z-index: 5;
+
+  pointer-events: auto;
+}
+
+
+/* =========================
+   SHARED LAUNCHER BUTTON
+   ========================= */
+
+.lab-launcher-button {
+  min-height: 46px;
+
   display: inline-flex;
   align-items: center;
+  justify-content: center;
 
   gap: 14px;
 
@@ -420,7 +445,8 @@
     13px 24px;
 
   border:
-    1px solid rgba(40, 175, 225, 0.55);
+    1px solid
+    rgba(40, 175, 225, 0.55);
 
   border-radius: 100px;
 
@@ -431,40 +457,71 @@
     blur(14px);
 
   box-shadow:
-    0 10px 30px rgba(0, 50, 90, 0.18);
+    0 10px 30px
+    rgba(0, 50, 90, 0.18);
 
   color: #09294b;
+
+  font-family: inherit;
 
   font-size: 0.76rem;
   font-weight: 800;
 
   letter-spacing: 0.1rem;
 
-  cursor: pointer;
+  white-space: nowrap;
 
-  pointer-events: auto;
+  cursor: pointer;
 
   transition:
     transform 0.25s ease,
+    border-color 0.25s ease,
     box-shadow 0.25s ease,
     background 0.25s ease;
 }
 
-.experiment-drawer-launcher:hover {
+
+.lab-launcher-button:hover {
   transform:
-    translateX(-50%) translateY(-3px);
+    translateY(-3px);
+
+  border-color:
+    rgba(24, 166, 220, 0.78);
 
   background:
     rgba(248, 253, 255, 0.96);
 
   box-shadow:
-    0 14px 36px rgba(0, 100, 160, 0.24);
+    0 14px 36px
+    rgba(0, 100, 160, 0.24);
 }
+
+
+/* =========================
+   EXPLORE EXPERIMENTS
+   ========================= */
+
+.experiment-drawer-launcher {
+  /*
+   * Positioning now comes from
+   * .lab-launcher-dock.
+   */
+}
+
 
 .drawer-arrow {
   font-size: 1rem;
+
+  transition:
+    transform 0.22s ease;
 }
 
+
+.experiment-drawer-launcher:hover
+.drawer-arrow {
+  transform:
+    translateY(-2px);
+}
 
 /* =========================
    DRAWER
@@ -625,6 +682,144 @@
 
   transform:
     rotate(4deg);
+}
+
+/* =========================
+   RETURN TO MUSEUM
+   ========================= */
+
+.museum-home-launcher {
+  padding-left: 18px;
+}
+
+
+/* =========================
+   COMET ICON
+   ========================= */
+
+.comet-icon {
+  position: relative;
+
+  width: 34px;
+  height: 24px;
+
+  display: inline-block;
+
+  flex-shrink: 0;
+}
+
+
+/*
+ * Comet trail.
+ */
+.comet-tail {
+  position: absolute;
+
+  top: 5px;
+  left: 2px;
+
+  width: 27px;
+  height: 9px;
+
+  border-radius:
+    100% 0 100% 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(64, 196, 255, 0.2) 20%,
+      rgba(46, 184, 255, 0.55) 58%,
+      rgba(26, 160, 245, 0.92) 100%
+    );
+
+  transform:
+    rotate(-22deg);
+
+  transform-origin:
+    right center;
+
+  filter:
+    drop-shadow(
+      0 0 4px
+      rgba(40, 185, 255, 0.5)
+    );
+
+  transition:
+    transform 0.28s ease,
+    filter 0.28s ease;
+}
+
+
+/*
+ * Bright comet head.
+ */
+.comet-core {
+  position: absolute;
+
+  right: 1px;
+  bottom: 3px;
+
+  width: 12px;
+  height: 12px;
+
+  border:
+    2px solid
+    rgba(16, 148, 226, 0.88);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #ffffff 0%,
+      #dff8ff 32%,
+      #67dcff 55%,
+      #149ee7 76%,
+      transparent 78%
+    );
+
+  box-shadow:
+    0 0 6px
+    rgba(32, 177, 255, 0.9),
+    0 0 14px
+    rgba(32, 177, 255, 0.48);
+
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+
+/* =========================
+   COMET HOVER
+   ========================= */
+
+.museum-home-launcher:hover
+.comet-tail {
+  transform:
+    rotate(-22deg)
+    scaleX(1.18);
+
+  filter:
+    drop-shadow(
+      0 0 7px
+      rgba(30, 180, 255, 0.8)
+    );
+}
+
+
+.museum-home-launcher:hover
+.comet-core {
+  transform:
+    translate(2px, -1px)
+    scale(1.08);
+
+  box-shadow:
+    0 0 8px
+    rgba(32, 177, 255, 1),
+    0 0 20px
+    rgba(32, 177, 255, 0.65);
 }
 
 
@@ -1008,14 +1203,41 @@
     background-color: #eaf5ff;
   }
 
-  .experiment-drawer-launcher {
-    bottom: 22px;
-
+ .lab-launcher-dock {
     width:
       calc(100% - 36px);
 
-    justify-content: center;
+    flex-direction: column-reverse;
+
+    gap: 8px;
+
+    bottom: 22px;
   }
+
+
+  .lab-launcher-button {
+    width: 100%;
+
+    min-height: 44px;
+  }
+
+
+  .museum-home-launcher {
+    width: auto;
+
+    align-self: flex-start;
+
+    padding:
+      10px 16px;
+
+    font-size: 0.65rem;
+  }
+
+
+  .experiment-drawer-launcher {
+    width: 100%;
+  }
+
 
   .experiment-drawer {
     width: 100%;
@@ -1104,10 +1326,6 @@
   box-shadow:
     0 14px 32px rgba(30, 91, 125, 0.14);
 }
-
-
-
-
 
 
 .lab-category-number {

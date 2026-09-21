@@ -99,7 +99,7 @@ export class LabTechnologyComponent {
       description:
         'Explore how early home computers introduced personal computing and evolved into the systems we use today.',
 
-      available: false,
+      available: true,
     },
 
 
@@ -115,7 +115,7 @@ export class LabTechnologyComponent {
       description:
         'Explore how peer-to-peer networking changed digital music distribution and content sharing.',
 
-      available: false,
+      available: true,
     },
 
 
@@ -140,7 +140,7 @@ readonly webExperiments:
     description:
       'Explore how the early web evolved from connected documents into interactive experiences using HTML, CSS, and JavaScript.',
 
-    available: false,
+    available: true,
   },
 
 
@@ -156,7 +156,7 @@ readonly webExperiments:
     description:
       'Explore how modern Angular applications use components, services, routing, and REST APIs to create interactive single-page applications.',
 
-    available: false,
+    available: true,
   },
 
 ];

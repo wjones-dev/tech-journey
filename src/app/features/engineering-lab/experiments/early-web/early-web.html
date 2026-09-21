@@ -1,0 +1,1174 @@
+<section class="lab-experiment early-web-experiment">
+
+  <!-- =========================================================
+       EXPERIMENT HEADER
+       ========================================================= -->
+
+  <header class="lab-header">
+
+    <button
+  type="button"
+  class="back-to-experiments-button"
+  (click)="backToExperiments()"
+>
+  <span aria-hidden="true">
+    ←
+  </span>
+
+  BACK TO EXPERIMENTS
+</button>
+
+
+    <div class="header-copy">
+
+      <span class="eyebrow">
+        WEB LAB
+      </span>
+
+      <h1>
+        Early Web Development
+      </h1>
+
+      <h2>
+        HTML • CSS • JavaScript
+      </h2>
+
+      <p>
+        Build a web page one layer at a time and explore
+        how structure, presentation, and behavior work
+        together inside the browser.
+      </p>
+
+    </div>
+
+
+    <div class="lab-badge">
+
+      <span class="badge-dot"></span>
+
+      FRONTEND
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+       PLAY
+       ========================================================= -->
+
+  <section class="lab-layer">
+
+    <div class="layer-heading">
+
+      <span class="layer-number">
+        01
+      </span>
+
+      <div>
+
+        <span class="layer-label">
+          PLAY
+        </span>
+
+        <h2>
+          Build the Web
+        </h2>
+
+        <p>
+          Start with document structure, add presentation,
+          then enable behavior.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         TECHNOLOGY LAYERS
+         ========================= -->
+
+    <div class="web-layer-selector">
+
+      <button
+        type="button"
+        class="web-layer-card"
+        [class.selected]="
+          !cssEnabled() &&
+          !javascriptEnabled()
+        "
+        (click)="enableHtml()"
+      >
+
+        <span class="web-layer-index">
+          01
+        </span>
+
+        <strong>
+          HTML
+        </strong>
+
+        <span class="web-layer-purpose">
+          Structure
+        </span>
+
+        <small>
+          Build the document
+        </small>
+
+      </button>
+
+
+      <div
+        class="web-layer-arrow"
+        aria-hidden="true"
+      >
+        →
+      </div>
+
+
+      <button
+        type="button"
+        class="web-layer-card"
+        [class.selected]="
+          cssEnabled() &&
+          !javascriptEnabled()
+        "
+        (click)="enableCss()"
+      >
+
+        <span class="web-layer-index">
+          02
+        </span>
+
+        <strong>
+          CSS
+        </strong>
+
+        <span class="web-layer-purpose">
+          Presentation
+        </span>
+
+        <small>
+          Style the document
+        </small>
+
+      </button>
+
+
+      <div
+        class="web-layer-arrow"
+        aria-hidden="true"
+      >
+        →
+      </div>
+
+
+      <button
+        type="button"
+        class="web-layer-card"
+        [class.selected]="
+          javascriptEnabled()
+        "
+        (click)="enableJavaScript()"
+      >
+
+        <span class="web-layer-index">
+          03
+        </span>
+
+        <strong>
+          JavaScript
+        </strong>
+
+        <span class="web-layer-purpose">
+          Behavior
+        </span>
+
+        <small>
+          Make it interactive
+        </small>
+
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         WORKSPACE
+         ========================= -->
+
+    <div class="web-workspace">
+
+      <!-- =========================
+           CONTROLS
+           ========================= -->
+
+      <aside class="web-controls control-panel">
+
+        <!-- WEB ERA -->
+
+        <div class="web-control-group">
+
+          <span class="control-label">
+            WEB ERA
+          </span>
+
+          <div class="web-option-buttons">
+
+            <button
+              type="button"
+              [class.selected]="
+                webEra() === 'EARLY'
+              "
+              (click)="setWebEra('EARLY')"
+            >
+              1996
+            </button>
+
+            <button
+              type="button"
+              [class.selected]="
+                webEra() === 'MODERN'
+              "
+              (click)="setWebEra('MODERN')"
+            >
+              MODERN
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="control-divider"></div>
+
+
+        <!-- CSS CONTROLS -->
+
+        <div
+          class="css-control-area"
+          [class.disabled]="
+            !cssEnabled()
+          "
+        >
+
+          <div class="control-section-heading">
+
+            <span>
+              CSS CONTROLS
+            </span>
+
+            <small>
+              {{
+                cssEnabled()
+                  ? 'ACTIVE'
+                  : 'ENABLE CSS'
+              }}
+            </small>
+
+          </div>
+
+
+          <!-- BACKGROUND -->
+
+          <div class="web-control-group">
+
+            <span class="control-label">
+              BACKGROUND
+            </span>
+
+            <div class="web-option-buttons">
+
+              <button
+                type="button"
+                [disabled]="!cssEnabled()"
+                [class.selected]="
+                  backgroundChoice() === 'GRAY'
+                "
+                (click)="setBackground('GRAY')"
+              >
+                GRAY
+              </button>
+
+              <button
+                type="button"
+                [disabled]="!cssEnabled()"
+                [class.selected]="
+                  backgroundChoice() === 'NAVY'
+                "
+                (click)="setBackground('NAVY')"
+              >
+                NAVY
+              </button>
+
+              <button
+                type="button"
+                [disabled]="!cssEnabled()"
+                [class.selected]="
+                  backgroundChoice() === 'BLACK'
+                "
+                (click)="setBackground('BLACK')"
+              >
+                BLACK
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- FONT -->
+
+          <div class="web-control-group">
+
+            <span class="control-label">
+              FONT
+            </span>
+
+            <div class="web-option-buttons">
+
+              <button
+                type="button"
+                [disabled]="!cssEnabled()"
+                [class.selected]="
+                  fontChoice() === 'SERIF'
+                "
+                (click)="setFont('SERIF')"
+              >
+                SERIF
+              </button>
+
+              <button
+                type="button"
+                [disabled]="!cssEnabled()"
+                [class.selected]="
+                  fontChoice() === 'SANS'
+                "
+                (click)="setFont('SANS')"
+              >
+                SANS
+              </button>
+
+              <button
+                type="button"
+                [disabled]="!cssEnabled()"
+                [class.selected]="
+                  fontChoice() === 'MONO'
+                "
+                (click)="setFont('MONO')"
+              >
+                MONO
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- ALIGNMENT -->
+
+          <div class="web-control-group">
+
+            <span class="control-label">
+              ALIGNMENT
+            </span>
+
+            <div class="web-option-buttons">
+
+              <button
+                type="button"
+                [disabled]="!cssEnabled()"
+                [class.selected]="
+                  alignmentChoice() === 'LEFT'
+                "
+                (click)="setAlignment('LEFT')"
+              >
+                LEFT
+              </button>
+
+              <button
+                type="button"
+                [disabled]="!cssEnabled()"
+                [class.selected]="
+                  alignmentChoice() === 'CENTER'
+                "
+                (click)="setAlignment('CENTER')"
+              >
+                CENTER
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- BORDER -->
+
+          <div class="web-control-group">
+
+            <span class="control-label">
+              BORDER
+            </span>
+
+            <div class="web-option-buttons">
+
+              <button
+                type="button"
+                [disabled]="!cssEnabled()"
+                [class.selected]="
+                  borderChoice() === 'NONE'
+                "
+                (click)="setBorder('NONE')"
+              >
+                NONE
+              </button>
+
+              <button
+                type="button"
+                [disabled]="!cssEnabled()"
+                [class.selected]="
+                  borderChoice() === 'CLASSIC'
+                "
+                (click)="setBorder('CLASSIC')"
+              >
+                CLASSIC
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="control-divider"></div>
+
+
+        <!-- JAVASCRIPT STATE -->
+
+        <div class="javascript-status">
+
+          <span class="control-label">
+            JAVASCRIPT
+          </span>
+
+          <div
+            class="technology-status"
+            [class.active]="
+              javascriptEnabled()
+            "
+          >
+
+            <span class="status-light"></span>
+
+            <strong>
+              {{
+                javascriptEnabled()
+                  ? 'BEHAVIOR ACTIVE'
+                  : 'BEHAVIOR DISABLED'
+              }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </aside>
+
+
+      <!-- =========================
+           BROWSER
+           ========================= -->
+
+      <div class="browser-shell">
+
+        <div class="browser-toolbar">
+
+          <div
+            class="browser-dots"
+            aria-hidden="true"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+
+          <div class="browser-address">
+            http://www.mywebsite.com
+          </div>
+
+        </div>
+
+
+        <div
+          class="browser-page"
+
+          [class.css-enabled]="
+            cssEnabled()
+          "
+
+          [class.era-modern]="
+            webEra() === 'MODERN'
+          "
+
+          [class.background-gray]="
+            backgroundChoice() === 'GRAY'
+          "
+
+          [class.background-navy]="
+            backgroundChoice() === 'NAVY'
+          "
+
+          [class.background-black]="
+            backgroundChoice() === 'BLACK'
+          "
+
+          [class.font-serif]="
+            fontChoice() === 'SERIF'
+          "
+
+          [class.font-sans]="
+            fontChoice() === 'SANS'
+          "
+
+          [class.font-mono]="
+            fontChoice() === 'MONO'
+          "
+
+          [class.align-left]="
+            alignmentChoice() === 'LEFT'
+          "
+
+          [class.align-center]="
+            alignmentChoice() === 'CENTER'
+          "
+
+          [class.classic-border]="
+            borderChoice() === 'CLASSIC'
+          "
+        >
+
+          <!-- =========================
+               EARLY WEB
+               ========================= -->
+
+          @if (webEra() === 'EARLY') {
+
+            <div class="early-page">
+
+              <h1>
+                MY FIRST WEB PAGE
+              </h1>
+
+              <p>
+                Welcome to my website.
+              </p>
+
+              <hr>
+
+              <h2>
+                About Me
+              </h2>
+
+              <p>
+                Learning HTML, CSS and JavaScript.
+              </p>
+
+             
+
+
+              <button
+                type="button"
+                class="guestbook-button"
+                (click)="signGuestbook()"
+              >
+                Sign Guestbook
+              </button>
+
+
+              <p class="guestbook-message">
+                {{ guestbookMessage() }}
+              </p>
+
+
+              <div class="visitor-counter">
+
+                <span>
+                  VISITOR
+                </span>
+
+                <strong>
+                  {{ visitorCount() }}
+                </strong>
+
+              </div>
+
+
+              <small class="resolution-message">
+                Best viewed at 800 × 600
+              </small>
+
+            </div>
+
+          }
+
+
+          <!-- =========================
+               MODERN WEB
+               ========================= -->
+
+          @else {
+
+            <div class="modern-page">
+
+              <nav class="modern-nav">
+
+                <strong>
+                  WEBLAB
+                </strong>
+
+                <div>
+                  <span>
+                    ABOUT
+                  </span>
+
+                  <span>
+                    PROJECTS
+                  </span>
+                </div>
+
+              </nav>
+
+
+              <div class="modern-hero">
+
+                <span class="modern-eyebrow">
+                  HELLO, WEB
+                </span>
+
+                <h1>
+                  My First Web Page
+                </h1>
+
+                <p>
+                  The same fundamental web technologies,
+                  applied with modern browser capabilities
+                  and design practices.
+                </p>
+
+
+                <button
+                  type="button"
+                  class="modern-button"
+                  (click)="signGuestbook()"
+                >
+                  Sign Guestbook
+                </button>
+
+
+                <p class="guestbook-message">
+                  {{ guestbookMessage() }}
+                </p>
+
+              </div>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       UNDERSTAND
+       ========================================================= -->
+
+  <section class="lab-layer">
+
+    <div class="layer-heading">
+
+      <span class="layer-number">
+        02
+      </span>
+
+      <div>
+
+        <span class="layer-label">
+          UNDERSTAND
+        </span>
+
+        <h2>
+          What Did the Browser Do?
+        </h2>
+
+        <p>
+          Follow the page through the browser and see the
+          responsibility of each web technology.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         SHARED PIPELINE
+         ========================= -->
+
+    <div class="pipeline">
+
+
+      <!-- HTML -->
+
+      <div class="pipeline-stage-wrapper">
+
+        <div class="pipeline-stage active">
+
+          <div class="stage-status">
+
+            <span class="active-pulse"></span>
+
+          </div>
+
+
+          <div class="stage-copy">
+
+            <strong>
+              HTML — STRUCTURE
+            </strong>
+
+            <p>
+              The browser reads the document and creates
+              the page structure.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="pipeline-arrow"
+          aria-hidden="true"
+        >
+          ↓
+        </div>
+
+      </div>
+
+
+      <!-- CSS -->
+
+      <div class="pipeline-stage-wrapper">
+
+        <div
+          class="pipeline-stage"
+          [class.active]="
+            cssEnabled()
+          "
+        >
+
+          <div class="stage-status">
+
+            @if (cssEnabled()) {
+
+              <span class="active-pulse"></span>
+
+            } @else {
+
+              <span class="inactive-dot"></span>
+
+            }
+
+          </div>
+
+
+          <div class="stage-copy">
+
+            <strong>
+              CSS — PRESENTATION
+            </strong>
+
+            <p>
+              CSS changes the visual presentation without
+              replacing the underlying HTML structure.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="pipeline-arrow"
+          aria-hidden="true"
+        >
+          ↓
+        </div>
+
+      </div>
+
+
+      <!-- JAVASCRIPT -->
+
+      <div class="pipeline-stage-wrapper">
+
+        <div
+          class="pipeline-stage"
+          [class.active]="
+            javascriptEnabled()
+          "
+        >
+
+          <div class="stage-status">
+
+            @if (javascriptEnabled()) {
+
+              <span class="active-pulse"></span>
+
+            } @else {
+
+              <span class="inactive-dot"></span>
+
+            }
+
+          </div>
+
+
+          <div class="stage-copy">
+
+            <strong>
+              JAVASCRIPT — BEHAVIOR
+            </strong>
+
+            <p>
+              JavaScript responds to events and can change
+              the document while the page is running.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="pipeline-arrow"
+          aria-hidden="true"
+        >
+          ↓
+        </div>
+
+      </div>
+
+
+      <!-- RENDER -->
+
+      <div class="pipeline-stage-wrapper">
+
+        <div class="pipeline-stage active">
+
+          <div class="stage-status">
+
+            <span class="active-pulse"></span>
+
+          </div>
+
+
+          <div class="stage-copy">
+
+            <strong>
+              BROWSER — RENDER
+            </strong>
+
+            <p>
+              The browser combines the active layers and
+              displays the final result to the user.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         CURRENT STACK
+         ========================= -->
+
+    <div class="web-stack-summary">
+
+      <span>
+        CURRENT STACK
+      </span>
+
+      <strong>
+        {{ currentStage() }}
+      </strong>
+
+    </div>
+
+
+    <!-- =========================
+         CONCEPT CALLOUT
+         ========================= -->
+
+    <div class="constraint-callout">
+
+      <span class="callout-label">
+        CORE WEB PRINCIPLE
+      </span>
+
+      <p>
+        HTML describes the document, CSS controls how that
+        document is presented, and JavaScript adds behavior.
+        Each layer has a different responsibility, but the
+        browser brings them together into one experience.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       ENGINEER
+       ========================================================= -->
+
+  <section class="lab-layer">
+
+    <div class="layer-heading engineer-heading">
+
+      <span class="layer-number">
+        03
+      </span>
+
+      <div>
+
+        <span class="layer-label">
+          ENGINEER
+        </span>
+
+        <h2>
+          View the Implementation
+        </h2>
+
+        <p>
+          Inspect the HTML, CSS, and JavaScript behind the
+          page you created.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         SHARED ENGINEER TOGGLE
+         ========================= -->
+
+    <button
+      type="button"
+      class="engineer-toggle"
+      [class.open]="
+        implementationOpen()
+      "
+      (click)="toggleImplementation()"
+    >
+
+      <span>
+        VIEW IMPLEMENTATION
+      </span>
+
+      <span
+        class="toggle-icon"
+        aria-hidden="true"
+      >
+        {{
+          implementationOpen()
+            ? '−'
+            : '+'
+        }}
+      </span>
+
+    </button>
+
+
+    <!-- =========================
+         IMPLEMENTATION
+         ========================= -->
+
+    @if (implementationOpen()) {
+
+      <div class="engineer-content">
+
+        <div class="implementation-intro">
+
+          <span>
+            SOURCE EXPLORER
+          </span>
+
+          <p>
+            The implementation below reflects the state
+            of the experiment.
+          </p>
+
+        </div>
+
+
+        <!-- CODE TABS -->
+
+        <div
+          class="code-tabs"
+          role="tablist"
+          aria-label="Implementation source"
+        >
+
+          <button
+            type="button"
+            role="tab"
+            [attr.aria-selected]="
+              activeCodeTab() === 'HTML'
+            "
+            [class.active]="
+              activeCodeTab() === 'HTML'
+            "
+            (click)="selectCodeTab('HTML')"
+          >
+            HTML
+          </button>
+
+
+          <button
+            type="button"
+            role="tab"
+            [attr.aria-selected]="
+              activeCodeTab() === 'CSS'
+            "
+            [class.active]="
+              activeCodeTab() === 'CSS'
+            "
+            (click)="selectCodeTab('CSS')"
+          >
+            CSS
+          </button>
+
+
+          <button
+            type="button"
+            role="tab"
+            [attr.aria-selected]="
+              activeCodeTab() === 'JAVASCRIPT'
+            "
+            [class.active]="
+              activeCodeTab() === 'JAVASCRIPT'
+            "
+            (click)="selectCodeTab('JAVASCRIPT')"
+          >
+            JAVASCRIPT
+          </button>
+
+        </div>
+
+
+        <!-- CODE WINDOW -->
+
+        <div class="code-window">
+
+          <div class="code-window-header">
+
+            <div class="code-file">
+
+              <span class="code-file-dot"></span>
+
+              @if (activeCodeTab() === 'HTML') {
+
+                <span>
+                  index.html
+                </span>
+
+              } @else if (activeCodeTab() === 'CSS') {
+
+                <span>
+                  styles.css
+                </span>
+
+              } @else {
+
+                <span>
+                  script.js
+                </span>
+
+              }
+
+            </div>
+
+
+            <span class="code-language">
+
+              {{
+                activeCodeTab()
+              }}
+
+            </span>
+
+          </div>
+
+
+          <div class="code-content">
+
+            @if (activeCodeTab() === 'HTML') {
+
+              <pre><code>{{ htmlCode() }}</code></pre>
+
+            } @else if (activeCodeTab() === 'CSS') {
+
+              <pre><code>{{ cssCode() }}</code></pre>
+
+            } @else {
+
+              <pre><code>{{ javascriptCode() }}</code></pre>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- MAIN LESSON -->
+
+        <div class="main-lesson">
+
+          <span>
+            ENGINEERING TAKEAWAY
+          </span>
+
+          <p>
+            Modern frameworks such as Angular build on the
+            same browser fundamentals. Components and
+            templates may provide higher-level abstractions,
+            but the browser ultimately still works with
+            HTML, CSS, and JavaScript.
+          </p>
+
+        </div>
+
+      </div>
+
+    }
+
+  </section>
+
+</section>

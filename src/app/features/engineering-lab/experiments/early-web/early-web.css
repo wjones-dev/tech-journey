@@ -1,0 +1,1237 @@
+/* =========================================================
+   EARLY WEB DEVELOPMENT EXPERIMENT
+
+   Shared Engineering Lab structure is defined globally.
+
+   This file contains only styles unique to the
+   Early Web Development experiment.
+   ========================================================= */
+
+
+/* =========================
+   WEB TECHNOLOGY SELECTOR
+   ========================= */
+
+.web-layer-selector {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+
+.web-layer-card {
+  min-height: 126px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 18px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(0, 0, 0, 0.15)
+    );
+
+  color: #9bafbe;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.web-layer-card:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(105, 230, 255, 0.32);
+
+  color: #d9f4fb;
+}
+
+
+.web-layer-card.selected {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(105, 230, 255, 0.58);
+
+  background:
+    rgba(105, 230, 255, 0.075);
+
+  color: #eefbff;
+
+  box-shadow:
+    0 0 28px rgba(105, 230, 255, 0.08);
+}
+
+
+.web-layer-index {
+  color: #69e6ff;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  letter-spacing: 0.11rem;
+}
+
+
+.web-layer-card strong {
+  color: inherit;
+
+  font-size: 1rem;
+  font-weight: 900;
+
+  letter-spacing: 0.07rem;
+}
+
+
+.web-layer-purpose {
+  color: #69e6ff;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+
+.web-layer-card small {
+  color: #718899;
+
+  font-size: 0.68rem;
+}
+
+
+.web-layer-arrow {
+  color:
+    rgba(105, 230, 255, 0.4);
+
+  font-size: 1.1rem;
+}
+
+
+/* =========================
+   WEB WORKSPACE
+   ========================= */
+
+.web-workspace {
+  display: grid;
+
+  grid-template-columns:
+    minmax(220px, 270px)
+    minmax(0, 1fr);
+
+  align-items: stretch;
+
+  gap: 22px;
+}
+
+
+/* =========================
+   WEB CONTROLS
+   ========================= */
+
+.web-controls {
+  align-self: stretch;
+}
+
+
+.web-control-group {
+  margin-bottom: 20px;
+}
+
+
+.web-control-group:last-child {
+  margin-bottom: 0;
+}
+
+
+.control-divider {
+  height: 1px;
+
+  margin:
+    20px 0;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+}
+
+
+.control-section-heading {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+
+.control-section-heading > span {
+  color: #69e6ff;
+
+  font-size: 0.66rem;
+  font-weight: 900;
+
+  letter-spacing: 0.11rem;
+}
+
+
+.control-section-heading small {
+  color: #638092;
+
+  font-size: 0.56rem;
+  font-weight: 900;
+
+  letter-spacing: 0.07rem;
+}
+
+
+.css-control-area {
+  transition:
+    opacity 180ms ease;
+}
+
+
+.css-control-area.disabled {
+  opacity: 0.42;
+}
+
+
+.web-option-buttons {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+}
+
+
+.web-option-buttons button {
+  min-height: 34px;
+
+  padding:
+    7px 10px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 7px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #7f95a6;
+
+  font-family: inherit;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    color 150ms ease;
+}
+
+
+.web-option-buttons button:hover:not(:disabled) {
+  border-color:
+    rgba(105, 230, 255, 0.32);
+
+  color: #d7edf6;
+}
+
+
+.web-option-buttons button.selected {
+  border-color:
+    rgba(105, 230, 255, 0.48);
+
+  background:
+    rgba(105, 230, 255, 0.08);
+
+  color: #8cecff;
+}
+
+
+.web-option-buttons button:disabled {
+  cursor: not-allowed;
+}
+
+
+/* =========================
+   JAVASCRIPT STATUS
+   ========================= */
+
+.technology-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #71889a;
+
+  font-size: 0.62rem;
+  font-weight: 900;
+
+  letter-spacing: 0.06rem;
+}
+
+
+.status-light {
+  width: 8px;
+  height: 8px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #3d5060;
+}
+
+
+.technology-status.active {
+  color: #78dfee;
+}
+
+
+.technology-status.active .status-light {
+  background: #69e6ff;
+
+  box-shadow:
+    0 0 10px rgba(105, 230, 255, 0.9);
+}
+
+
+/* =========================
+   BROWSER SHELL
+   ========================= */
+
+.browser-shell {
+  min-width: 0;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 15px;
+
+  background: #111820;
+
+  box-shadow:
+    0 18px 46px rgba(0, 0, 0, 0.24);
+}
+
+
+.browser-toolbar {
+  min-height: 44px;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding:
+    8px 13px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #25313a,
+      #1b252d
+    );
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+.browser-dots {
+  display: flex;
+
+  gap: 5px;
+}
+
+
+.browser-dots span {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(230, 239, 244, 0.28);
+}
+
+
+.browser-address {
+  min-width: 0;
+
+  padding:
+    6px 10px;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.045);
+
+  border-radius: 5px;
+
+  background:
+    rgba(255, 255, 255, 0.055);
+
+  color: #9caab4;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.69rem;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+/* =========================
+   BROWSER PAGE
+   ========================= */
+
+.browser-page {
+  min-height: 440px;
+
+  padding: 28px;
+
+  background: #ffffff;
+
+  color: #000000;
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  text-align: left;
+
+  transition:
+    background 220ms ease,
+    color 220ms ease,
+    font-family 220ms ease;
+}
+
+
+/*
+ * With CSS disabled, the page intentionally uses
+ * browser-like default presentation.
+ */
+
+.browser-page:not(.css-enabled) {
+  background: #ffffff;
+
+  color: #000000;
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  text-align: left;
+}
+
+
+/* =========================
+   CSS EXPERIMENT STATES
+   ========================= */
+
+.browser-page.css-enabled.background-gray {
+  background: #d6d6d6;
+
+  color: #111111;
+}
+
+
+.browser-page.css-enabled.background-navy {
+  background: #081a35;
+
+  color: #ffffff;
+}
+
+
+.browser-page.css-enabled.background-black {
+  background: #050505;
+
+  color: #ffffff;
+}
+
+
+.browser-page.css-enabled.font-serif {
+  font-family:
+    "Times New Roman",
+    serif;
+}
+
+
+.browser-page.css-enabled.font-sans {
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+.browser-page.css-enabled.font-mono {
+  font-family:
+    "Courier New",
+    monospace;
+}
+
+
+.browser-page.css-enabled.align-left {
+  text-align: left;
+}
+
+
+.browser-page.css-enabled.align-center {
+  text-align: center;
+}
+
+
+/* =========================
+   EARLY WEB PAGE
+   ========================= */
+
+.early-page {
+  max-width: 720px;
+
+  margin:
+    0 auto;
+}
+
+
+.browser-page.css-enabled.classic-border
+.early-page {
+  padding: 20px;
+
+  border:
+    4px ridge #b8b8b8;
+}
+
+
+.early-page h1 {
+  font-size: 2rem;
+}
+
+
+.early-page a {
+  color: #0000ee;
+
+  text-decoration: underline;
+
+  cursor: pointer;
+}
+
+
+.browser-page.background-navy
+.early-page a,
+.browser-page.background-black
+.early-page a {
+  color: #70b7ff;
+}
+
+
+.guestbook-button {
+  margin:
+    10px 0;
+
+  padding:
+    4px 10px;
+
+  cursor: pointer;
+}
+
+
+.guestbook-message {
+  min-height: 22px;
+
+  font-size: 0.82rem;
+}
+
+
+.visitor-counter {
+  width: max-content;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin:
+    28px auto 14px;
+
+  padding:
+    5px 8px;
+
+  background: #000000;
+
+  color: #00ff66;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.72rem;
+}
+
+
+.visitor-counter strong {
+  color: #f5ff75;
+}
+
+
+.resolution-message {
+  display: block;
+
+  margin-top: 12px;
+}
+
+
+/* =========================
+   MODERN WEB PAGE
+   ========================= */
+
+.browser-page.era-modern {
+  padding: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(54, 178, 218, 0.16),
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      #07131e,
+      #0c2435
+    );
+
+  color: #ffffff;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  text-align: left;
+}
+
+
+.modern-page {
+  min-height: 440px;
+}
+
+
+.modern-nav {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding:
+    18px 24px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  color: #a9bcc9;
+
+  font-size: 0.67rem;
+  font-weight: 800;
+
+  letter-spacing: 0.08rem;
+}
+
+
+.modern-nav strong {
+  color: #69e6ff;
+
+  font-size: 0.75rem;
+}
+
+
+.modern-nav div {
+  display: flex;
+
+  gap: 18px;
+}
+
+
+.modern-hero {
+  max-width: 650px;
+
+  margin:
+    0 auto;
+
+  padding:
+    76px 38px;
+}
+
+.browser-page.align-left
+.modern-hero {
+  text-align: left;
+}
+
+
+.browser-page.align-center
+.modern-hero {
+  text-align: center;
+}
+
+
+.modern-eyebrow {
+  color: #69e6ff;
+
+  font-size: 0.64rem;
+  font-weight: 900;
+
+  letter-spacing: 0.15rem;
+}
+
+
+.modern-hero h1 {
+  margin:
+    12px 0 14px;
+
+  color: #f5fbff;
+
+  font-size:
+    clamp(2rem, 5vw, 3.3rem);
+
+  line-height: 1;
+}
+
+
+.modern-hero p {
+  max-width: 560px;
+
+  margin:
+    0 auto;
+
+  color: #9db2c0;
+
+  line-height: 1.65;
+}
+
+
+.modern-button {
+  margin-top: 24px;
+
+  padding:
+    10px 18px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.56);
+
+  border-radius: 8px;
+
+  background:
+    rgba(105, 230, 255, 0.08);
+
+  color: #dffaff;
+
+  font-family: inherit;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+
+.modern-button:hover {
+  transform:
+    translateY(-1px);
+
+  border-color: #69e6ff;
+
+  background:
+    rgba(105, 230, 255, 0.14);
+}
+
+
+.modern-page .guestbook-message {
+  margin-top: 16px;
+
+  color: #83dbea;
+}
+
+.browser-page.css-enabled.classic-border
+.modern-page {
+  margin: 16px;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.45);
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 0 24px rgba(105, 230, 255, 0.08);
+}
+
+
+/* =========================
+   CURRENT WEB STACK
+   ========================= */
+
+.web-stack-summary {
+  max-width: 760px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  margin:
+    24px auto 0;
+
+  padding:
+    14px 18px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.14);
+
+  border-radius: 10px;
+
+  background:
+    rgba(105, 230, 255, 0.035);
+}
+
+
+.web-stack-summary span {
+  color: #6f8799;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  letter-spacing: 0.11rem;
+}
+
+
+.web-stack-summary strong {
+  color: #74dff2;
+
+  text-align: right;
+
+  font-size: 0.72rem;
+}
+
+
+/* =========================
+   IMPLEMENTATION INTRO
+   ========================= */
+
+.implementation-intro {
+  margin-bottom: 18px;
+}
+
+
+.implementation-intro > span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #69e6ff;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  letter-spacing: 0.11rem;
+}
+
+
+.implementation-intro p {
+  margin: 0;
+
+  color: #7f94a6;
+
+  font-size: 0.78rem;
+
+  line-height: 1.55;
+}
+
+
+/* =========================
+   CODE TABS
+   ========================= */
+
+.code-tabs {
+  display: flex;
+
+  gap: 6px;
+
+  margin-bottom: 8px;
+}
+
+
+.code-tabs button {
+  min-width: 92px;
+
+  padding:
+    9px 14px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius:
+    8px 8px 0 0;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #71899b;
+
+  font-family: inherit;
+
+  font-size: 0.64rem;
+  font-weight: 900;
+
+  letter-spacing: 0.06rem;
+
+  cursor: pointer;
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    color 150ms ease;
+}
+
+
+.code-tabs button:hover {
+  color: #cfe4ed;
+}
+
+
+.code-tabs button.active {
+  border-color:
+    rgba(105, 230, 255, 0.4);
+
+  background:
+    rgba(105, 230, 255, 0.065);
+
+  color: #7ce6f7;
+}
+
+
+/* =========================
+   CODE WINDOW
+   ========================= */
+
+.code-window {
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 11px;
+
+  background: #060d14;
+}
+
+
+.code-window-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding:
+    10px 14px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+
+.code-file {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #879bab;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.7rem;
+}
+
+
+.code-file-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #69e6ff;
+
+  box-shadow:
+    0 0 8px rgba(105, 230, 255, 0.65);
+}
+
+
+.code-language {
+  color: #557184;
+
+  font-size: 0.58rem;
+  font-weight: 900;
+
+  letter-spacing: 0.08rem;
+}
+
+
+.code-content {
+  max-height: 500px;
+
+  overflow: auto;
+}
+
+
+.code-content pre {
+  margin: 0;
+
+  padding: 22px;
+}
+
+
+.code-content code {
+  color: #c7deea;
+
+  font-family:
+    "Courier New",
+    Consolas,
+    monospace;
+
+  font-size: 0.76rem;
+
+  line-height: 1.65;
+
+  white-space: pre;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 800px) {
+
+  /*
+   * Shared Lab header, Lab layer, layer heading,
+   * and other experiment shell behavior comes
+   * from the global stylesheet.
+   */
+
+
+  .web-layer-selector {
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+
+
+  .web-layer-card {
+    min-height: 100px;
+  }
+
+
+  .web-layer-arrow {
+    transform:
+      rotate(90deg);
+
+    text-align: center;
+  }
+
+
+  .web-workspace {
+    grid-template-columns: 1fr;
+  }
+
+
+  .browser-page {
+    min-height: 380px;
+
+    padding: 20px;
+  }
+
+
+  .modern-page {
+    min-height: 380px;
+  }
+
+
+  .modern-hero {
+    padding:
+      56px 24px;
+  }
+
+
+  .web-stack-summary {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .web-stack-summary strong {
+    text-align: left;
+  }
+
+
+  .code-tabs {
+    overflow-x: auto;
+  }
+
+
+  .code-tabs button {
+    flex-shrink: 0;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 520px) {
+
+  .web-option-buttons {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .web-option-buttons button {
+    width: 100%;
+  }
+
+
+  .browser-toolbar {
+    gap: 8px;
+
+    padding:
+      7px 9px;
+  }
+
+
+  .browser-address {
+    font-size: 0.58rem;
+  }
+
+
+  .browser-page {
+    padding: 15px;
+  }
+
+
+  .early-page h1 {
+    font-size: 1.6rem;
+  }
+
+
+  .modern-nav {
+    padding:
+      15px 16px;
+  }
+
+
+  .modern-nav div {
+    display: none;
+  }
+
+
+  .modern-hero {
+    padding:
+      46px 18px;
+  }
+
+
+  .code-window-header {
+    padding:
+      9px 11px;
+  }
+
+
+  .code-content pre {
+    padding: 16px;
+  }
+
+
+  .code-content code {
+    font-size: 0.68rem;
+  }
+
+}

@@ -1,17 +1,33 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { JavaStreamExperiment } from './experiments/java/data-processing/java-stream-experiment';
 import { AtariLabComponent } from './experiments/atari/atari';
 import { LabCatalogComponent, LabTechnologyKey } from './lab-catalog/lab-catalog';
 import { LabExperimentKey, LabTechnologyComponent } from './lab-technology/lab-technology';
+import { HomeComputersLabComponent } from './experiments/home-computers/home-computers';
+import { NapsterLabComponent } from './experiments/napster/napster';
+import { EarlyWebComponent } from './experiments/early-web/early-web';
+import { AngularLabComponent } from './experiments/angular/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-engineering-lab',
   standalone: true,
-  imports: [JavaStreamExperiment, AtariLabComponent, LabCatalogComponent, LabTechnologyComponent],
+  imports: [
+    JavaStreamExperiment,
+    AtariLabComponent,
+    HomeComputersLabComponent,
+    NapsterLabComponent,
+    EarlyWebComponent,
+    AngularLabComponent,
+    LabCatalogComponent,
+    LabTechnologyComponent,
+  ],
   templateUrl: './engineering-lab.html',
   styleUrl: './engineering-lab.css',
 })
 export class EngineeringLabComponent {
+  private readonly router = inject(Router);
+
   readonly experimentDrawerOpen = signal<boolean>(false);
 
   readonly labGuideOpen = signal<boolean>(false);
@@ -20,7 +36,9 @@ export class EngineeringLabComponent {
     'PERSONAL_TECHNOLOGY' | 'WEB' | 'JAVA' | 'CLOUD_DEVOPS' | 'AI' | null
   >(null);
 
-  readonly activeExperiment = signal<'JAVA_STREAM' | 'ATARI' | null>(null);
+  readonly activeExperiment = signal<
+    'JAVA_STREAM' | 'ATARI' | 'HOME_COMPUTERS' | 'NAPSTER' | 'EARLY_WEB' | 'ANGULAR' | null
+  >(null);
   toggleExperimentDrawer(): void {
     const opening = !this.experimentDrawerOpen();
     this.experimentDrawerOpen.set(opening);
@@ -41,10 +59,14 @@ export class EngineeringLabComponent {
     this.selectedLab.set('JAVA');
   }
 
-  backFromAtariExperiment(): void {
+  backFromPersonalTechnologyExperiment(): void {
     this.activeExperiment.set(null);
-
     this.selectedLab.set('PERSONAL_TECHNOLOGY');
+  }
+
+  backFromWebExperiment(): void {
+    this.activeExperiment.set(null);
+    this.selectedLab.set('WEB');
   }
 
   closeExperimentDrawer(): void {
@@ -111,7 +133,31 @@ export class EngineeringLabComponent {
         this.activeExperiment.set('ATARI');
 
         break;
+
+      case 'HOME_COMPUTERS':
+        this.activeExperiment.set('HOME_COMPUTERS');
+
+        break;
+
+      case 'NAPSTER':
+        this.activeExperiment.set('NAPSTER');
+
+        break;
+
+      case 'EARLY_WEB':
+        this.activeExperiment.set('EARLY_WEB');
+
+        break;
+
+      case 'ANGULAR':
+        this.activeExperiment.set('ANGULAR');
+
+        break;
     }
+  }
+
+  returnToMuseum(): void {
+    this.router.navigateByUrl('/');
   }
 
   toggleLabGuide(): void {

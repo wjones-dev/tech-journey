@@ -1,0 +1,819 @@
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   HOME COMPUTERS
+   Experiment-specific styles only.
+   Shared Engineering Lab styles live in styles.css.
+   ========================================================= */
+
+
+/* =========================
+   PLAY LAYOUT
+   ========================= */
+
+.play-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 0.72fr)
+    minmax(420px, 1.28fr);
+
+  gap: 30px;
+
+  align-items: stretch;
+}
+
+
+/* =========================
+   ACTION CONTROLS
+   ========================= */
+
+.action-controls {
+  display: grid;
+
+  gap: 10px;
+}
+
+
+.action-button {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  width: 100%;
+
+  padding:
+    14px 15px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #a8bac7;
+
+  text-align: left;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+
+.action-button:hover:not(:disabled) {
+  border-color:
+    rgba(105, 230, 255, 0.35);
+
+  transform:
+    translateY(-1px);
+}
+
+
+.action-button.selected {
+  border-color:
+    rgba(105, 230, 255, 0.62);
+
+  background:
+    rgba(105, 230, 255, 0.09);
+}
+
+
+.action-button strong {
+  color: #dffaff;
+
+  font-size: 0.72rem;
+
+  letter-spacing: 0.05rem;
+}
+
+
+.action-button span {
+  color: #74899a;
+
+  font-size: 0.7rem;
+
+  line-height: 1.45;
+}
+
+
+.action-button:disabled {
+  cursor: default;
+
+  opacity: 0.55;
+}
+
+
+/* =========================
+   RUN COMPUTER
+   ========================= */
+
+.run-button {
+  width: 100%;
+
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 20px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.52);
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(44, 176, 219, 0.18),
+      rgba(85, 91, 230, 0.17)
+    );
+
+  color: #c5f7ff;
+
+  font-family: inherit;
+
+  font-size: 0.74rem;
+  font-weight: 900;
+
+  letter-spacing: 0.08rem;
+
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+
+.run-button:hover:not(:disabled) {
+  border-color: #69e6ff;
+
+  transform:
+    translateY(-1px);
+}
+
+
+.run-button:disabled {
+  cursor: default;
+}
+
+
+.operation-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-top: 12px;
+
+  color: #667d90;
+
+  font-size: 0.62rem;
+
+  letter-spacing: 0.08rem;
+}
+
+
+.operation-status strong {
+  color: #d8e7f1;
+}
+
+
+/* =========================
+   COMPUTER VISUAL
+   ========================= */
+
+.computer-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 22px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 16px;
+
+  background:
+    radial-gradient(
+      circle at 50% 25%,
+      rgba(76, 138, 165, 0.13),
+      transparent 55%
+    ),
+    rgba(0, 0, 0, 0.2);
+}
+
+
+.computer {
+  width:
+    min(100%, 510px);
+}
+
+
+/* =========================
+   MONITOR
+   ========================= */
+
+.monitor {
+  width: 75%;
+
+  margin:
+    0 auto;
+
+  padding:
+    18px 18px 22px;
+
+  border-radius:
+    18px 18px 13px 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #d2cbb7,
+      #817d70
+    );
+
+  box-shadow:
+    0 22px 40px rgba(0, 0, 0, 0.35);
+}
+
+
+.monitor-screen {
+  position: relative;
+
+  height: 210px;
+
+  overflow: hidden;
+
+  padding: 22px;
+
+  border:
+    9px solid #252a27;
+
+  border-radius: 15px;
+
+  background:
+    #071b14;
+
+  box-shadow:
+    inset 0 0 35px rgba(0, 0, 0, 0.75);
+}
+
+
+.monitor-screen pre {
+  position: relative;
+
+  z-index: 2;
+
+  margin: 0;
+
+  color: #86ffb7;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.77rem;
+
+  line-height: 1.6;
+
+  white-space: pre-wrap;
+
+  text-shadow:
+    0 0 8px rgba(134, 255, 183, 0.45);
+}
+
+
+.screen-glow {
+  position: absolute;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 3px,
+      rgba(134, 255, 183, 0.025) 4px
+    );
+}
+
+
+.screen-scanline {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  top: -10%;
+
+  height: 5px;
+
+  background:
+    rgba(134, 255, 183, 0.25);
+
+  box-shadow:
+    0 0 14px rgba(134, 255, 183, 0.4);
+
+  animation:
+    scanComputer 0.8s linear infinite;
+}
+
+
+/* =========================
+   COMPUTER BASE
+   ========================= */
+
+.computer-base {
+  position: relative;
+
+  width: 63%;
+  height: 70px;
+
+  margin:
+    0 auto;
+
+  border-radius:
+    0 0 16px 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #b8b09d,
+      #746f64
+    );
+}
+
+
+.drive-slot {
+  position: absolute;
+
+  top: 22px;
+  right: 25px;
+
+  width: 76px;
+  height: 7px;
+
+  border-radius: 3px;
+
+  background: #343631;
+}
+
+
+.power-light {
+  position: absolute;
+
+  left: 25px;
+  top: 25px;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #7eff99;
+
+  box-shadow:
+    0 0 9px rgba(126, 255, 153, 0.7);
+}
+
+
+/* =========================
+   KEYBOARD
+   ========================= */
+
+.keyboard {
+  display: grid;
+
+  grid-template-columns:
+    repeat(10, 1fr);
+
+  gap: 5px;
+
+  width: 88%;
+
+  margin:
+    13px auto 0;
+
+  padding: 13px;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      #a69f8c,
+      #716d62
+    );
+
+  transform:
+    perspective(450px)
+    rotateX(20deg);
+}
+
+
+.keyboard span {
+  height: 13px;
+
+  border-radius: 2px;
+
+  background:
+    #383b37;
+
+  box-shadow:
+    inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================
+   LIVE SYSTEM PATH
+   ========================= */
+
+.live-system-path {
+  width: 100%;
+
+  margin-top: 25px;
+
+  padding:
+    16px 18px 18px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.075);
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(105, 230, 255, 0.035),
+      rgba(0, 0, 0, 0.16)
+    );
+}
+
+
+.live-system-path.running {
+  border-color:
+    rgba(105, 230, 255, 0.24);
+
+  box-shadow:
+    0 0 28px rgba(105, 230, 255, 0.04);
+}
+
+
+.live-system-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 17px;
+}
+
+
+.live-system-eyebrow {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #69e6ff;
+
+  font-size: 0.58rem;
+  font-weight: 900;
+
+  letter-spacing: 0.12rem;
+}
+
+
+.live-system-header strong {
+  color: #a9bbc8;
+
+  font-size: 0.69rem;
+  font-weight: 600;
+}
+
+
+.live-system-status {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  flex-shrink: 0;
+
+  color: #708899;
+
+  font-size: 0.57rem;
+  font-weight: 900;
+
+  letter-spacing: 0.08rem;
+}
+
+
+.status-ready {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #435b6c;
+}
+
+
+.status-pulse {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #69e6ff;
+
+  box-shadow:
+    0 0 11px rgba(105, 230, 255, 0.95);
+
+  /*
+   * Shared animation lives in styles.css.
+   */
+  animation:
+    labActivePulse
+    0.7s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+/* =========================
+   LIVE PIPELINE
+   ========================= */
+
+.live-pipeline {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+}
+
+
+.live-stage-wrapper {
+  display: flex;
+  align-items: center;
+
+  flex:
+    1 1 0;
+
+  min-width: 0;
+}
+
+
+.live-stage-wrapper:last-child {
+  flex:
+    0 0 auto;
+}
+
+
+.live-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 7px;
+
+  min-width: 55px;
+
+  opacity: 0.45;
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+
+.live-stage-dot {
+  width: 11px;
+  height: 11px;
+
+  border:
+    2px solid #405667;
+
+  border-radius: 50%;
+
+  background: #17212a;
+}
+
+
+.live-stage-label {
+  max-width: 80px;
+
+  color: #6f8495;
+
+  font-size: 0.52rem;
+  font-weight: 900;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+
+.live-system-path.running
+.live-stage.active {
+  opacity: 1;
+
+  transform:
+    translateY(-2px);
+}
+
+
+.live-system-path.running
+.live-stage.active
+.live-stage-dot {
+  border-color: #8ff2ff;
+
+  background: #69e6ff;
+
+  transform:
+    scale(1.18);
+
+  box-shadow:
+    0 0 6px rgba(105, 230, 255, 0.95),
+    0 0 16px rgba(105, 230, 255, 0.55);
+}
+
+
+.live-system-path.running
+.live-stage.active
+.live-stage-label {
+  color: #d7f9ff;
+}
+
+
+.live-stage-connector {
+  flex:
+    1 1 auto;
+
+  min-width: 15px;
+
+  color:
+    rgba(105, 230, 255, 0.3);
+
+  text-align: center;
+
+  font-size: 0.66rem;
+}
+
+
+/* =========================
+   HOME COMPUTER ANIMATION
+   ========================= */
+
+@keyframes scanComputer {
+
+  from {
+    top: -5%;
+  }
+
+  to {
+    top: 105%;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 800px) {
+
+  /*
+   * Shared header, layer, engineering explorer,
+   * and comparison-table responsive rules now
+   * live in styles.css.
+   */
+
+  .play-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+
+  .computer-area {
+    padding: 14px;
+  }
+
+
+  .monitor {
+    width: 82%;
+  }
+
+
+  .monitor-screen {
+    height: 190px;
+  }
+
+
+  .live-system-header {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 9px;
+  }
+
+
+  .live-pipeline {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 9px;
+  }
+
+
+  .live-stage-wrapper,
+  .live-stage-wrapper:last-child {
+    display: block;
+  }
+
+
+  .live-stage {
+    min-height: 62px;
+
+    padding:
+      9px 5px;
+
+    border:
+      1px solid rgba(255, 255, 255, 0.055);
+
+    border-radius: 9px;
+
+    background:
+      rgba(0, 0, 0, 0.12);
+  }
+
+
+  .live-stage-label {
+    white-space: normal;
+  }
+
+
+  .live-stage-connector {
+    display: none;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 520px) {
+
+  .monitor {
+    width: 94%;
+  }
+
+
+  .monitor-screen {
+    height: 165px;
+
+    padding: 16px;
+  }
+
+
+  .monitor-screen pre {
+    font-size: 0.67rem;
+  }
+
+
+  .keyboard {
+    width: 96%;
+
+    gap: 3px;
+  }
+
+
+  .keyboard span {
+    height: 10px;
+  }
+
+}

@@ -1,0 +1,1303 @@
+<section class="lab-experiment angular-experiment">
+
+  <!-- =========================================================
+       HEADER
+       ========================================================= -->
+
+  <header class="lab-header">
+
+    <button
+      type="button"
+      class="back-to-experiments-button"
+      (click)="backToExperiments()"
+    >
+      <span aria-hidden="true">
+        ←
+      </span>
+
+      BACK TO EXPERIMENTS
+    </button>
+
+
+    <div class="header-copy">
+
+      <span class="eyebrow">
+        WEB LAB
+      </span>
+
+      <h1>
+        Angular
+      </h1>
+
+      <h2>
+        Components • Templates • Signals
+      </h2>
+
+      <p>
+        Explore how Angular responds to user actions,
+        manages reactive state, updates templates,
+        and coordinates communication between components.
+      </p>
+
+    </div>
+
+
+    <div class="lab-badge">
+
+      <span class="badge-dot"></span>
+
+      ANGULAR
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+       PLAY
+       ========================================================= -->
+
+  <section class="lab-layer">
+
+    <div class="layer-heading">
+
+      <span class="layer-number">
+        01
+      </span>
+
+      <div>
+
+        <span class="layer-label">
+          PLAY
+        </span>
+
+        <h2>
+          Drive the Application
+        </h2>
+
+        <p>
+          Change Angular state and watch the interface
+          respond without directly manipulating the DOM.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         SCENARIO SELECTOR
+         ========================= -->
+
+    <div class="angular-scenario-selector">
+
+      <button
+        type="button"
+        class="scenario-card"
+        [class.selected]="
+          activeScenario() === 'REACTIVE_STATE'
+        "
+        (click)="
+          selectScenario('REACTIVE_STATE')
+        "
+      >
+
+        <span class="scenario-number">
+          01
+        </span>
+
+        <strong>
+          Reactive State
+        </strong>
+
+        <span>
+          Signals • Events • Templates
+        </span>
+
+      </button>
+
+
+      <button
+        type="button"
+        class="scenario-card"
+        [class.selected]="
+          activeScenario() ===
+          'COMPONENT_COMMUNICATION'
+        "
+        (click)="
+          selectScenario(
+            'COMPONENT_COMMUNICATION'
+          )
+        "
+      >
+
+        <span class="scenario-number">
+          02
+        </span>
+
+        <strong>
+          Component Communication
+        </strong>
+
+        <span>
+          input() • output() • Parent / Child
+        </span>
+
+      </button>
+
+    </div>
+
+
+    <!-- =======================================================
+         SCENARIO 01
+         REACTIVE STATE
+         ======================================================= -->
+
+    @if (
+      activeScenario() === 'REACTIVE_STATE'
+    ) {
+
+      <div class="angular-workspace">
+
+        <!-- =========================
+             CONTROLS
+             ========================= -->
+
+        <aside class="control-panel angular-controls">
+
+          <div class="angular-control-group">
+
+            <span class="control-label">
+              TECHNOLOGY
+            </span>
+
+            <div class="angular-option-buttons">
+
+              <button
+                type="button"
+                [class.selected]="
+                  selectedTechnology() ===
+                  'ANGULAR'
+                "
+                (click)="
+                  selectTechnology('ANGULAR')
+                "
+              >
+                ANGULAR
+              </button>
+
+
+              <button
+                type="button"
+                [class.selected]="
+                  selectedTechnology() ===
+                  'JAVA'
+                "
+                (click)="
+                  selectTechnology('JAVA')
+                "
+              >
+                JAVA
+              </button>
+
+
+              <button
+                type="button"
+                [class.selected]="
+                  selectedTechnology() ===
+                  'DOCKER'
+                "
+                (click)="
+                  selectTechnology('DOCKER')
+                "
+              >
+                DOCKER
+              </button>
+
+
+              <button
+                type="button"
+                [class.selected]="
+                  selectedTechnology() ===
+                  'AI'
+                "
+                (click)="
+                  selectTechnology('AI')
+                "
+              >
+                AI
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="angular-control-divider">
+          </div>
+
+
+          <div class="angular-control-group">
+
+            <span class="control-label">
+              DISPLAY MODE
+            </span>
+
+            <div class="angular-option-buttons">
+
+              <button
+                type="button"
+                [class.selected]="
+                  displayMode() === 'CARD'
+                "
+                (click)="
+                  setDisplayMode('CARD')
+                "
+              >
+                CARD
+              </button>
+
+
+              <button
+                type="button"
+                [class.selected]="
+                  displayMode() === 'DETAILS'
+                "
+                (click)="
+                  setDisplayMode('DETAILS')
+                "
+              >
+                DETAILS
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="angular-control-divider">
+          </div>
+
+
+          <div class="angular-control-group">
+
+            <span class="control-label">
+              CONCEPTS
+            </span>
+
+            <button
+              type="button"
+              class="concept-toggle"
+              [class.active]="
+                showConcepts()
+              "
+              (click)="toggleConcepts()"
+            >
+
+              <span class="toggle-track">
+
+                <span class="toggle-thumb">
+                </span>
+
+              </span>
+
+              <strong>
+                {{
+                  showConcepts()
+                    ? 'VISIBLE'
+                    : 'HIDDEN'
+                }}
+              </strong>
+
+            </button>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="angular-reset-button"
+            (click)="resetExperiment()"
+          >
+            RESET
+          </button>
+
+        </aside>
+
+
+        <!-- =========================
+             LIVE COMPONENT
+             ========================= -->
+
+        <div class="angular-preview-shell">
+
+          <div class="preview-toolbar">
+
+            <span>
+              LIVE ANGULAR COMPONENT
+            </span>
+
+            <strong>
+              {{ selectedTechnology() }}
+            </strong>
+
+          </div>
+
+
+          <div
+            class="technology-preview"
+            [class.details-mode]="
+              displayMode() === 'DETAILS'
+            "
+          >
+
+            <span class="technology-category">
+              {{
+                currentTechnology().category
+              }}
+            </span>
+
+
+            <h3>
+              {{
+                currentTechnology().name
+              }}
+            </h3>
+
+
+            <p>
+              {{
+                currentTechnology().description
+              }}
+            </p>
+
+
+            @if (showConcepts()) {
+
+              <div class="concept-list">
+
+                @for (
+                  concept of
+                    currentTechnology().concepts;
+                  track concept
+                ) {
+
+                  <span>
+                    {{ concept }}
+                  </span>
+
+                }
+
+              </div>
+
+            }
+
+
+            @if (
+              displayMode() === 'DETAILS'
+            ) {
+
+              <div class="technology-details">
+
+                <span>
+                  ANGULAR STATE
+                </span>
+
+                <code>
+                  selectedTechnology =
+                  '{{ selectedTechnology() }}'
+                </code>
+
+                <code>
+                  showConcepts =
+                  {{ showConcepts() }}
+                </code>
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- =======================================================
+         SCENARIO 02
+         COMPONENT COMMUNICATION
+         ======================================================= -->
+
+    @else {
+
+      <div class="component-demo">
+
+        <!-- CHILD -->
+
+        <article class="component-box child-component">
+
+          <span class="component-type">
+            CHILD COMPONENT
+          </span>
+
+          <h3>
+            TechnologySelectorComponent
+          </h3>
+
+          <p>
+            The child does not change the parent directly.
+            It emits an event.
+          </p>
+
+
+          <button
+            type="button"
+            class="component-action-button"
+            (click)="runComponentCommunication()"
+          >
+            SELECT ANGULAR
+          </button>
+
+
+          <div class="component-state">
+
+            <span>
+              output()
+            </span>
+
+            <strong>
+              {{ childSelection() }}
+            </strong>
+
+          </div>
+
+        </article>
+
+
+        <div
+          class="communication-arrow"
+          aria-hidden="true"
+        >
+          →
+        </div>
+
+
+        <!-- PARENT -->
+
+        <article class="component-box parent-component">
+
+          <span class="component-type">
+            PARENT COMPONENT
+          </span>
+
+          <h3>
+            TechnologyDemoComponent
+          </h3>
+
+          <p>
+            The parent receives the event and updates
+            its signal state.
+          </p>
+
+
+          <div class="component-state">
+
+            <span>
+              signal()
+            </span>
+
+            <strong>
+              {{ parentMessage() }}
+            </strong>
+
+          </div>
+
+        </article>
+
+
+        <div
+          class="communication-arrow"
+          aria-hidden="true"
+        >
+          →
+        </div>
+
+
+        <!-- CHILD INPUT -->
+
+        <article class="component-box child-component">
+
+          <span class="component-type">
+            CHILD COMPONENT
+          </span>
+
+          <h3>
+            TechnologyCardComponent
+          </h3>
+
+          <p>
+            The parent passes state down to another child
+            through an input.
+          </p>
+
+
+          <div class="component-state">
+
+            <span>
+              input()
+            </span>
+
+            <strong>
+              {{
+                childInputValue()
+              }}
+            </strong>
+
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <div class="communication-actions">
+
+        <button
+          type="button"
+          (click)="
+            runComponentCommunication()
+          "
+        >
+          RUN EVENT FLOW
+        </button>
+
+        <button
+          type="button"
+          (click)="
+            resetCommunication()
+          "
+        >
+          RESET FLOW
+        </button>
+
+      </div>
+
+    }
+
+  </section>
+
+
+  <!-- =========================================================
+       UNDERSTAND
+       ========================================================= -->
+
+  <section class="lab-layer">
+
+    <div class="layer-heading">
+
+      <span class="layer-number">
+        02
+      </span>
+
+      <div>
+
+        <span class="layer-label">
+          UNDERSTAND
+        </span>
+
+        <h2>
+          Follow the Angular Flow
+        </h2>
+
+        <p>
+          Angular connects user events, application state,
+          templates, and the browser's rendered DOM.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    @if (
+      activeScenario() === 'REACTIVE_STATE'
+    ) {
+
+      <div class="pipeline">
+
+        <!-- USER -->
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+
+              <span class="active-pulse">
+              </span>
+
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                USER ACTION
+              </strong>
+
+              <p>
+                The visitor clicks a button or changes
+                a control.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="pipeline-arrow">
+            ↓
+          </div>
+
+        </div>
+
+
+        <!-- EVENT -->
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+
+              <span class="active-pulse">
+              </span>
+
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                EVENT BINDING
+              </strong>
+
+              <p>
+                Angular receives the event through syntax
+                such as
+                <code>
+                  (click)
+                </code>.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="pipeline-arrow">
+            ↓
+          </div>
+
+        </div>
+
+
+        <!-- COMPONENT -->
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+
+              <span class="active-pulse">
+              </span>
+
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                COMPONENT METHOD
+              </strong>
+
+              <p>
+                The event calls TypeScript logic in
+                the component.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="pipeline-arrow">
+            ↓
+          </div>
+
+        </div>
+
+
+        <!-- SIGNAL -->
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+
+              <span class="active-pulse">
+              </span>
+
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                SIGNAL STATE
+              </strong>
+
+              <p>
+                The component updates reactive application
+                state with
+                <code>
+                  signal()
+                </code>.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="pipeline-arrow">
+            ↓
+          </div>
+
+        </div>
+
+
+        <!-- TEMPLATE -->
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+
+              <span class="active-pulse">
+              </span>
+
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                TEMPLATE
+              </strong>
+
+              <p>
+  Angular evaluates bindings such as
+  interpolation and
+  <code>
+    &#64;if
+  </code>.
+</p>
+
+            </div>
+
+          </div>
+
+
+          <div class="pipeline-arrow">
+            ↓
+          </div>
+
+        </div>
+
+
+        <!-- DOM -->
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+
+              <span class="active-pulse">
+              </span>
+
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                DOM
+              </strong>
+
+              <p>
+                Angular keeps the rendered browser view
+                synchronized with application state.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="pipeline-arrow">
+            ↓
+          </div>
+
+        </div>
+
+
+        <!-- SCREEN -->
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+
+              <span class="active-pulse">
+              </span>
+
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                SCREEN
+              </strong>
+
+              <p>
+                The visitor sees the updated interface.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+
+    @else {
+
+      <div class="pipeline">
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+              <span class="active-pulse"></span>
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                CHILD COMPONENT
+              </strong>
+
+              <p>
+                A child component receives the user action.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="pipeline-arrow">
+            ↓
+          </div>
+
+        </div>
+
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+              <span class="active-pulse"></span>
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                output()
+              </strong>
+
+              <p>
+                The child emits an event without directly
+                changing the parent.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="pipeline-arrow">
+            ↓
+          </div>
+
+        </div>
+
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+              <span class="active-pulse"></span>
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                PARENT HANDLER
+              </strong>
+
+              <p>
+                The parent receives the emitted value.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="pipeline-arrow">
+            ↓
+          </div>
+
+        </div>
+
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+              <span class="active-pulse"></span>
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                PARENT SIGNAL
+              </strong>
+
+              <p>
+                The parent updates the state it owns.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="pipeline-arrow">
+            ↓
+          </div>
+
+        </div>
+
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+              <span class="active-pulse"></span>
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                input()
+              </strong>
+
+              <p>
+                Updated state is passed down to another
+                child component.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="pipeline-arrow">
+            ↓
+          </div>
+
+        </div>
+
+
+        <div class="pipeline-stage-wrapper">
+
+          <div class="pipeline-stage active">
+
+            <div class="stage-status">
+              <span class="active-pulse"></span>
+            </div>
+
+            <div class="stage-copy">
+
+              <strong>
+                TEMPLATE / DOM
+              </strong>
+
+              <p>
+                The receiving component renders the new
+                input value.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- =========================
+         LAST ACTION
+         ========================= -->
+
+    <div class="angular-flow-status">
+
+      <span>
+        LAST STATE CHANGE
+      </span>
+
+      <code>
+        {{ lastAction() }}
+      </code>
+
+    </div>
+
+
+    <!-- =========================
+         DOM EXPLANATION
+         ========================= -->
+
+    <div class="constraint-callout">
+
+      <span class="callout-label">
+        WHAT IS THE DOM?
+      </span>
+
+      <p>
+        The Document Object Model is the browser's live
+        representation of the page. In Angular, you
+        generally update component state and allow Angular
+        to synchronize the rendered view instead of
+        manually finding and changing DOM elements.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       ENGINEER
+       ========================================================= -->
+
+  <section class="lab-layer">
+
+    <div class="layer-heading engineer-heading">
+
+      <span class="layer-number">
+        03
+      </span>
+
+      <div>
+
+        <span class="layer-label">
+          ENGINEER
+        </span>
+
+        <h2>
+          View the Angular Implementation
+        </h2>
+
+        <p>
+          Inspect how components, signals, templates,
+          inputs, and outputs create the behavior you
+          just used.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="engineer-toggle"
+      [class.open]="
+        implementationOpen()
+      "
+      (click)="
+        toggleImplementation()
+      "
+    >
+
+      <span>
+        VIEW IMPLEMENTATION
+      </span>
+
+      <span
+        class="toggle-icon"
+        aria-hidden="true"
+      >
+        {{
+          implementationOpen()
+            ? '−'
+            : '+'
+        }}
+      </span>
+
+    </button>
+
+
+    @if (implementationOpen()) {
+
+      <div class="engineer-content">
+
+        <!-- CODE TABS -->
+
+        <div class="angular-code-tabs">
+
+          <button
+            type="button"
+            [class.active]="
+              activeCodeTab() ===
+              'COMPONENT'
+            "
+            (click)="
+              selectCodeTab('COMPONENT')
+            "
+          >
+            COMPONENT
+          </button>
+
+
+          <button
+            type="button"
+            [class.active]="
+              activeCodeTab() ===
+              'TEMPLATE'
+            "
+            (click)="
+              selectCodeTab('TEMPLATE')
+            "
+          >
+            TEMPLATE
+          </button>
+
+
+          <button
+            type="button"
+            [class.active]="
+              activeCodeTab() ===
+              'COMMUNICATION'
+            "
+            (click)="
+              selectCodeTab(
+                'COMMUNICATION'
+              )
+            "
+          >
+            INPUT / OUTPUT
+          </button>
+
+        </div>
+
+
+        <div class="angular-code-window">
+
+          <div class="angular-code-header">
+
+            @if (
+              activeCodeTab() ===
+              'COMPONENT'
+            ) {
+
+              technology-demo.ts
+
+            } @else if (
+              activeCodeTab() ===
+              'TEMPLATE'
+            ) {
+
+              technology-demo.html
+
+            } @else {
+
+              component-communication.ts
+
+            }
+
+          </div>
+
+
+          <div class="angular-code-content">
+
+            @if (
+              activeCodeTab() ===
+              'COMPONENT'
+            ) {
+
+              <pre><code>{{ componentCode() }}</code></pre>
+
+            } @else if (
+              activeCodeTab() ===
+              'TEMPLATE'
+            ) {
+
+              <pre><code>{{ templateCode() }}</code></pre>
+
+            } @else {
+
+              <pre><code>{{ communicationCode() }}</code></pre>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <div class="main-lesson">
+
+          <span>
+            YOU'RE USING IT NOW
+          </span>
+
+          <p>
+            The Engineering Lab, its experiment drawer,
+            these controls, and this Angular experiment
+            are themselves Angular components. The same
+            concepts demonstrated here are actively
+            powering the Tech Journey interface.
+          </p>
+
+        </div>
+
+      </div>
+
+    }
+
+  </section>
+
+</section>

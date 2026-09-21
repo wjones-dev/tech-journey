@@ -1,0 +1,760 @@
+<section class="lab-experiment napster-lab">
+  <header class="lab-header">
+
+  <button
+    type="button"
+    class="back-to-experiments-button"
+    (click)="backToExperiments()">
+
+    ← BACK TO EXPERIMENTS
+
+  </button>
+
+
+  <div class="header-copy">
+
+    <span class="eyebrow">
+      MUSIC • NETWORKING • P2P
+    </span>
+
+    <h1>
+      Napster / File Sharing
+    </h1>
+
+    <h2>
+      How Did Peer-to-Peer Music Sharing Work?
+    </h2>
+
+    <p>
+      Search for a digital music file, locate another user
+      sharing it, then watch how centralized discovery and
+      peer-to-peer transfer work together.
+    </p>
+
+  </div>
+
+
+  <div class="lab-badge">
+
+    <span class="badge-dot"></span>
+
+    BUILT WITH ANGULAR
+
+  </div>
+
+</header>
+
+
+
+  <!-- =========================
+       PLAY
+       ========================= -->
+
+  <section class="lab-layer">
+
+    <div class="layer-heading">
+
+      <div class="layer-number">
+        01
+      </div>
+
+      <div>
+
+        <span class="layer-label">
+          PLAY
+        </span>
+
+        <h2>
+          Find and Download an MP3
+        </h2>
+
+        <p>
+          Choose a music file and connection speed,
+          then simulate a Napster-era download.
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="play-grid">
+
+      <!-- CONTROLS -->
+
+      <div class="control-panel">
+
+        <span class="control-label">
+          SELECT MUSIC FILE
+        </span>
+
+
+        <div class="track-controls">
+
+          @for (
+            track of tracks;
+            track track.id
+          ) {
+
+            <button
+              type="button"
+              class="track-button"
+              [class.selected]="selectedTrack() === track.id"
+              [disabled]="simulationRunning()"
+              (click)="selectTrack(track.id)">
+
+              <strong>
+                {{ track.title }}
+              </strong>
+
+              <span>
+                {{ track.size }}
+              </span>
+
+            </button>
+
+          }
+
+        </div>
+
+
+
+        <span class="control-label connection-label">
+          INTERNET CONNECTION
+        </span>
+
+
+        <div class="connection-controls">
+
+          @for (
+            connection of connectionOptions;
+            track connection.id
+          ) {
+
+            <button
+              type="button"
+              class="connection-button"
+              [class.selected]="selectedConnection() === connection.id"
+              [disabled]="simulationRunning()"
+              (click)="selectConnection(connection.id)">
+
+              {{ connection.label }}
+
+            </button>
+
+          }
+
+        </div>
+
+
+        <button
+          type="button"
+          class="run-button"
+          [disabled]="simulationRunning()"
+          (click)="runTransfer()">
+
+          @if (simulationRunning()) {
+
+            <span class="run-indicator"></span>
+
+            TRANSFERRING
+
+          } @else {
+
+            <span aria-hidden="true">
+              ▶
+            </span>
+
+            SEARCH & DOWNLOAD
+
+          }
+
+        </button>
+
+
+        <div class="download-status">
+
+          <span>
+            DOWNLOADS
+          </span>
+
+          <strong>
+            {{ downloadCount() }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =========================
+           NAPSTER CLIENT
+           ========================= -->
+
+      <div class="client-area">
+
+        <div class="music-client">
+
+          <div class="client-titlebar">
+
+            <div>
+
+              <span class="client-dot"></span>
+
+              P2P MUSIC CLIENT
+
+            </div>
+
+            <span>
+              CONNECTED
+            </span>
+
+          </div>
+
+
+          <div class="client-toolbar">
+
+            <span>
+              SEARCH RESULTS
+            </span>
+
+            <span>
+              USERS ONLINE: 24,817
+            </span>
+
+          </div>
+
+
+          <div class="search-result">
+
+            <div class="file-icon">
+              ♪
+            </div>
+
+
+            <div class="file-details">
+
+              <strong>
+                {{ selectedTrackDetails().title }}
+              </strong>
+
+              <span>
+                MP3 • {{ selectedTrackDetails().size }}
+              </span>
+
+            </div>
+
+
+            <span class="peer-count">
+              12 PEERS
+            </span>
+
+          </div>
+
+
+
+          <div class="transfer-panel">
+
+            <div class="transfer-heading">
+
+              <span>
+                {{ statusMessage() }}
+              </span>
+
+              <strong>
+                {{ transferProgress() }}%
+              </strong>
+
+            </div>
+
+
+            <div class="progress-track">
+
+              <div
+                class="progress-fill"
+                [style.width.%]="transferProgress()">
+              </div>
+
+            </div>
+
+
+            <div class="transfer-meta">
+
+              <span>
+                {{ selectedConnection() }}
+              </span>
+
+              <span>
+                {{ selectedTrackDetails().size }}
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             LIVE NETWORK PATH
+             ========================= -->
+
+        <div
+          class="live-system-path"
+          [class.running]="simulationRunning()">
+
+          <div class="live-system-header">
+
+            <div>
+
+              <span class="live-system-eyebrow">
+                LIVE NETWORK PATH
+              </span>
+
+              <strong>
+                Watch discovery become a peer-to-peer transfer
+              </strong>
+
+            </div>
+
+
+            <div class="live-system-status">
+
+              @if (simulationRunning()) {
+
+                <span class="status-pulse"></span>
+
+                ACTIVE
+
+              } @else {
+
+                <span class="status-ready"></span>
+
+                READY
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <div class="live-pipeline">
+
+            @for (
+              stage of architectureStages;
+              track stage.id;
+              let last = $last
+            ) {
+
+              <div class="live-stage-wrapper">
+
+                <div
+                  class="live-stage"
+                  [class.active]="isStageActive(stage.id)">
+
+                  <span class="live-stage-dot"></span>
+
+                  <span class="live-stage-label">
+                    {{ stage.label }}
+                  </span>
+
+                </div>
+
+
+                @if (!last) {
+
+                  <div
+                    class="live-stage-connector"
+                    aria-hidden="true">
+
+                    →
+
+                  </div>
+
+                }
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       UNDERSTAND
+       ========================= -->
+
+  <section class="lab-layer">
+
+    <div class="layer-heading">
+
+      <div class="layer-number">
+        02
+      </div>
+
+      <div>
+
+        <span class="layer-label">
+          UNDERSTAND
+        </span>
+
+        <h2>
+          Follow the Network
+        </h2>
+
+        <p>
+          Napster combined centralized file discovery with
+          direct transfers between individual users.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="pipeline">
+
+      @for (
+        stage of architectureStages;
+        track stage.id;
+        let last = $last
+      ) {
+
+        <div class="pipeline-stage-wrapper">
+
+          <article
+            class="pipeline-stage"
+            [class.active]="isStageActive(stage.id)">
+
+            <div class="stage-status">
+
+              @if (isStageActive(stage.id)) {
+
+                <span class="active-pulse"></span>
+
+              } @else {
+
+                <span class="inactive-dot"></span>
+
+              }
+
+            </div>
+
+
+            <div class="stage-copy">
+
+              <strong>
+                {{ stage.label }}
+              </strong>
+
+              <p>
+                {{ stage.description }}
+              </p>
+
+            </div>
+
+          </article>
+
+
+          @if (!last) {
+
+            <div
+              class="pipeline-arrow"
+              aria-hidden="true">
+
+              ↓
+
+            </div>
+
+          }
+
+        </div>
+
+      }
+
+    </div>
+
+
+    <aside class="constraint-callout">
+
+      <span class="callout-label">
+        ENGINEERING CONSTRAINT
+      </span>
+
+      <p>
+        File availability depended on other users being online,
+        and home Internet connections were often slow. A single
+        MP3 could take many minutes to transfer over dial-up.
+      </p>
+
+    </aside>
+
+  </section>
+
+
+
+  <!-- =========================
+       ENGINEER
+       ========================= -->
+
+  <section class="lab-layer">
+
+    <div class="layer-heading engineer-heading">
+
+      <div class="layer-number">
+        03
+      </div>
+
+      <div>
+
+        <span class="layer-label">
+          ENGINEER
+        </span>
+
+        <h2>
+          Explore the Architecture
+        </h2>
+
+        <p>
+          Examine the major technologies that made
+          Internet music sharing possible.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="engineer-toggle"
+      [class.open]="engineerExpanded()"
+      [attr.aria-expanded]="engineerExpanded()"
+      (click)="toggleEngineer()">
+
+      <span>
+        {{
+          engineerExpanded()
+            ? 'HIDE ENGINEERING'
+            : 'VIEW ENGINEERING'
+        }}
+      </span>
+
+      <span
+        class="toggle-icon"
+        aria-hidden="true">
+
+        {{
+          engineerExpanded()
+            ? '−'
+            : '+'
+        }}
+
+      </span>
+
+    </button>
+
+
+
+    @if (engineerExpanded()) {
+
+      <div class="engineer-content">
+
+        <div class="hardware-explorer">
+
+          <div>
+
+            <span class="engineer-subheading">
+              SYSTEM COMPONENTS
+            </span>
+
+
+            <div class="component-buttons">
+
+              @for (
+                component of engineeringComponents;
+                track component.id
+              ) {
+
+                <button
+                  type="button"
+                  class="component-button"
+                  [class.selected]="
+                    selectedEngineeringComponent()?.id
+                    === component.id
+                  "
+                  (click)="selectEngineeringComponent(component)">
+
+                  {{ component.label }}
+
+                </button>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          @if (
+            selectedEngineeringComponent();
+            as component
+          ) {
+
+            <article class="component-detail">
+
+              <span class="detail-eyebrow">
+                COMPONENT RESPONSIBILITY
+              </span>
+
+              <h3>
+                {{ component.label }}
+              </h3>
+
+              <p>
+                {{ component.description }}
+              </p>
+
+            </article>
+
+          }
+
+        </div>
+
+
+
+        <!-- THEN VS NOW -->
+
+        <div class="then-now">
+
+          <span class="engineer-subheading">
+            THEN → NOW
+          </span>
+
+          <h3>
+            From File Sharing to Streaming
+          </h3>
+
+
+          <div class="comparison-table">
+
+            <div class="comparison-header">
+
+              <span>
+                FILE-SHARING ERA
+              </span>
+
+              <span></span>
+
+              <span>
+                MODERN MUSIC
+              </span>
+
+            </div>
+
+
+            <div class="comparison-row">
+
+              <span>MP3 downloads</span>
+
+              <strong>→</strong>
+
+              <span>On-demand streaming</span>
+
+            </div>
+
+
+            <div class="comparison-row">
+
+              <span>User-to-user transfer</span>
+
+              <strong>→</strong>
+
+              <span>Cloud / CDN delivery</span>
+
+            </div>
+
+
+            <div class="comparison-row">
+
+              <span>Local music library</span>
+
+              <strong>→</strong>
+
+              <span>Cloud music library</span>
+
+            </div>
+
+
+            <div class="comparison-row">
+
+              <span>56K dial-up</span>
+
+              <strong>→</strong>
+
+              <span>High-speed broadband</span>
+
+            </div>
+
+
+            <div class="comparison-row">
+
+              <span>Manual file organization</span>
+
+              <strong>→</strong>
+
+              <span>Synced applications</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="main-lesson">
+
+          <span>
+            MAIN LESSON
+          </span>
+
+          <p>
+            Napster demonstrated how centralized discovery and
+            distributed users could work together. The architecture
+            helped popularize peer-to-peer networking while changing
+            how people thought about distributing digital media.
+          </p>
+
+        </div>
+
+      </div>
+
+    }
+
+  </section>
+
+
+
+  <button
+    type="button"
+    class="back-to-experiments-button"
+    (click)="backToExperiments()">
+
+    ← BACK TO EXPERIMENTS
+
+  </button>
+
+</section>

@@ -23,13 +23,62 @@
          EXPERIMENT DRAWER LAUNCHER
          ========================= -->
 
-    @if (!experimentDrawerOpen()) {
-      <button type="button" class="experiment-drawer-launcher" (click)="toggleExperimentDrawer()">
-        <span> EXPLORE EXPERIMENTS </span>
+  @if (!experimentDrawerOpen()) {
 
-        <span class="drawer-arrow" aria-hidden="true"> ↑ </span>
-      </button>
-    }
+  <div class="lab-launcher-dock">
+
+    <!-- =========================
+         RETURN TO MUSEUM
+         ========================= -->
+
+    <button
+      type="button"
+      class="lab-launcher-button museum-home-launcher"
+      (click)="returnToMuseum()"
+      aria-label="Return to Tech Journey Museum"
+    >
+
+      <span
+        class="comet-icon"
+        aria-hidden="true"
+      >
+        <span class="comet-tail"></span>
+        <span class="comet-core"></span>
+      </span>
+
+      <span>
+        MUSEUM
+      </span>
+
+    </button>
+
+
+    <!-- =========================
+         EXPLORE EXPERIMENTS
+         ========================= -->
+
+    <button
+      type="button"
+      class="lab-launcher-button experiment-drawer-launcher"
+      (click)="toggleExperimentDrawer()"
+    >
+
+      <span>
+        EXPLORE EXPERIMENTS
+      </span>
+
+      <span
+        class="drawer-arrow"
+        aria-hidden="true"
+      >
+        ↑
+      </span>
+
+    </button>
+
+  </div>
+
+}
 
     <!-- =========================
          EXPERIMENT DRAWER
@@ -87,9 +136,18 @@
 
             @else if (activeExperiment() === 'ATARI') {
               <span class="drawer-eyebrow"> PERSONAL TECHNOLOGY • 1983 </span>
+            } 
 
-              <h2>Atari 2600</h2>
-            } @else if (selectedLab() === 'CLOUD_DEVOPS' && activeExperiment() === null) {
+             @else if (activeExperiment() === 'HOME_COMPUTERS') {
+              <span class="drawer-eyebrow"> PERSONAL TECHNOLOGY • 1983 </span>
+            }
+
+             @else if (activeExperiment() === 'NAPSTER') {
+              <span class="drawer-eyebrow"> PERSONAL TECHNOLOGY • 1983 </span>
+            }
+            
+            
+            @else if (selectedLab() === 'CLOUD_DEVOPS' && activeExperiment() === null) {
               <span class="drawer-eyebrow"> CLOUD & DEVOPS </span>
 
               <h2>Choose an Experiment</h2>
@@ -98,6 +156,12 @@
 
               <h2>Choose an Experiment</h2>
             }
+
+            @else if (activeExperiment() === 'EARLY_WEB') {
+  <span class="drawer-eyebrow">
+    WEB • EARLY WEB DEVELOPMENT
+  </span>
+}
           </div>
 
           <!-- =========================
@@ -249,23 +313,33 @@
           }
         }
 
-        <!-- =========================
-             ACTIVE EXPERIMENT
-             JAVA STREAM
-             ========================= -->
-
         @if (activeExperiment() === 'JAVA_STREAM') {
           <app-java-stream-experiment (back)="backFromJavaExperiment()" />
         }
 
-        <!-- =========================
-             ACTIVE EXPERIMENT
-             ATARI
-             ========================= -->
-
         @if (activeExperiment() === 'ATARI') {
-          <app-atari-lab (back)="backFromAtariExperiment()" />
+          <app-atari-lab (back)="backFromPersonalTechnologyExperiment()" />
         }
+
+        @if (activeExperiment() === 'HOME_COMPUTERS') {
+          <app-home-computers-lab (back)="backFromPersonalTechnologyExperiment()" />
+        }
+
+        @if (activeExperiment() === 'NAPSTER') {
+          <app-napster-lab (back)="backFromPersonalTechnologyExperiment()" />
+        }
+
+        @if (activeExperiment() === 'EARLY_WEB') {
+  <app-early-web
+    (back)="backFromWebExperiment()"
+  />
+}
+
+@if (activeExperiment() === 'ANGULAR') {
+  <app-angular-lab
+    (back)="backFromWebExperiment()"
+  />
+}
       </section>
     }
   </div>

@@ -1,0 +1,991 @@
+/* =========================================================
+   ANGULAR LAB
+
+   Shared Engineering Lab structure comes from styles.css.
+   This file contains Angular-specific experiment styling.
+   ========================================================= */
+
+
+/* =========================
+   SCENARIO SELECTOR
+   ========================= */
+
+.angular-scenario-selector {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+
+.scenario-card {
+  min-height: 120px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 20px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 15px;
+
+  background:
+    rgba(0, 0, 0, 0.14);
+
+  color: #879aaa;
+
+  text-align: left;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+
+.scenario-card:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(105, 230, 255, 0.32);
+
+  color: #d8edf5;
+}
+
+
+.scenario-card.selected {
+  border-color:
+    rgba(105, 230, 255, 0.52);
+
+  background:
+    rgba(105, 230, 255, 0.07);
+
+  color: #e8faff;
+}
+
+
+.scenario-number {
+  color: #69e6ff;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  letter-spacing: 0.1rem;
+}
+
+
+.scenario-card strong {
+  font-size: 0.92rem;
+}
+
+
+.scenario-card > span:last-child {
+  color: #72889a;
+
+  font-size: 0.72rem;
+}
+
+
+/* =========================
+   REACTIVE STATE WORKSPACE
+   ========================= */
+
+.angular-workspace {
+  display: grid;
+
+  grid-template-columns:
+    minmax(220px, 270px)
+    minmax(0, 1fr);
+
+  gap: 22px;
+
+  align-items: stretch;
+}
+
+
+/* =========================
+   CONTROLS
+   ========================= */
+
+.angular-controls {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.angular-control-group {
+  margin-bottom: 4px;
+}
+
+
+.angular-control-divider {
+  height: 1px;
+
+  margin:
+    20px 0;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+}
+
+
+.angular-option-buttons {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+
+.angular-option-buttons button {
+  padding:
+    8px 11px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 7px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #8095a5;
+
+  font-family: inherit;
+
+  font-size: 0.62rem;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition:
+    border-color 150ms ease,
+    color 150ms ease,
+    background 150ms ease;
+}
+
+
+.angular-option-buttons button:hover {
+  border-color:
+    rgba(105, 230, 255, 0.32);
+
+  color: #d8edf5;
+}
+
+
+.angular-option-buttons button.selected {
+  border-color:
+    rgba(105, 230, 255, 0.48);
+
+  background:
+    rgba(105, 230, 255, 0.08);
+
+  color: #7ee8fa;
+}
+
+
+/* =========================
+   CONCEPT TOGGLE
+   ========================= */
+
+.concept-toggle {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #708697;
+
+  font-family: inherit;
+
+  cursor: pointer;
+}
+
+
+.toggle-track {
+  position: relative;
+
+  width: 42px;
+  height: 22px;
+
+  display: block;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.05);
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+
+.toggle-thumb {
+  position: absolute;
+
+  top: 3px;
+  left: 3px;
+
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  background: #5b6d7a;
+
+  transition:
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+
+.concept-toggle.active {
+  color: #7de4f4;
+}
+
+
+.concept-toggle.active
+.toggle-track {
+  border-color:
+    rgba(105, 230, 255, 0.45);
+
+  background:
+    rgba(105, 230, 255, 0.1);
+}
+
+
+.concept-toggle.active
+.toggle-thumb {
+  transform:
+    translateX(19px);
+
+  background: #69e6ff;
+
+  box-shadow:
+    0 0 8px
+    rgba(105, 230, 255, 0.65);
+}
+
+
+.concept-toggle strong {
+  font-size: 0.62rem;
+
+  letter-spacing: 0.06rem;
+}
+
+
+/* =========================
+   RESET
+   ========================= */
+
+.angular-reset-button {
+  margin-top: auto;
+
+  padding:
+    9px 12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 8px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #718696;
+
+  font-family: inherit;
+
+  font-size: 0.62rem;
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   LIVE PREVIEW
+   ========================= */
+
+.angular-preview-shell {
+  min-width: 0;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 15px;
+
+  background:
+    rgba(4, 13, 22, 0.68);
+}
+
+
+.preview-toolbar {
+  min-height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding:
+    10px 15px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+
+.preview-toolbar span {
+  color: #617c8e;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  letter-spacing: 0.1rem;
+}
+
+
+.preview-toolbar strong {
+  color: #69e6ff;
+
+  font-size: 0.66rem;
+}
+
+
+/* =========================
+   TECHNOLOGY COMPONENT
+   ========================= */
+
+.technology-preview {
+  max-width: 600px;
+
+  min-height: 360px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  margin:
+    0 auto;
+
+  padding: 42px;
+
+  transition:
+    max-width 180ms ease,
+    padding 180ms ease;
+}
+
+
+.technology-preview.details-mode {
+  max-width: 760px;
+}
+
+
+.technology-category {
+  margin-bottom: 9px;
+
+  color: #69e6ff;
+
+  font-size: 0.64rem;
+  font-weight: 900;
+
+  letter-spacing: 0.11rem;
+}
+
+
+.technology-preview h3 {
+  margin:
+    0 0 12px;
+
+  color: #edf9ff;
+
+  font-size:
+    clamp(1.7rem, 4vw, 2.8rem);
+}
+
+
+.technology-preview > p {
+  max-width: 580px;
+
+  margin: 0;
+
+  color: #91a6b5;
+
+  line-height: 1.65;
+}
+
+
+/* =========================
+   CONCEPT LIST
+   ========================= */
+
+.concept-list {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 24px;
+}
+
+
+.concept-list span {
+  padding:
+    7px 10px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.18);
+
+  border-radius: 999px;
+
+  background:
+    rgba(105, 230, 255, 0.04);
+
+  color: #84ceda;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+
+/* =========================
+   DETAILS MODE
+   ========================= */
+
+.technology-details {
+  display: grid;
+
+  gap: 7px;
+
+  margin-top: 28px;
+
+  padding: 16px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 9px;
+
+  background:
+    rgba(0, 0, 0, 0.17);
+}
+
+
+.technology-details > span {
+  color: #627e90;
+
+  font-size: 0.59rem;
+  font-weight: 900;
+
+  letter-spacing: 0.1rem;
+}
+
+
+.technology-details code {
+  color: #a8d9e5;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.7rem;
+}
+
+
+/* =========================
+   COMPONENT COMMUNICATION
+   ========================= */
+
+.component-demo {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+
+  align-items: stretch;
+
+  gap: 12px;
+}
+
+
+.component-box {
+  min-height: 240px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 22px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 14px;
+
+  background:
+    rgba(0, 0, 0, 0.14);
+}
+
+
+.parent-component {
+  border-color:
+    rgba(105, 230, 255, 0.25);
+
+  background:
+    rgba(105, 230, 255, 0.045);
+}
+
+
+.component-type {
+  margin-bottom: 12px;
+
+  color: #69e6ff;
+
+  font-size: 0.59rem;
+  font-weight: 900;
+
+  letter-spacing: 0.1rem;
+}
+
+
+.component-box h3 {
+  margin:
+    0 0 10px;
+
+  color: #edf9ff;
+
+  font-size: 1rem;
+}
+
+
+.component-box p {
+  margin:
+    0 0 18px;
+
+  color: #8196a6;
+
+  font-size: 0.76rem;
+
+  line-height: 1.6;
+}
+
+
+.component-state {
+  margin-top: auto;
+
+  padding: 12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 8px;
+
+  background:
+    rgba(0, 0, 0, 0.15);
+}
+
+
+.component-state span,
+.component-state strong {
+  display: block;
+}
+
+
+.component-state span {
+  margin-bottom: 5px;
+
+  color: #647f91;
+
+  font-size: 0.58rem;
+  font-weight: 900;
+}
+
+
+.component-state strong {
+  color: #96ddea;
+
+  font-size: 0.68rem;
+}
+
+
+.component-action-button {
+  align-self: flex-start;
+
+  padding:
+    8px 11px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.3);
+
+  border-radius: 7px;
+
+  background:
+    rgba(105, 230, 255, 0.06);
+
+  color: #a1e8f3;
+
+  font-family: inherit;
+
+  font-size: 0.62rem;
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+
+.communication-arrow {
+  align-self: center;
+
+  color:
+    rgba(105, 230, 255, 0.42);
+
+  font-size: 1.2rem;
+}
+
+
+.communication-actions {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 18px;
+}
+
+
+.communication-actions button {
+  padding:
+    9px 13px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.2);
+
+  border-radius: 8px;
+
+  background:
+    rgba(105, 230, 255, 0.045);
+
+  color: #8edce9;
+
+  font-family: inherit;
+
+  font-size: 0.63rem;
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   FLOW STATUS
+   ========================= */
+
+.angular-flow-status {
+  max-width: 760px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin:
+    24px auto 0;
+
+  padding:
+    14px 18px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.13);
+
+  border-radius: 10px;
+
+  background:
+    rgba(105, 230, 255, 0.03);
+}
+
+
+.angular-flow-status span {
+  color: #648092;
+
+  font-size: 0.59rem;
+  font-weight: 900;
+
+  letter-spacing: 0.1rem;
+}
+
+
+.angular-flow-status code {
+  color: #86dce9;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.68rem;
+}
+
+
+/* =========================
+   CODE TABS
+   ========================= */
+
+.angular-code-tabs {
+  display: flex;
+
+  gap: 6px;
+
+  margin-bottom: 8px;
+}
+
+
+.angular-code-tabs button {
+  padding:
+    9px 14px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius:
+    8px 8px 0 0;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #718899;
+
+  font-family: inherit;
+
+  font-size: 0.62rem;
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+
+.angular-code-tabs button.active {
+  border-color:
+    rgba(105, 230, 255, 0.42);
+
+  background:
+    rgba(105, 230, 255, 0.07);
+
+  color: #78e4f4;
+}
+
+
+/* =========================
+   CODE WINDOW
+   ========================= */
+
+.angular-code-window {
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 11px;
+
+  background: #060d14;
+}
+
+
+.angular-code-header {
+  padding:
+    10px 14px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  color: #718899;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.68rem;
+}
+
+
+.angular-code-content {
+  max-height: 520px;
+
+  overflow: auto;
+}
+
+
+.angular-code-content pre {
+  margin: 0;
+
+  padding: 22px;
+}
+
+
+.angular-code-content code {
+  color: #c4dce8;
+
+  font-family:
+    "Courier New",
+    Consolas,
+    monospace;
+
+  font-size: 0.75rem;
+
+  line-height: 1.65;
+
+  white-space: pre;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 800px) {
+
+  .angular-scenario-selector {
+    grid-template-columns: 1fr;
+  }
+
+
+  .angular-workspace {
+    grid-template-columns: 1fr;
+  }
+
+
+  .technology-preview {
+    min-height: 320px;
+
+    padding:
+      34px 24px;
+  }
+
+
+  .component-demo {
+    grid-template-columns: 1fr;
+  }
+
+
+  .communication-arrow {
+    transform:
+      rotate(90deg);
+
+    justify-self: center;
+  }
+
+
+  .angular-flow-status {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .angular-code-tabs {
+    overflow-x: auto;
+  }
+
+
+  .angular-code-tabs button {
+    flex-shrink: 0;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 520px) {
+
+  .angular-option-buttons {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .angular-option-buttons button {
+    width: 100%;
+  }
+
+
+  .preview-toolbar {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .technology-preview {
+    padding:
+      28px 18px;
+  }
+
+
+  .communication-actions {
+    flex-direction: column;
+  }
+
+
+  .communication-actions button {
+    width: 100%;
+  }
+
+
+  .angular-code-content pre {
+    padding: 16px;
+  }
+
+
+  .angular-code-content code {
+    font-size: 0.68rem;
+  }
+
+}

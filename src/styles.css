@@ -13,3 +13,1000 @@ body {
 body {
   background: #05070d;
 }
+
+
+/* =========================================================
+   ENGINEERING LAB - SHARED EXPERIMENT STYLES
+   ========================================================= */
+
+
+/* =========================
+   EXPERIMENT SHELL
+   ========================= */
+
+.lab-experiment {
+  width: 100%;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+
+/* =========================
+   EXPERIMENT HEADER
+   ========================= */
+
+.lab-experiment .lab-header {
+  display: grid;
+
+  grid-template-columns:
+    minmax(190px, 220px)
+    minmax(0, 1fr)
+    auto;
+
+  align-items: start;
+
+  gap: 36px;
+
+  margin-bottom: 36px;
+
+  padding-bottom: 30px;
+
+  border-bottom:
+    1px solid rgba(30, 80, 105, 0.12);
+}
+
+
+.lab-experiment .header-copy {
+  max-width: 760px;
+}
+
+
+.lab-experiment .eyebrow {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #16a6ca;
+
+  font-size: 0.72rem;
+  font-weight: 900;
+
+  letter-spacing: 0.18rem;
+}
+
+
+.lab-experiment .lab-header h1 {
+  margin: 0;
+
+  color: #12344a;
+
+  font-size:
+    clamp(2.2rem, 5vw, 4rem);
+
+  font-weight: 800;
+
+  line-height: 1;
+}
+
+
+.lab-experiment .lab-header h2 {
+  margin:
+    14px 0 12px;
+
+  color: #31566d;
+
+  font-size:
+    clamp(1rem, 2vw, 1.35rem);
+
+  font-weight: 700;
+}
+
+
+.lab-experiment .lab-header p {
+  max-width: 700px;
+
+  margin: 0;
+
+  color: #5f7d90;
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   BACK TO EXPERIMENTS
+   ========================= */
+
+.lab-experiment .back-to-experiments-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  justify-self: start;
+
+  min-height: 42px;
+
+  padding:
+    9px 14px;
+
+  border:
+    1px solid rgba(31, 98, 130, 0.22);
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.42);
+
+  color: #285d78;
+
+  font-family: inherit;
+
+  font-size: 0.67rem;
+  font-weight: 900;
+
+  letter-spacing: 0.07rem;
+
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+
+.lab-experiment
+.back-to-experiments-button:hover {
+  transform:
+    translateX(-2px);
+
+  border-color:
+    rgba(24, 111, 148, 0.45);
+
+  background:
+    rgba(255, 255, 255, 0.72);
+
+  color: #164d69;
+}
+
+
+/* =========================
+   TECHNOLOGY BADGE
+   ========================= */
+
+.lab-experiment .lab-badge {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  align-self: start;
+
+  flex-shrink: 0;
+
+  padding:
+    9px 13px;
+
+  border:
+    1px solid rgba(27, 161, 195, 0.28);
+
+  border-radius: 999px;
+
+  background:
+    rgba(61, 197, 226, 0.08);
+
+  color: #1686a4;
+
+  font-size: 0.64rem;
+  font-weight: 900;
+
+  letter-spacing: 0.12rem;
+}
+
+
+.lab-experiment .badge-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #2bc4e5;
+
+  box-shadow:
+    0 0 8px rgba(43, 196, 229, 0.55);
+}
+
+
+/* =========================
+   PLAY / UNDERSTAND / ENGINEER
+   ========================= */
+
+.lab-experiment .lab-layer {
+  position: relative;
+
+  margin-bottom: 28px;
+
+  padding: 30px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 31, 45, 0.86),
+      rgba(7, 13, 22, 0.92)
+    );
+
+  color: #f7fbff;
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.18);
+}
+
+
+.lab-experiment .layer-heading {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 18px;
+
+  margin-bottom: 26px;
+}
+
+
+.lab-experiment .layer-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.22);
+
+  border-radius: 10px;
+
+  background:
+    rgba(105, 230, 255, 0.07);
+
+  color: #69e6ff;
+
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+
+.lab-experiment .layer-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #69e6ff;
+
+  font-size: 0.67rem;
+  font-weight: 800;
+
+  letter-spacing: 0.14rem;
+}
+
+
+.lab-experiment .layer-heading h2 {
+  margin:
+    0 0 5px;
+
+  color: #f7fbff;
+
+  font-size: 1.45rem;
+}
+
+
+.lab-experiment .layer-heading p {
+  max-width: 680px;
+
+  margin: 0;
+
+  color: #8fa2b3;
+
+  line-height: 1.55;
+}
+
+
+/* =========================
+   SHARED CONTROL PANEL
+   ========================= */
+
+.lab-experiment .control-panel {
+  padding: 22px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 16px;
+
+  background:
+    rgba(0, 0, 0, 0.18);
+}
+
+
+.lab-experiment .control-label {
+  display: block;
+
+  margin-bottom: 11px;
+
+  color: #8499aa;
+
+  font-size: 0.66rem;
+  font-weight: 800;
+
+  letter-spacing: 0.12rem;
+}
+
+
+/* =========================
+   RUNNING INDICATOR
+   ========================= */
+
+.lab-experiment .run-indicator {
+  width: 10px;
+  height: 10px;
+
+  border:
+    2px solid rgba(105, 230, 255, 0.25);
+
+  border-top-color: #69e6ff;
+
+  border-radius: 50%;
+
+  animation:
+    labRunSpin 0.8s linear infinite;
+}
+
+
+/* =========================
+   UNDERSTAND PIPELINE
+   ========================= */
+
+.lab-experiment .pipeline {
+  max-width: 760px;
+
+  margin:
+    0 auto;
+}
+
+
+.lab-experiment .pipeline-stage-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+
+.lab-experiment .pipeline-stage {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 14px;
+
+  padding:
+    16px 18px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 12px;
+
+  background:
+    rgba(0, 0, 0, 0.14);
+
+  transition:
+    border-color 200ms ease,
+    background 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+
+.lab-experiment .pipeline-stage.active {
+  transform:
+    translateX(4px);
+
+  border-color:
+    rgba(105, 230, 255, 0.6);
+
+  background:
+    rgba(105, 230, 255, 0.08);
+
+  box-shadow:
+    0 0 26px rgba(105, 230, 255, 0.08);
+}
+
+
+.lab-experiment .stage-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 14px;
+
+  padding-top: 5px;
+}
+
+
+.lab-experiment .inactive-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #3f5262;
+}
+
+
+.lab-experiment .active-pulse {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #69e6ff;
+
+  box-shadow:
+    0 0 12px rgba(105, 230, 255, 0.95);
+
+  animation:
+    labActivePulse
+    0.8s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+.lab-experiment .stage-copy strong {
+  color: #edf8ff;
+
+  font-size: 0.82rem;
+}
+
+
+.lab-experiment .stage-copy p {
+  margin:
+    4px 0 0;
+
+  color: #7f94a6;
+
+  font-size: 0.78rem;
+
+  line-height: 1.5;
+}
+
+
+.lab-experiment .pipeline-arrow {
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color:
+    rgba(105, 230, 255, 0.42);
+
+  font-size: 0.9rem;
+}
+
+
+/* =========================
+   ENGINEERING CONSTRAINT
+   ========================= */
+
+.lab-experiment .constraint-callout {
+  max-width: 760px;
+
+  margin:
+    28px auto 0;
+
+  padding:
+    17px 19px;
+
+  border-left:
+    3px solid rgba(255, 199, 91, 0.75);
+
+  border-radius:
+    0 9px 9px 0;
+
+  background:
+    rgba(255, 199, 91, 0.045);
+}
+
+
+.lab-experiment .callout-label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #f0c669;
+
+  font-size: 0.62rem;
+  font-weight: 900;
+
+  letter-spacing: 0.1rem;
+}
+
+
+.lab-experiment .constraint-callout p {
+  margin: 0;
+
+  color: #a99f83;
+
+  font-size: 0.8rem;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   ENGINEER
+   ========================= */
+
+.lab-experiment .engineer-heading {
+  margin-bottom: 20px;
+}
+
+
+.lab-experiment .engineer-toggle {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding:
+    15px 18px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.22);
+
+  border-radius: 11px;
+
+  background:
+    rgba(105, 230, 255, 0.045);
+
+  color: #a8eaf5;
+
+  font-family: inherit;
+
+  font-size: 0.71rem;
+  font-weight: 900;
+
+  letter-spacing: 0.09rem;
+
+  cursor: pointer;
+}
+
+
+.lab-experiment .engineer-toggle.open {
+  border-color:
+    rgba(105, 230, 255, 0.42);
+}
+
+
+.lab-experiment .toggle-icon {
+  font-size: 1.1rem;
+
+  font-weight: 400;
+}
+
+
+.lab-experiment .engineer-content {
+  margin-top: 24px;
+
+  animation:
+    labEngineerReveal 220ms ease;
+}
+
+
+/* =========================
+   ENGINEERING EXPLORER
+   ========================= */
+
+.lab-experiment .hardware-explorer {
+  display: grid;
+
+  grid-template-columns:
+    minmax(220px, 0.7fr)
+    minmax(280px, 1.3fr);
+
+  gap: 22px;
+
+  margin-bottom: 34px;
+}
+
+
+.lab-experiment .engineer-subheading {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #6f879a;
+
+  font-size: 0.63rem;
+  font-weight: 900;
+
+  letter-spacing: 0.11rem;
+}
+
+
+.lab-experiment .component-buttons {
+  display: grid;
+
+  gap: 7px;
+}
+
+
+.lab-experiment .component-button {
+  padding:
+    11px 13px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 8px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #859bac;
+
+  text-align: left;
+
+  font-family: inherit;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    border-color 150ms ease,
+    color 150ms ease,
+    background 150ms ease;
+}
+
+
+.lab-experiment .component-button:hover {
+  color: #d7e8f3;
+}
+
+
+.lab-experiment .component-button.selected {
+  border-color:
+    rgba(105, 230, 255, 0.42);
+
+  background:
+    rgba(105, 230, 255, 0.075);
+
+  color: #8be9fa;
+}
+
+
+.lab-experiment .component-detail {
+  min-height: 190px;
+
+  padding: 26px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(105, 230, 255, 0.045),
+      rgba(255, 255, 255, 0.015)
+    );
+}
+
+
+.lab-experiment .detail-eyebrow {
+  display: block;
+
+  margin-bottom: 11px;
+
+  color: #638194;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  letter-spacing: 0.11rem;
+}
+
+
+.lab-experiment .component-detail h3 {
+  margin:
+    0 0 10px;
+
+  color: #edfaff;
+
+  font-size: 1.3rem;
+}
+
+
+.lab-experiment .component-detail p {
+  max-width: 600px;
+
+  margin: 0;
+
+  color: #8ea3b3;
+
+  line-height: 1.65;
+}
+
+
+/* =========================
+   THEN → NOW
+   ========================= */
+
+.lab-experiment .then-now {
+  padding-top: 30px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+.lab-experiment .then-now h3 {
+  margin:
+    0 0 18px;
+
+  font-size: 1.15rem;
+}
+
+
+.lab-experiment .comparison-table {
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.075);
+
+  border-radius: 12px;
+}
+
+
+.lab-experiment .comparison-header,
+.lab-experiment .comparison-row {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    48px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  padding:
+    12px 16px;
+}
+
+
+.lab-experiment .comparison-header {
+  background:
+    rgba(105, 230, 255, 0.055);
+
+  color: #7eb8c4;
+
+  font-size: 0.64rem;
+  font-weight: 900;
+
+  letter-spacing: 0.09rem;
+}
+
+
+.lab-experiment .comparison-row {
+  border-top:
+    1px solid rgba(255, 255, 255, 0.055);
+
+  color: #9eafbb;
+
+  font-size: 0.78rem;
+}
+
+
+.lab-experiment .comparison-row strong {
+  color: #5db6c8;
+
+  text-align: center;
+}
+
+
+/* =========================
+   MAIN LESSON
+   ========================= */
+
+.lab-experiment .main-lesson {
+  margin-top: 24px;
+
+  padding:
+    18px 20px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.13);
+
+  border-radius: 12px;
+
+  background:
+    rgba(105, 230, 255, 0.035);
+}
+
+
+.lab-experiment .main-lesson span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #69e6ff;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  letter-spacing: 0.11rem;
+}
+
+
+.lab-experiment .main-lesson p {
+  margin: 0;
+
+  color: #b8cad5;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   SHARED ANIMATIONS
+   ========================= */
+
+@keyframes labRunSpin {
+
+  to {
+    transform:
+      rotate(360deg);
+  }
+
+}
+
+
+@keyframes labActivePulse {
+
+  from {
+    opacity: 0.55;
+
+    transform:
+      scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      scale(1.15);
+  }
+
+}
+
+
+@keyframes labEngineerReveal {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* =========================
+   SHARED RESPONSIVE
+   ========================= */
+
+@media (max-width: 800px) {
+
+  .lab-experiment .lab-header {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+
+  .lab-experiment
+  .back-to-experiments-button {
+    justify-self: start;
+  }
+
+
+  .lab-experiment .lab-badge {
+    justify-self: start;
+  }
+
+
+  .lab-experiment .lab-layer {
+    padding:
+      22px 18px;
+
+    border-radius: 17px;
+  }
+
+
+  .lab-experiment .layer-heading {
+    gap: 13px;
+  }
+
+
+  .lab-experiment .layer-number {
+    width: 36px;
+    height: 36px;
+  }
+
+
+  .lab-experiment .hardware-explorer {
+    grid-template-columns: 1fr;
+  }
+
+
+  .lab-experiment .comparison-header,
+  .lab-experiment .comparison-row {
+    grid-template-columns:
+      minmax(0, 1fr)
+      28px
+      minmax(0, 1fr);
+
+    padding:
+      11px 10px;
+
+    font-size: 0.69rem;
+  }
+
+}
+
+
+@media (max-width: 520px) {
+
+  .lab-experiment .lab-header h1 {
+    font-size: 2.25rem;
+  }
+
+
+  .lab-experiment .comparison-header {
+    font-size: 0.55rem;
+  }
+
+
+  .lab-experiment .comparison-row {
+    font-size: 0.62rem;
+  }
+
+}
