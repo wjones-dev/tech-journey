@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SecurityJwt } from './security-jwt';
+import { Security } from './security';
 
-describe('SecurityJwt', () => {
-  let component: SecurityJwt;
-  let fixture: ComponentFixture<SecurityJwt>;
+describe('Security', () => {
+  let component: Security;
+  let fixture: ComponentFixture<Security>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SecurityJwt],
+      imports: [Security],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SecurityJwt);
+    fixture = TestBed.createComponent(Security);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

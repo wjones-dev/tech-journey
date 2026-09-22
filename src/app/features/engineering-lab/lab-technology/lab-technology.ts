@@ -1,17 +1,6 @@
-import {
-  Component,
-  input,
-  output
-} from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
-
-export type LabTechnologyKey =
-  | 'PERSONAL_TECHNOLOGY'
-  | 'WEB'
-  | 'JAVA'
-  | 'CLOUD_DEVOPS'
-  | 'AI';
-
+export type LabTechnologyKey = 'PERSONAL_TECHNOLOGY' | 'WEB' | 'JAVA' | 'CLOUD_DEVOPS' | 'AI';
 
 export type LabExperimentKey =
   | 'ATARI'
@@ -21,12 +10,11 @@ export type LabExperimentKey =
   | 'ANGULAR'
   | 'JAVA_STREAM'
   | 'SPRING_REQUEST_LIFECYCLE'
-  | 'SPRING_SECURITY_JWT'
+  | 'SPRING_SECURITY'
   | 'AWS_CLOUD'
   | 'CONTAINERS_ORCHESTRATION'
   | 'CICD_CLOUD_NATIVE'
   | 'AGENTIC_AI';
-
 
 interface LabExperimentCard {
   key: LabExperimentKey;
@@ -42,7 +30,6 @@ interface LabExperimentCard {
   available: boolean;
 }
 
-
 @Component({
   selector: 'app-lab-technology',
   standalone: true,
@@ -51,26 +38,17 @@ interface LabExperimentCard {
   styleUrl: './lab-technology.css',
 })
 export class LabTechnologyComponent {
+  readonly technology = input.required<LabTechnologyKey>();
 
-  readonly technology =
-    input.required<LabTechnologyKey>();
+  readonly back = output<void>();
 
-
-  readonly back =
-    output<void>();
-
-
-  readonly experimentSelected =
-    output<LabExperimentKey>();
-
+  readonly experimentSelected = output<LabExperimentKey>();
 
   /* =========================
      PERSONAL TECHNOLOGY
      ========================= */
 
-  readonly personalTechnologyExperiments:
-    LabExperimentCard[] = [
-
+  readonly personalTechnologyExperiments: LabExperimentCard[] = [
     {
       key: 'ATARI',
 
@@ -85,7 +63,6 @@ export class LabTechnologyComponent {
 
       available: true,
     },
-
 
     {
       key: 'HOME_COMPUTERS',
@@ -102,7 +79,6 @@ export class LabTechnologyComponent {
       available: true,
     },
 
-
     {
       key: 'NAPSTER',
 
@@ -117,58 +93,49 @@ export class LabTechnologyComponent {
 
       available: true,
     },
-
-
   ];
 
   /* =========================
    WEB
    ========================= */
 
-readonly webExperiments:
-  LabExperimentCard[] = [
+  readonly webExperiments: LabExperimentCard[] = [
+    {
+      key: 'EARLY_WEB',
 
-  {
-    key: 'EARLY_WEB',
+      number: '01',
 
-    number: '01',
+      eyebrow: 'EARLY WEB DEVELOPMENT',
 
-    eyebrow: 'EARLY WEB DEVELOPMENT',
+      title: 'HTML • CSS • JavaScript',
 
-    title: 'HTML • CSS • JavaScript',
+      description:
+        'Explore how the early web evolved from connected documents into interactive experiences using HTML, CSS, and JavaScript.',
 
-    description:
-      'Explore how the early web evolved from connected documents into interactive experiences using HTML, CSS, and JavaScript.',
+      available: true,
+    },
 
-    available: true,
-  },
+    {
+      key: 'ANGULAR',
 
+      number: '02',
 
-  {
-    key: 'ANGULAR',
+      eyebrow: 'MODERN WEB DEVELOPMENT',
 
-    number: '02',
+      title: 'Angular • TypeScript • SPA',
 
-    eyebrow: 'MODERN WEB DEVELOPMENT',
+      description:
+        'Explore how modern Angular applications use components, services, routing, and REST APIs to create interactive single-page applications.',
 
-    title: 'Angular • TypeScript • SPA',
-
-    description:
-      'Explore how modern Angular applications use components, services, routing, and REST APIs to create interactive single-page applications.',
-
-    available: true,
-  },
-
-];
-
+      available: true,
+    },
+  ];
 
   /* =========================
      JAVA
      ========================= */
 
-  readonly javaExperiments:
-    LabExperimentCard[] = [
-
+  readonly javaExperiments: LabExperimentCard[] = [
     {
       key: 'JAVA_STREAM',
 
@@ -178,12 +145,10 @@ readonly webExperiments:
 
       title: 'Collections • Streams • Lambdas',
 
-      description:
-        'Process real Tech Journey data through a live Java Stream pipeline.',
+      description: 'Process real Tech Journey data through a live Java Stream pipeline.',
 
       available: true,
     },
-
 
     {
       key: 'SPRING_REQUEST_LIFECYCLE',
@@ -192,130 +157,110 @@ readonly webExperiments:
 
       eyebrow: 'SPRING BOOT REQUEST LIFECYCLE',
 
-      title: 'REST • Service • Data',
+      title: 'Under the Covers',
 
       description:
-        'Follow a request through Controller, Service, JPA, H2, DTO mapping, and exception handling.',
+        'See how Maven, Spring Framework, and Spring Boot build, assemble, configure, and start a modern Java application.',
 
       available: true,
     },
 
-
     {
-      key: 'SPRING_SECURITY_JWT',
+      key: 'SPRING_SECURITY',
 
       number: '03',
 
-      eyebrow: 'SPRING SECURITY / JWT',
+      eyebrow: 'SPRING SECURITY',
 
       title: 'Authentication • Authorization',
 
-      description:
-        'Explore valid, missing, expired, and unauthorized token scenarios.',
+      description: 'Explore valid, missing, expired, and unauthorized token scenarios.',
 
-      available: false,
+      available: true,
     },
-
   ];
 
   /* =========================
    CLOUD & DEVOPS
    ========================= */
 
-readonly cloudDevOpsExperiments:
-  LabExperimentCard[] = [
+  readonly cloudDevOpsExperiments: LabExperimentCard[] = [
+    {
+      key: 'AWS_CLOUD',
 
-  {
-    key: 'AWS_CLOUD',
+      number: '01',
 
-    number: '01',
+      eyebrow: 'AWS / CLOUD COMPUTING',
 
-    eyebrow: 'AWS / CLOUD COMPUTING',
+      title: 'Cloud Services • Architecture • AWS',
 
-    title: 'Cloud Services • Architecture • AWS',
+      description:
+        'Explore how applications use managed cloud services such as storage, databases, messaging, and monitoring.',
 
-    description:
-      'Explore how applications use managed cloud services such as storage, databases, messaging, and monitoring.',
+      available: false,
+    },
 
-    available: false,
-  },
+    {
+      key: 'CONTAINERS_ORCHESTRATION',
 
+      number: '02',
 
-  {
-    key: 'CONTAINERS_ORCHESTRATION',
+      eyebrow: 'CONTAINERS & ORCHESTRATION',
 
-    number: '02',
+      title: 'Docker • Kubernetes • OpenShift',
 
-    eyebrow: 'CONTAINERS & ORCHESTRATION',
+      description:
+        'Explore how applications are packaged into containers and how orchestration platforms deploy, scale, and manage them.',
 
-    title: 'Docker • Kubernetes • OpenShift',
+      available: false,
+    },
 
-    description:
-      'Explore how applications are packaged into containers and how orchestration platforms deploy, scale, and manage them.',
+    {
+      key: 'CICD_CLOUD_NATIVE',
 
-    available: false,
-  },
+      number: '03',
 
+      eyebrow: 'CI/CD & CLOUD-NATIVE DEVELOPMENT',
 
-  {
-    key: 'CICD_CLOUD_NATIVE',
+      title: 'Build • Test • Deploy • Health',
 
-    number: '03',
+      description:
+        'Explore automated delivery pipelines and the configuration, health, and observability practices behind cloud-native applications.',
 
-    eyebrow: 'CI/CD & CLOUD-NATIVE DEVELOPMENT',
+      available: false,
+    },
+  ];
 
-    title: 'Build • Test • Deploy • Health',
-
-    description:
-      'Explore automated delivery pipelines and the configuration, health, and observability practices behind cloud-native applications.',
-
-    available: false,
-  },
-
-];
-
-/* =========================
+  /* =========================
    AI
    ========================= */
 
-readonly aiExperiments:
-  LabExperimentCard[] = [
+  readonly aiExperiments: LabExperimentCard[] = [
+    {
+      key: 'AGENTIC_AI',
 
-  {
-    key: 'AGENTIC_AI',
+      number: '01',
 
-    number: '01',
+      eyebrow: 'AGENTIC AI / AI ENGINEERING',
 
-    eyebrow: 'AGENTIC AI / AI ENGINEERING',
+      title: 'Planning • Tool Use • MCP • Python',
 
-    title: 'Planning • Tool Use • MCP • Python',
+      description:
+        'Explore how an AI agent can receive a goal, plan steps, select tools, observe results, and continue working toward a final outcome.',
 
-    description:
-      'Explore how an AI agent can receive a goal, plan steps, select tools, observe results, and continue working toward a final outcome.',
+      available: false,
+    },
+  ];
 
-    available: false,
-  },
-
-];
-
-
-  selectExperiment(
-    experiment: LabExperimentCard
-  ): void {
-
+  selectExperiment(experiment: LabExperimentCard): void {
     if (!experiment.available) {
       return;
     }
 
-
-    this.experimentSelected.emit(
-      experiment.key
-    );
+    this.experimentSelected.emit(experiment.key);
   }
-
 
   backToTechnologies(): void {
     this.back.emit();
   }
-
 }

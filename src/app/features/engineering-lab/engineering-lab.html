@@ -134,7 +134,14 @@
 
             } @else if (activeExperiment() === 'SPRING_REQUEST_LIFECYCLE') {
               <span class="drawer-eyebrow"> JAVA • EXPERIMENT 02 </span>
+            
+
+             } @else if (activeExperiment() === 'SPRING_SECURITY') {
+              <span class="drawer-eyebrow"> JAVA • EXPERIMENT 03 </span>
             }
+
+
+            
           </div>
 
           <!-- =========================
@@ -313,6 +320,13 @@
         @if (activeExperiment() === 'SPRING_REQUEST_LIFECYCLE') {
           <app-lifecycle (back)="backFromJavaExperiment()" />
         }
+
+        @if (activeExperiment() === 'SPRING_SECURITY') {
+          <app-security (back)="backFromJavaExperiment()" />
+        }
+
+
+        
       </section>
     }
   </div>

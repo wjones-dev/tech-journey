@@ -1,0 +1,1172 @@
+/* =========================================================
+   SPRING SECURITY EXPERIMENT
+   Experiment-specific styling only.
+
+   Shared experiment shell, header, layer, button, pipeline,
+   and typography styling comes from the Engineering Lab
+   master stylesheet.
+   ========================================================= */
+
+
+
+
+/* =========================================================
+   PLAY
+   ========================================================= */
+
+.security-play-panel {
+  display: grid;
+
+  gap: 24px;
+}
+
+
+.security-play-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(280px, 0.85fr);
+
+  gap: 20px;
+}
+
+
+/* =========================
+   SHARED SECURITY CARD
+   ========================= */
+
+.security-card {
+  min-width: 0;
+
+  padding: 24px;
+
+  border:
+    1px solid rgba(116, 189, 221, 0.22);
+
+  border-radius: 18px;
+
+  background:
+    rgba(8, 23, 35, 0.68);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+
+.security-card-heading {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 10px;
+}
+
+
+.security-card-heading h4,
+.resource-tester-heading h4,
+.security-concept-card h4,
+.implementation-card h4 {
+  margin:
+    3px 0 0;
+
+  font-size: 1.08rem;
+}
+
+
+.security-card-kicker {
+  display: block;
+
+  font-size: 0.66rem;
+  font-weight: 800;
+
+  letter-spacing: 0.14em;
+
+  opacity: 0.62;
+}
+
+
+.security-card-description {
+  margin:
+    0 0 20px;
+
+  line-height: 1.6;
+
+  opacity: 0.72;
+}
+
+.password-toggle {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: -5px;
+  margin-bottom: 10px;
+
+  color: #74899a;
+
+  font-size: 0.7rem;
+
+  cursor: pointer;
+}
+
+
+.password-toggle input {
+  accent-color: currentColor;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   SESSION INDICATOR
+   ========================= */
+
+.session-indicator {
+  flex-shrink: 0;
+
+  padding:
+    6px 9px;
+
+  border-radius: 999px;
+
+  font-size: 0.62rem;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+}
+
+
+.session-indicator.authenticated {
+  border:
+    1px solid rgba(106, 231, 166, 0.36);
+
+  background:
+    rgba(68, 194, 130, 0.12);
+}
+
+
+.session-indicator.anonymous {
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  opacity: 0.72;
+}
+
+
+/* =========================
+   DEMO IDENTITIES
+   ========================= */
+
+.demo-identities {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+
+.demo-identity-button {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding:
+    12px 14px;
+
+  border:
+    1px solid rgba(116, 189, 221, 0.18);
+
+  border-radius: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+
+.demo-identity-button:hover:not(:disabled) {
+  transform:
+    translateY(-1px);
+
+  border-color:
+    rgba(116, 189, 221, 0.42);
+
+  background:
+    rgba(116, 189, 221, 0.07);
+}
+
+
+.demo-identity-button.selected {
+  border-color:
+    rgba(112, 208, 241, 0.65);
+
+  background:
+    rgba(79, 181, 222, 0.11);
+}
+
+
+.demo-identity-button:disabled {
+  cursor: default;
+
+  opacity: 0.55;
+}
+
+
+.identity-role {
+  font-size: 0.62rem;
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+
+  opacity: 0.65;
+}
+
+
+/* =========================
+   CREDENTIAL FORM
+   ========================= */
+
+.credential-field {
+  display: grid;
+
+  gap: 7px;
+
+  margin-bottom: 15px;
+}
+
+
+.credential-field > span {
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+
+  opacity: 0.75;
+}
+
+
+.credential-field input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding:
+    12px 14px;
+
+  border:
+    1px solid rgba(116, 189, 221, 0.22);
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background:
+    rgba(2, 12, 20, 0.7);
+
+  color: inherit;
+
+  font: inherit;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+.credential-field input:focus {
+  border-color:
+    rgba(105, 202, 239, 0.72);
+
+  box-shadow:
+    0 0 0 3px rgba(67, 177, 219, 0.09);
+}
+
+
+.login-actions {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+
+.security-primary-action,
+.security-secondary-action,
+.resource-action {
+  min-height: 40px;
+
+  border-radius: 10px;
+
+  font: inherit;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  cursor: pointer;
+
+  transition:
+    transform 150ms ease,
+    opacity 150ms ease,
+    background 150ms ease;
+}
+
+
+.security-primary-action {
+  flex: 1;
+
+  border:
+    1px solid rgba(98, 205, 239, 0.62);
+
+  background:
+    rgba(67, 178, 220, 0.18);
+
+  color: inherit;
+}
+
+
+.security-secondary-action {
+  flex: 1;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.14);
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  color: inherit;
+}
+
+
+.security-primary-action:hover:not(:disabled),
+.security-secondary-action:hover:not(:disabled),
+.resource-action:hover:not(:disabled) {
+  transform:
+    translateY(-1px);
+}
+
+
+.security-primary-action:disabled,
+.security-secondary-action:disabled,
+.resource-action:disabled {
+  cursor: default;
+
+  opacity: 0.48;
+}
+
+
+/* =========================
+   CURRENT IDENTITY
+   ========================= */
+
+.session-card {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.identity-display {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin:
+    22px 0;
+}
+
+
+.identity-avatar {
+  display: grid;
+
+  flex:
+    0 0 48px;
+
+  width: 48px;
+  height: 48px;
+
+  place-items: center;
+
+  border:
+    1px solid rgba(101, 205, 239, 0.42);
+
+  border-radius: 50%;
+
+  background:
+    rgba(73, 181, 220, 0.11);
+
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+
+.identity-copy {
+  display: grid;
+
+  gap: 3px;
+}
+
+
+.identity-copy strong {
+  font-size: 1.05rem;
+}
+
+
+.identity-caption,
+.role-list-label {
+  font-size: 0.62rem;
+  font-weight: 800;
+
+  letter-spacing: 0.11em;
+
+  opacity: 0.58;
+}
+
+
+.role-list {
+  margin-bottom: 18px;
+}
+
+
+.role-chips {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin-top: 8px;
+}
+
+
+.role-chip {
+  padding:
+    5px 9px;
+
+  border:
+    1px solid rgba(107, 216, 167, 0.3);
+
+  border-radius: 999px;
+
+  background:
+    rgba(66, 190, 129, 0.09);
+
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+
+.context-state {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: auto;
+
+  padding:
+    12px 13px;
+
+  border:
+    1px solid rgba(106, 231, 166, 0.2);
+
+  border-radius: 10px;
+
+  background:
+    rgba(68, 194, 130, 0.06);
+
+  font-size: 0.75rem;
+}
+
+
+.context-state strong {
+  font-size: 0.67rem;
+
+  letter-spacing: 0.1em;
+}
+
+
+/* =========================
+   ANONYMOUS STATE
+   ========================= */
+
+.anonymous-state {
+  display: grid;
+
+  flex: 1;
+
+  place-items: center;
+
+  align-content: center;
+
+  min-height: 210px;
+
+  padding:
+    20px;
+
+  text-align: center;
+}
+
+
+.anonymous-icon {
+  display: grid;
+
+  width: 48px;
+  height: 48px;
+
+  margin-bottom: 12px;
+
+  place-items: center;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.14);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  font-weight: 800;
+
+  opacity: 0.68;
+}
+
+
+.anonymous-state h5 {
+  margin:
+    0 0 7px;
+
+  font-size: 0.95rem;
+}
+
+
+.anonymous-state p {
+  max-width: 280px;
+
+  margin: 0;
+
+  line-height: 1.55;
+
+  opacity: 0.62;
+}
+
+
+/* =========================
+   RESOURCE TESTER
+   ========================= */
+
+.resource-tester {
+  padding:
+    24px;
+
+  border:
+    1px solid rgba(116, 189, 221, 0.18);
+
+  border-radius: 18px;
+
+  background:
+    rgba(5, 18, 29, 0.54);
+}
+
+
+.resource-tester-heading {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-bottom: 18px;
+}
+
+
+.resource-tester-heading p {
+  max-width: 470px;
+
+  margin: 0;
+
+  line-height: 1.55;
+
+  opacity: 0.66;
+}
+
+
+.resource-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+.resource-card {
+  padding:
+    18px;
+
+  border:
+    1px solid rgba(116, 189, 221, 0.15);
+
+  border-radius: 14px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+
+.resource-card-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 15px;
+}
+
+
+.http-method {
+  font-size: 0.66rem;
+  font-weight: 900;
+
+  letter-spacing: 0.1em;
+}
+
+
+.required-role {
+  font-size: 0.62rem;
+  font-weight: 700;
+
+  letter-spacing: 0.07em;
+
+  opacity: 0.62;
+}
+
+
+.resource-card code {
+  display: block;
+
+  overflow-wrap: anywhere;
+
+  font-size: 0.78rem;
+}
+
+
+.resource-card p {
+  min-height: 42px;
+
+  margin:
+    12px 0 16px;
+
+  line-height: 1.5;
+
+  opacity: 0.63;
+}
+
+
+.resource-action {
+  width: 100%;
+
+  border:
+    1px solid rgba(107, 196, 230, 0.28);
+
+  background:
+    rgba(67, 172, 212, 0.08);
+
+  color: inherit;
+}
+
+
+/* =========================
+   RESPONSE
+   ========================= */
+
+.security-response {
+  display: flex;
+
+  align-items: stretch;
+
+  gap: 16px;
+
+  margin-top: 16px;
+
+  padding:
+    16px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+
+.response-status {
+  display: grid;
+
+  flex:
+    0 0 70px;
+
+  place-items: center;
+
+  align-content: center;
+
+  border-right:
+    1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+.response-status span {
+  font-size: 0.6rem;
+
+  letter-spacing: 0.12em;
+
+  opacity: 0.52;
+}
+
+
+.response-status strong {
+  font-size: 1.35rem;
+}
+
+
+.response-copy {
+  min-width: 0;
+}
+
+
+.response-action {
+  display: block;
+
+  margin-bottom: 4px;
+
+  overflow-wrap: anywhere;
+
+  font-size: 0.67rem;
+
+  opacity: 0.58;
+}
+
+
+.response-copy p {
+  margin:
+    4px 0 0;
+
+  line-height: 1.5;
+
+  opacity: 0.7;
+}
+
+
+.response-success {
+  border-color:
+    rgba(92, 218, 151, 0.34);
+}
+
+
+.response-unauthorized {
+  border-color:
+    rgba(237, 180, 83, 0.4);
+}
+
+
+.response-forbidden {
+  border-color:
+    rgba(235, 108, 108, 0.38);
+}
+
+
+/* =========================================================
+   UNDERSTAND
+   ========================================================= */
+
+.security-pipeline {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  overflow-x: auto;
+
+  padding-bottom: 4px;
+}
+
+
+.security-stage {
+  display: grid;
+
+  flex:
+    0 0 132px;
+
+  gap: 7px;
+
+  min-height: 76px;
+
+  align-content: center;
+
+  padding:
+    12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  opacity: 0.42;
+
+  transition:
+    opacity 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+
+.security-stage strong {
+  font-size: 0.67rem;
+
+  line-height: 1.35;
+
+  letter-spacing: 0.06em;
+}
+
+
+.stage-number {
+  font-size: 0.58rem;
+  font-weight: 800;
+
+  opacity: 0.55;
+}
+
+
+.security-stage.stage-active {
+  border-color:
+    rgba(92, 189, 227, 0.42);
+
+  background:
+    rgba(70, 175, 215, 0.08);
+
+  opacity: 1;
+}
+
+
+.security-stage.stage-success {
+  border-color:
+    rgba(80, 216, 147, 0.48);
+
+  background:
+    rgba(64, 190, 127, 0.09);
+
+  opacity: 1;
+}
+
+
+.security-stage.stage-failed {
+  border-color:
+    rgba(235, 101, 101, 0.5);
+
+  background:
+    rgba(211, 74, 74, 0.09);
+
+  opacity: 1;
+}
+
+
+.pipeline-arrow {
+  flex:
+    0 0 auto;
+
+  font-size: 1rem;
+
+  opacity: 0.35;
+}
+
+
+.security-pipeline-empty {
+  width: 100%;
+
+  padding:
+    28px 20px;
+
+  text-align: center;
+}
+
+
+.pipeline-empty-icon {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 1.35rem;
+
+  opacity: 0.45;
+}
+
+
+.security-pipeline-empty p {
+  margin:
+    6px 0 0;
+
+  opacity: 0.6;
+}
+
+
+/* =========================
+   AUTHENTICATION VS AUTHORIZATION
+   ========================= */
+
+.security-concept-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 20px;
+}
+
+
+.security-concept-card {
+  display: flex;
+
+  gap: 16px;
+
+  padding:
+    20px;
+
+  border:
+    1px solid rgba(116, 189, 221, 0.16);
+
+  border-radius: 14px;
+
+  background:
+    rgba(255, 255, 255, 0.02);
+}
+
+
+.concept-number {
+  display: grid;
+
+  flex:
+    0 0 34px;
+
+  width: 34px;
+  height: 34px;
+
+  place-items: center;
+
+  border:
+    1px solid rgba(112, 202, 237, 0.3);
+
+  border-radius: 9px;
+
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+
+.security-concept-card p {
+  line-height: 1.55;
+
+  opacity: 0.66;
+}
+
+
+.security-concept-card code {
+  font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   ENGINEER
+   ========================================================= */
+
+.security-engineer-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+.implementation-card {
+  min-width: 0;
+
+  padding:
+    20px;
+
+  border:
+    1px solid rgba(116, 189, 221, 0.16);
+
+  border-radius: 14px;
+
+  background:
+    rgba(5, 18, 29, 0.5);
+}
+
+
+.implementation-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 0.65rem;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+
+  opacity: 0.6;
+}
+
+
+.implementation-card pre {
+  overflow-x: auto;
+
+  margin:
+    16px 0 0;
+
+  padding:
+    15px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 10px;
+
+  background:
+    rgba(1, 10, 17, 0.72);
+}
+
+
+.implementation-card code {
+  font-size: 0.74rem;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .security-play-grid,
+  .security-engineer-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .security-pipeline {
+    justify-content:
+      flex-start;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .security-card,
+  .resource-tester {
+    padding:
+      18px;
+  }
+
+
+  .demo-identities,
+  .resource-grid,
+  .security-concept-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .resource-tester-heading {
+    display: grid;
+
+    gap: 10px;
+  }
+
+
+  .resource-card p {
+    min-height: 0;
+  }
+
+
+  .security-response {
+    display: grid;
+  }
+
+
+  .response-status {
+    display: flex;
+
+    justify-content: flex-start;
+
+    gap: 8px;
+
+    padding-bottom: 10px;
+
+    border-right: 0;
+
+    border-bottom:
+      1px solid rgba(255, 255, 255, 0.1);
+  }
+
+
+  .response-status strong {
+    font-size: 1rem;
+  }
+
+
+  .security-concept-card {
+    padding:
+      17px;
+  }
+
+}

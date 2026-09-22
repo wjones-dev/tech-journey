@@ -1,0 +1,694 @@
+<section class="lab-experiment security-experiment">
+  <!-- =========================
+       HEADER
+       ========================= -->
+
+  <header class="lab-header">
+    <button type="button" class="back-to-experiments-button" (click)="backToExperiments()">
+      ← BACK TO EXPERIMENTS
+    </button>
+
+    <div class="header-copy">
+      <span class="eyebrow"> JAVA • EXPERIMENT 03 </span>
+
+      <h1>Spring Security</h1>
+
+      <h2>Authentication • Authorization • Roles</h2>
+
+      <p>
+        Log in against the real Spring Boot backend, access protected resources, and see how Spring
+        Security decides who you are and what you are allowed to do.
+      </p>
+    </div>
+
+    <div class="lab-badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+
+      BUILT WITH SPRING SECURITY
+    </div>
+  </header>
+
+  <!-- =========================================================
+       01 PLAY
+       ========================================================= -->
+
+  <section class="lab-layer">
+    <div class="layer-heading">
+      <span class="layer-number"> 01 </span>
+
+      <div>
+        <span class="layer-label"> PLAY </span>
+
+        <h3>Authenticate & Test Access</h3>
+
+        <p>
+          Choose a demo identity, log in, and make requests against resources protected by Spring
+          Security.
+        </p>
+      </div>
+    </div>
+
+    <div class="control-panel security-play-panel">
+      <div class="security-play-grid">
+        <!-- =========================
+             LOGIN PANEL
+             ========================= -->
+
+        <section class="security-card login-card">
+          <div class="security-card-heading">
+            <div>
+              <span class="security-card-kicker"> AUTHENTICATION </span>
+
+              <h4>Demo Login</h4>
+            </div>
+
+            @if (authenticated()) {
+              <span class="session-indicator authenticated"> AUTHENTICATED </span>
+            } @else {
+              <span class="session-indicator anonymous"> ANONYMOUS </span>
+            }
+          </div>
+
+          <p class="security-card-description">
+            These accounts exist only for this controlled Engineering Lab experiment.
+          </p>
+
+          <!-- DEMO IDENTITIES -->
+
+          <div class="demo-identities">
+            <button
+              type="button"
+              class="demo-identity-button"
+              [class.selected]="username() === 'demo-user'"
+              [disabled]="loading()"
+              (click)="useDemoUser()"
+            >
+              <span class="identity-role"> USER </span>
+
+              <span> demo-user </span>
+            </button>
+
+            <button
+              type="button"
+              class="demo-identity-button"
+              [class.selected]="username() === 'demo-admin'"
+              [disabled]="loading()"
+              (click)="useDemoAdmin()"
+            >
+              <span class="identity-role"> ADMIN </span>
+
+              <span> demo-admin </span>
+            </button>
+          </div>
+
+          <!-- USERNAME -->
+
+          <label class="credential-field">
+            <span> Username </span>
+
+            <input
+              type="text"
+              autocomplete="username"
+              [value]="username()"
+              [disabled]="loading()"
+              (input)="username.set($any($event.target).value)"
+            />
+          </label>
+
+          <!-- PASSWORD -->
+
+          <label class="credential-field">
+            <span> Password </span>
+
+            <input
+              [type]="showPassword() ? 'text' : 'password'"
+              autocomplete="current-password"
+              [value]="password()"
+              [disabled]="loading()"
+              (input)="password.set($any($event.target).value)"
+              (keydown.enter)="login()"
+            />
+          </label>
+
+          <label class="password-toggle">
+            <input
+              type="checkbox"
+              [checked]="showPassword()"
+              (change)="showPassword.set($any($event.target).checked)"
+            />
+
+            <span> Show password </span>
+          </label>
+
+          <!-- LOGIN / LOGOUT -->
+
+          <div class="login-actions">
+            @if (!authenticated()) {
+              <button
+                type="button"
+                class="security-primary-action"
+                [disabled]="loading() || !username().trim() || !password()"
+                (click)="login()"
+              >
+                @if (loading()) {
+                  AUTHENTICATING...
+                } @else {
+                  LOGIN
+                }
+              </button>
+            } @else {
+              <button
+                type="button"
+                class="security-secondary-action"
+                [disabled]="loading()"
+                (click)="logout()"
+              >
+                LOGOUT
+              </button>
+            }
+          </div>
+        </section>
+
+        <!-- =========================
+             SESSION / IDENTITY PANEL
+             ========================= -->
+
+        <section class="security-card session-card">
+          <div class="security-card-heading">
+            <div>
+              <span class="security-card-kicker"> SECURITY CONTEXT </span>
+
+              <h4>Current Identity</h4>
+            </div>
+          </div>
+
+          @if (authenticated()) {
+            <div class="identity-display">
+              <div class="identity-avatar">
+                {{ authenticatedUsername()?.charAt(0)?.toUpperCase() }}
+              </div>
+
+              <div class="identity-copy">
+                <span class="identity-caption"> AUTHENTICATED PRINCIPAL </span>
+
+                <strong>
+                  {{ authenticatedUsername() }}
+                </strong>
+              </div>
+            </div>
+
+            <div class="role-list">
+              <span class="role-list-label"> AUTHORITIES </span>
+
+              <div class="role-chips">
+                @for (role of roles(); track role) {
+                  <span class="role-chip">
+                    {{ role }}
+                  </span>
+                }
+              </div>
+            </div>
+
+            <div class="context-state">
+              <span> SecurityContext </span>
+
+              <strong> ACTIVE </strong>
+            </div>
+          } @else {
+            <div class="anonymous-state">
+              <div class="anonymous-icon">?</div>
+
+              <h5>No authenticated identity</h5>
+
+              <p>Spring Security currently sees this browser session as anonymous.</p>
+            </div>
+          }
+        </section>
+      </div>
+
+      <!-- =========================
+           PROTECTED RESOURCES
+           ========================= -->
+
+      <section class="resource-tester">
+        <div class="resource-tester-heading">
+          <div>
+            <span class="security-card-kicker"> AUTHORIZATION </span>
+
+            <h4>Protected Resources</h4>
+          </div>
+
+          <p>
+            These requests are sent to the real Spring Boot API. Try them before logging in, as
+            USER, and as ADMIN.
+          </p>
+        </div>
+
+        <div class="resource-grid">
+          <!-- USER RESOURCE -->
+
+          <article class="resource-card">
+            <div class="resource-card-top">
+              <span class="http-method"> GET </span>
+
+              <span class="required-role"> USER / ADMIN </span>
+            </div>
+
+            <code> /api/lab/security/user </code>
+
+            <p>Requires an authenticated USER or ADMIN.</p>
+
+            <button
+              type="button"
+              class="resource-action"
+              [disabled]="loading()"
+              (click)="requestUserResource()"
+            >
+              TRY USER RESOURCE
+            </button>
+          </article>
+
+          <!-- ADMIN RESOURCE -->
+
+          <article class="resource-card">
+            <div class="resource-card-top">
+              <span class="http-method"> GET </span>
+
+              <span class="required-role"> ADMIN ONLY </span>
+            </div>
+
+            <code> /api/lab/security/admin </code>
+
+            <p>Requires authentication with ROLE_ADMIN.</p>
+
+            <button
+              type="button"
+              class="resource-action"
+              [disabled]="loading()"
+              (click)="requestAdminResource()"
+            >
+              TRY ADMIN RESOURCE
+            </button>
+          </article>
+        </div>
+
+        <!-- =========================
+             LAST RESPONSE
+             ========================= -->
+
+        @if (lastStatus() !== null) {
+          <div
+            class="security-response"
+            [class.response-success]="lastOutcome() === 'SUCCESS'"
+            [class.response-unauthorized]="lastOutcome() === 'UNAUTHORIZED'"
+            [class.response-forbidden]="lastOutcome() === 'FORBIDDEN'"
+          >
+            <div class="response-status">
+              <span> HTTP </span>
+
+              <strong>
+                {{ lastStatus() }}
+              </strong>
+            </div>
+
+            <div class="response-copy">
+              <span class="response-action">
+                {{ lastAction() }}
+              </span>
+
+              <strong>
+                @if (lastStatus() === 200) {
+                  OK
+                } @else if (lastStatus() === 401) {
+                  UNAUTHORIZED
+                } @else if (lastStatus() === 403) {
+                  FORBIDDEN
+                } @else {
+                  RESPONSE
+                }
+              </strong>
+
+              <p>
+                {{ lastMessage() }}
+              </p>
+            </div>
+          </div>
+        }
+      </section>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       02 UNDERSTAND
+       ========================================================= -->
+
+  <section class="lab-layer">
+    <div class="layer-heading">
+      <span class="layer-number"> 02 </span>
+
+      <div>
+        <span class="layer-label"> UNDERSTAND </span>
+
+        <h3>Follow the Security Flow</h3>
+
+        <p>
+          See where the latest request traveled through Spring Security and where access was granted
+          or stopped.
+        </p>
+      </div>
+    </div>
+
+    <div class="pipeline security-pipeline">
+      @if (lastAction() === null) {
+        <div class="security-pipeline-empty">
+          <span class="pipeline-empty-icon"> → </span>
+
+          <strong> Run an authentication or authorization request </strong>
+
+          <p>The Spring Security pipeline will visualize the result here.</p>
+        </div>
+      } @else if (lastAction() === 'LOGIN') {
+        <!-- =========================
+             LOGIN PIPELINE
+             ========================= -->
+
+        <div class="security-stage stage-active">
+          <span class="stage-number"> 01 </span>
+
+          <strong> LOGIN REQUEST </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div class="security-stage stage-active">
+          <span class="stage-number"> 02 </span>
+
+          <strong> FILTER CHAIN </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div
+          class="security-stage"
+          [class.stage-active]="lastOutcome() === 'SUCCESS'"
+          [class.stage-failed]="lastOutcome() === 'UNAUTHORIZED'"
+        >
+          <span class="stage-number"> 03 </span>
+
+          <strong> AUTHENTICATION </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div class="security-stage" [class.stage-active]="lastOutcome() === 'SUCCESS'">
+          <span class="stage-number"> 04 </span>
+
+          <strong> USER VERIFIED </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div class="security-stage" [class.stage-active]="lastOutcome() === 'SUCCESS'">
+          <span class="stage-number"> 05 </span>
+
+          <strong> SECURITY CONTEXT </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div
+          class="security-stage"
+          [class.stage-success]="lastOutcome() === 'SUCCESS'"
+          [class.stage-failed]="lastOutcome() === 'UNAUTHORIZED'"
+        >
+          <span class="stage-number"> 06 </span>
+
+          <strong>
+            @if (lastOutcome() === 'SUCCESS') {
+              ACCESS GRANTED
+            } @else {
+              401
+            }
+          </strong>
+        </div>
+      } @else if (lastAction() === 'LOGOUT') {
+        <!-- =========================
+             LOGOUT PIPELINE
+             ========================= -->
+
+        <div class="security-stage stage-active">
+          <span class="stage-number"> 01 </span>
+
+          <strong> LOGOUT REQUEST </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div class="security-stage stage-active">
+          <span class="stage-number"> 02 </span>
+
+          <strong> SESSION INVALIDATED </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div class="security-stage stage-active">
+          <span class="stage-number"> 03 </span>
+
+          <strong> CONTEXT CLEARED </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div class="security-stage stage-success">
+          <span class="stage-number"> 04 </span>
+
+          <strong> ANONYMOUS </strong>
+        </div>
+      } @else {
+        <!-- =========================
+             AUTHORIZATION PIPELINE
+             ========================= -->
+
+        <div class="security-stage stage-active">
+          <span class="stage-number"> 01 </span>
+
+          <strong> REQUEST </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div class="security-stage stage-active">
+          <span class="stage-number"> 02 </span>
+
+          <strong> FILTER CHAIN </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div
+          class="security-stage"
+          [class.stage-active]="lastOutcome() !== 'UNAUTHORIZED'"
+          [class.stage-failed]="lastOutcome() === 'UNAUTHORIZED'"
+        >
+          <span class="stage-number"> 03 </span>
+
+          <strong> AUTHENTICATION </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div
+          class="security-stage"
+          [class.stage-active]="lastOutcome() === 'SUCCESS' || lastOutcome() === 'FORBIDDEN'"
+        >
+          <span class="stage-number"> 04 </span>
+
+          <strong> SECURITY CONTEXT </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div
+          class="security-stage"
+          [class.stage-active]="lastOutcome() === 'SUCCESS'"
+          [class.stage-failed]="lastOutcome() === 'FORBIDDEN'"
+        >
+          <span class="stage-number"> 05 </span>
+
+          <strong> AUTHORIZATION </strong>
+        </div>
+
+        <span class="pipeline-arrow"> → </span>
+
+        <div
+          class="security-stage"
+          [class.stage-success]="lastOutcome() === 'SUCCESS'"
+          [class.stage-failed]="lastOutcome() === 'UNAUTHORIZED' || lastOutcome() === 'FORBIDDEN'"
+        >
+          <span class="stage-number"> 06 </span>
+
+          <strong>
+            @if (lastOutcome() === 'SUCCESS') {
+              200 OK
+            } @else if (lastOutcome() === 'FORBIDDEN') {
+              403
+            } @else {
+              401
+            }
+          </strong>
+        </div>
+      }
+    </div>
+
+    <!-- AUTHENTICATION VS AUTHORIZATION -->
+
+    <div class="security-concept-grid">
+      <article class="security-concept-card">
+        <span class="concept-number"> A </span>
+
+        <div>
+          <span class="security-card-kicker"> AUTHENTICATION </span>
+
+          <h4>Who are you?</h4>
+
+          <p>
+            Spring Security verifies the supplied identity and establishes an authenticated
+            SecurityContext.
+          </p>
+
+          <code> Bad credentials → 401 </code>
+        </div>
+      </article>
+
+      <article class="security-concept-card">
+        <span class="concept-number"> B </span>
+
+        <div>
+          <span class="security-card-kicker"> AUTHORIZATION </span>
+
+          <h4>What may you access?</h4>
+
+          <p>
+            Spring Security compares the authenticated user's authorities with the rule protecting
+            the requested resource.
+          </p>
+
+          <code> Wrong role → 403 </code>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       03 ENGINEER
+       ========================================================= -->
+
+  <section class="lab-layer">
+    <div class="layer-heading">
+      <span class="layer-number"> 03 </span>
+
+      <div>
+        <span class="layer-label"> ENGINEER </span>
+
+        <h3>Inside the Implementation</h3>
+
+        <p>
+          Connect the behavior you just observed to the Spring Security components responsible for
+          authentication and authorization.
+        </p>
+      </div>
+    </div>
+
+    <div class="security-engineer-grid">
+      <!-- SECURITY FILTER CHAIN -->
+
+      <article class="implementation-card">
+        <span class="implementation-label"> SecurityFilterChain </span>
+
+        <h4>Define Access Rules</h4>
+
+        <pre><code>.requestMatchers(
+    "/api/lab/security/user"
+)
+.hasAnyRole("USER", "ADMIN")
+
+.requestMatchers(
+    "/api/lab/security/admin"
+)
+.hasRole("ADMIN")</code></pre>
+      </article>
+
+      <!-- PASSWORD ENCODER -->
+
+      <article class="implementation-card">
+        <span class="implementation-label"> PasswordEncoder </span>
+
+        <h4>Verify Passwords Safely</h4>
+
+        <pre><code>&#64;Bean
+PasswordEncoder passwordEncoder() &#123;
+    return new BCryptPasswordEncoder();
+&#125;</code></pre>
+      </article>
+
+      <!-- USER DETAILS SERVICE -->
+
+      <article class="implementation-card">
+        <span class="implementation-label"> UserDetailsService </span>
+
+        <h4>Load Demo Identities</h4>
+
+        <pre><code>User.builder()
+    .username("demo-user")
+    .password(encodedPassword)
+    .roles("USER")
+    .build();</code></pre>
+      </article>
+
+      <!-- AUTHENTICATION MANAGER -->
+
+      <article class="implementation-card">
+        <span class="implementation-label"> AuthenticationManager </span>
+
+        <h4>Authenticate Credentials</h4>
+
+        <pre><code>authenticationManager
+    .authenticate(
+        authenticationRequest
+    );</code></pre>
+      </article>
+
+      <!-- SECURITY CONTEXT -->
+
+      <article class="implementation-card">
+        <span class="implementation-label"> SecurityContext </span>
+
+        <h4>Remember the Identity</h4>
+
+        <pre><code>securityContext
+    .setAuthentication(
+        authentication
+    );
+
+securityContextRepository
+    .saveContext(...);</code></pre>
+      </article>
+
+      <!-- STATUS CODES -->
+
+      <article class="implementation-card">
+        <span class="implementation-label"> HTTP Security </span>
+
+        <h4>401 vs 403</h4>
+
+        <pre><code>401 Unauthorized
+No valid authentication
+
+403 Forbidden
+Authenticated, but the role
+cannot access the resource</code></pre>
+      </article>
+    </div>
+  </section>
+</section>

@@ -9,6 +9,7 @@ import { EarlyWebComponent } from './experiments/early-web/early-web';
 import { AngularLabComponent } from './experiments/angular/angular';
 import { Router } from '@angular/router';
 import { LifecycleComponent } from './experiments/spring-boot/lifecycle/lifecycle';
+import { SecurityComponent } from './experiments/spring-boot/security/security';
 
 @Component({
   selector: 'app-engineering-lab',
@@ -21,6 +22,7 @@ import { LifecycleComponent } from './experiments/spring-boot/lifecycle/lifecycl
     EarlyWebComponent,
     AngularLabComponent,
     LifecycleComponent,
+    SecurityComponent,
     LabCatalogComponent,
     LabTechnologyComponent,
   ],
@@ -46,6 +48,7 @@ export class EngineeringLabComponent {
     | 'EARLY_WEB'
     | 'ANGULAR'
     | 'SPRING_REQUEST_LIFECYCLE'
+    | 'SPRING_SECURITY'
     | null
   >(null);
   toggleExperimentDrawer(): void {
@@ -165,6 +168,11 @@ export class EngineeringLabComponent {
 
       case 'SPRING_REQUEST_LIFECYCLE':
         this.activeExperiment.set('SPRING_REQUEST_LIFECYCLE');
+
+        break;
+
+      case 'SPRING_SECURITY':
+        this.activeExperiment.set('SPRING_SECURITY');
 
         break;
     }

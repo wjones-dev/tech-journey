@@ -129,12 +129,12 @@ export class LifecycleComponent implements OnDestroy {
               });
 
               this.bootComplete.set(true);
-            }, 1400);
+            }, 2200);
 
             this.timers.push(completionTimer);
           }
         },
-        700 + index * 1900,
+        700 + index * 2800,
       );
 
       this.timers.push(timer);
