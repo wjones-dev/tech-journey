@@ -1,13 +1,6 @@
 import { Component, output } from '@angular/core';
 
-
-export type LabTechnologyKey =
-  | 'PERSONAL_TECHNOLOGY'
-  | 'WEB'
-  | 'JAVA'
-  | 'CLOUD_DEVOPS'
-  | 'AI';
-
+export type LabTechnologyKey = 'PERSONAL_TECHNOLOGY' | 'WEB' | 'JAVA' | 'CLOUD_DEVOPS' | 'AI';
 
 interface LabTechnologyCard {
   key: LabTechnologyKey;
@@ -25,7 +18,6 @@ interface LabTechnologyCard {
   buttonLabel: string;
 }
 
-
 @Component({
   selector: 'app-lab-catalog',
   standalone: true,
@@ -34,17 +26,13 @@ interface LabTechnologyCard {
   styleUrl: './lab-catalog.css',
 })
 export class LabCatalogComponent {
-
-  readonly technologySelected =
-    output<LabTechnologyKey>();
-
+  readonly technologySelected = output<LabTechnologyKey>();
 
   readonly technologies: LabTechnologyCard[] = [
-
     {
       key: 'PERSONAL_TECHNOLOGY',
 
-      period: '1983',
+      period: '',
 
       eyebrow: 'TECHNOLOGY EVOLUTION',
 
@@ -58,31 +46,27 @@ export class LabCatalogComponent {
       buttonLabel: 'VIEW EXPERIMENTS',
     },
 
-
     {
-  key: 'WEB',
+      key: 'WEB',
 
-  period: '1993',
+      period: '',
 
-  eyebrow: 'WEB DEVELOPMENT',
+      eyebrow: 'WEB DEVELOPMENT',
 
-  title: 'Web',
+      title: 'Web',
 
-  description:
-    'Explore the evolution from early HTML, CSS, and JavaScript pages to modern Angular single-page applications.',
+      description:
+        'Explore the evolution from early HTML, CSS, and JavaScript pages to modern Angular single-page applications.',
 
-  experimentCount: 2,
+      experimentCount: 2,
 
-  buttonLabel: 'VIEW EXPERIMENTS',
-},
-
-    
-
+      buttonLabel: 'VIEW EXPERIMENTS',
+    },
 
     {
       key: 'JAVA',
 
-      period: '1995',
+      period: '',
 
       eyebrow: 'SOFTWARE DEVELOPMENT',
 
@@ -97,60 +81,45 @@ export class LabCatalogComponent {
     },
 
     {
-  key: 'CLOUD_DEVOPS',
+      key: 'CLOUD_DEVOPS',
 
-  period: '2018',
+      period: '',
 
-  eyebrow: 'CLOUD & DEVOPS',
+      eyebrow: 'CLOUD & DEVOPS',
 
-  title: 'Cloud & DevOps',
+      title: 'Cloud & DevOps',
 
-  description:
-    'Explore cloud services, container orchestration, CI/CD pipelines, and the practices behind modern cloud-native software delivery.',
+      description:
+        'Explore cloud services, container orchestration, CI/CD pipelines, and the practices behind modern cloud-native software delivery.',
 
-  experimentCount: 3,
+      experimentCount: 3,
 
-  buttonLabel: 'VIEW EXPERIMENTS',
-},
+      buttonLabel: 'VIEW EXPERIMENTS',
+    },
 
+    {
+      key: 'AI',
 
-{
-  key: 'AI',
+      period: '',
 
-  period: '2026',
+      eyebrow: 'AI ENGINEERING',
 
-  eyebrow: 'AI ENGINEERING',
+      title: 'AI',
 
-  title: 'AI',
+      description:
+        'Explore agentic AI systems that can plan tasks, use tools, work across services, and coordinate multi-step engineering workflows.',
 
-  description:
-    'Explore agentic AI systems that can plan tasks, use tools, work across services, and coordinate multi-step engineering workflows.',
+      experimentCount: 1,
 
-  experimentCount: 1,
-
-  buttonLabel: 'VIEW EXPERIMENTS',
-},
-
+      buttonLabel: 'VIEW EXPERIMENTS',
+    },
   ];
 
-
-  selectTechnology(
-    technology: LabTechnologyCard
-  ): void {
-
-    this.technologySelected.emit(
-      technology.key
-    );
+  selectTechnology(technology: LabTechnologyCard): void {
+    this.technologySelected.emit(technology.key);
   }
 
-
-  experimentLabel(
-    count: number
-  ): string {
-
-    return count === 1
-      ? '1 EXPERIMENT'
-      : `${count} EXPERIMENTS`;
+  experimentLabel(count: number): string {
+    return count === 1 ? '1 EXPERIMENT' : `${count} EXPERIMENTS`;
   }
-
 }

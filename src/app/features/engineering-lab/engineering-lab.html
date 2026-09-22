@@ -23,62 +23,41 @@
          EXPERIMENT DRAWER LAUNCHER
          ========================= -->
 
-  @if (!experimentDrawerOpen()) {
-
-  <div class="lab-launcher-dock">
-
-    <!-- =========================
+    @if (!experimentDrawerOpen()) {
+      <div class="lab-launcher-dock">
+        <!-- =========================
          RETURN TO MUSEUM
          ========================= -->
 
-    <button
-      type="button"
-      class="lab-launcher-button museum-home-launcher"
-      (click)="returnToMuseum()"
-      aria-label="Return to Tech Journey Museum"
-    >
+        <button
+          type="button"
+          class="lab-launcher-button museum-home-launcher"
+          (click)="returnToMuseum()"
+          aria-label="Return to Tech Journey Museum"
+        >
+          <span class="comet-icon" aria-hidden="true">
+            <span class="comet-tail"></span>
+            <span class="comet-core"></span>
+          </span>
 
-      <span
-        class="comet-icon"
-        aria-hidden="true"
-      >
-        <span class="comet-tail"></span>
-        <span class="comet-core"></span>
-      </span>
+          <span> MUSEUM </span>
+        </button>
 
-      <span>
-        MUSEUM
-      </span>
-
-    </button>
-
-
-    <!-- =========================
+        <!-- =========================
          EXPLORE EXPERIMENTS
          ========================= -->
 
-    <button
-      type="button"
-      class="lab-launcher-button experiment-drawer-launcher"
-      (click)="toggleExperimentDrawer()"
-    >
+        <button
+          type="button"
+          class="lab-launcher-button experiment-drawer-launcher"
+          (click)="toggleExperimentDrawer()"
+        >
+          <span> EXPLORE EXPERIMENTS </span>
 
-      <span>
-        EXPLORE EXPERIMENTS
-      </span>
-
-      <span
-        class="drawer-arrow"
-        aria-hidden="true"
-      >
-        ↑
-      </span>
-
-    </button>
-
-  </div>
-
-}
+          <span class="drawer-arrow" aria-hidden="true"> ↑ </span>
+        </button>
+      </div>
+    }
 
     <!-- =========================
          EXPERIMENT DRAWER
@@ -128,26 +107,20 @@
 
             @else if (activeExperiment() === 'JAVA_STREAM') {
               <span class="drawer-eyebrow"> JAVA • EXPERIMENT 01 </span>
-
-              <h2>Java Data Processing</h2>
             }
 
             <!-- LEVEL 3 - ATARI -->
 
             @else if (activeExperiment() === 'ATARI') {
-              <span class="drawer-eyebrow"> PERSONAL TECHNOLOGY • 1983 </span>
-            } 
+              <span class="drawer-eyebrow"> PERSONAL TECHNOLOGY</span>
 
-             @else if (activeExperiment() === 'HOME_COMPUTERS') {
-              <span class="drawer-eyebrow"> PERSONAL TECHNOLOGY • 1983 </span>
-            }
+            } @else if (activeExperiment() === 'HOME_COMPUTERS') {
+              <span class="drawer-eyebrow"> PERSONAL TECHNOLOGY</span>
 
-             @else if (activeExperiment() === 'NAPSTER') {
-              <span class="drawer-eyebrow"> PERSONAL TECHNOLOGY • 1983 </span>
-            }
-            
-            
-            @else if (selectedLab() === 'CLOUD_DEVOPS' && activeExperiment() === null) {
+            } @else if (activeExperiment() === 'NAPSTER') {
+              <span class="drawer-eyebrow"> PERSONAL TECHNOLOGY</span>
+
+            } @else if (selectedLab() === 'CLOUD_DEVOPS' && activeExperiment() === null) {
               <span class="drawer-eyebrow"> CLOUD & DEVOPS </span>
 
               <h2>Choose an Experiment</h2>
@@ -155,13 +128,13 @@
               <span class="drawer-eyebrow"> AI </span>
 
               <h2>Choose an Experiment</h2>
-            }
 
-            @else if (activeExperiment() === 'EARLY_WEB') {
-  <span class="drawer-eyebrow">
-    WEB • EARLY WEB DEVELOPMENT
-  </span>
-}
+            } @else if (activeExperiment() === 'EARLY_WEB') {
+              <span class="drawer-eyebrow"> WEB • EARLY WEB DEVELOPMENT </span>
+
+            } @else if (activeExperiment() === 'SPRING_REQUEST_LIFECYCLE') {
+              <span class="drawer-eyebrow"> JAVA • EXPERIMENT 02 </span>
+            }
           </div>
 
           <!-- =========================
@@ -313,10 +286,6 @@
           }
         }
 
-        @if (activeExperiment() === 'JAVA_STREAM') {
-          <app-java-stream-experiment (back)="backFromJavaExperiment()" />
-        }
-
         @if (activeExperiment() === 'ATARI') {
           <app-atari-lab (back)="backFromPersonalTechnologyExperiment()" />
         }
@@ -330,16 +299,20 @@
         }
 
         @if (activeExperiment() === 'EARLY_WEB') {
-  <app-early-web
-    (back)="backFromWebExperiment()"
-  />
-}
+          <app-early-web (back)="backFromWebExperiment()" />
+        }
 
-@if (activeExperiment() === 'ANGULAR') {
-  <app-angular-lab
-    (back)="backFromWebExperiment()"
-  />
-}
+        @if (activeExperiment() === 'ANGULAR') {
+          <app-angular-lab (back)="backFromWebExperiment()" />
+        }
+
+        @if (activeExperiment() === 'JAVA_STREAM') {
+          <app-java-stream-experiment (back)="backFromJavaExperiment()" />
+        }
+
+        @if (activeExperiment() === 'SPRING_REQUEST_LIFECYCLE') {
+          <app-lifecycle (back)="backFromJavaExperiment()" />
+        }
       </section>
     }
   </div>

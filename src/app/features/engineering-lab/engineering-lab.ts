@@ -8,6 +8,7 @@ import { NapsterLabComponent } from './experiments/napster/napster';
 import { EarlyWebComponent } from './experiments/early-web/early-web';
 import { AngularLabComponent } from './experiments/angular/angular';
 import { Router } from '@angular/router';
+import { LifecycleComponent } from './experiments/spring-boot/lifecycle/lifecycle';
 
 @Component({
   selector: 'app-engineering-lab',
@@ -19,6 +20,7 @@ import { Router } from '@angular/router';
     NapsterLabComponent,
     EarlyWebComponent,
     AngularLabComponent,
+    LifecycleComponent,
     LabCatalogComponent,
     LabTechnologyComponent,
   ],
@@ -37,7 +39,14 @@ export class EngineeringLabComponent {
   >(null);
 
   readonly activeExperiment = signal<
-    'JAVA_STREAM' | 'ATARI' | 'HOME_COMPUTERS' | 'NAPSTER' | 'EARLY_WEB' | 'ANGULAR' | null
+    | 'JAVA_STREAM'
+    | 'ATARI'
+    | 'HOME_COMPUTERS'
+    | 'NAPSTER'
+    | 'EARLY_WEB'
+    | 'ANGULAR'
+    | 'SPRING_REQUEST_LIFECYCLE'
+    | null
   >(null);
   toggleExperimentDrawer(): void {
     const opening = !this.experimentDrawerOpen();
@@ -124,11 +133,6 @@ export class EngineeringLabComponent {
     this.labGuideOpen.set(false);
 
     switch (experiment) {
-      case 'JAVA_STREAM':
-        this.activeExperiment.set('JAVA_STREAM');
-
-        break;
-
       case 'ATARI':
         this.activeExperiment.set('ATARI');
 
@@ -151,6 +155,16 @@ export class EngineeringLabComponent {
 
       case 'ANGULAR':
         this.activeExperiment.set('ANGULAR');
+
+        break;
+
+      case 'JAVA_STREAM':
+        this.activeExperiment.set('JAVA_STREAM');
+
+        break;
+
+      case 'SPRING_REQUEST_LIFECYCLE':
+        this.activeExperiment.set('SPRING_REQUEST_LIFECYCLE');
 
         break;
     }

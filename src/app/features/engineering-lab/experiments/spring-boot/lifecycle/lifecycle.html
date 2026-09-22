@@ -1,0 +1,593 @@
+<section class="lab-experiment spring-boot-lifecycle">
+  <!-- =========================
+       HEADER
+       ========================= -->
+
+  <header class="lab-header">
+    <button type="button" class="back-to-experiments-button" (click)="backToExperiments()">
+      ← BACK TO EXPERIMENTS
+    </button>
+
+    <div class="header-copy">
+      <span class="eyebrow"> JAVA • EXPERIMENT 02 </span>
+
+      <h1>Spring Boot</h1>
+
+      <h2>Under the Covers</h2>
+
+      <p>See how a Java project becomes a running Spring Boot application.</p>
+    </div>
+
+    <div class="lab-badge">
+      <span class="badge-dot"></span>
+
+      BUILT WITH SPRING BOOT
+    </div>
+  </header>
+
+  <!-- =========================
+       01 — PLAY
+       ========================= -->
+
+  <section class="lab-layer play-layer">
+    <div class="layer-heading">
+      <div class="layer-number">01</div>
+
+      <div>
+        <span class="layer-label"> PLAY </span>
+
+        <h2>Boot the Application</h2>
+
+        <p>
+          Power up the Tech Journey API and watch Maven, Spring Framework, and Spring Boot assemble
+          the application.
+        </p>
+      </div>
+    </div>
+
+    <!-- =========================
+         INITIAL STATE
+         ========================= -->
+
+    @if (!bootStarted()) {
+      <div class="boot-launch-grid">
+        <!-- CONTROLS -->
+
+        <div class="control-panel boot-control-panel">
+          <span class="control-label"> APPLICATION STATUS </span>
+
+          <div class="offline-status">
+            <span class="offline-dot"></span>
+
+            OFFLINE
+          </div>
+
+          <h3>Ready to Initialize</h3>
+
+          <p>
+            Start the application lifecycle and follow the process from Maven build to a running
+            Spring Boot web application.
+          </p>
+
+          <button type="button" class="run-button" (click)="startBoot()">
+            <span aria-hidden="true"> ▶ </span>
+
+            BOOT APPLICATION
+          </button>
+        </div>
+
+        <!-- POWER VISUAL -->
+
+        <div class="boot-launch-visual">
+          <span class="visual-label"> TECH JOURNEY API </span>
+
+          <div class="power-core">
+            <span class="power-ring"></span>
+
+            <span class="power-ring power-ring-inner"></span>
+
+            <span class="power-center"></span>
+          </div>
+
+          <div class="boot-launch-status">
+            <span> MAVEN </span>
+
+            <span> SPRING </span>
+
+            <span> SPRING BOOT </span>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- =========================
+         RUNNING / COMPLETE STATE
+         ========================= -->
+
+    @if (bootStarted()) {
+      <div class="boot-console">
+        <!-- STAGE RAIL -->
+
+        <div class="stage-rail">
+          @for (stage of stages; track stage.key; let index = $index) {
+            <div
+              class="stage-step"
+              [class.active]="isStageActive(index)"
+              [class.complete]="isStageComplete(index)"
+            >
+              <span class="stage-number">
+                {{ stage.number }}
+              </span>
+
+              <span class="stage-name">
+                {{ stage.title }}
+              </span>
+
+              <span class="stage-status">
+                @if (isStageComplete(index)) {
+                  ✓
+                } @else if (isStageActive(index)) {
+                  ●
+                } @else {
+                  —
+                }
+              </span>
+            </div>
+          }
+        </div>
+
+        <!-- =========================
+             MAIN WORKSPACE
+             ========================= -->
+
+        <div class="boot-workspace">
+          <!-- MAIN VISUAL -->
+
+          <div class="boot-visual-panel">
+            @if (!bootComplete()) {
+              @switch (currentStage()?.key) {
+                <!-- BUILD -->
+
+                @case ('BUILD') {
+                  <div class="visual-stage">
+                    <span class="visual-label"> MAVEN BUILD </span>
+
+                    <div class="build-flow">
+                      <div class="flow-node">pom.xml</div>
+
+                      <span class="flow-arrow"> ↓ </span>
+
+                      <div class="flow-node active-node">Maven</div>
+
+                      <span class="flow-arrow"> ↓ </span>
+
+                      <div class="mini-process-grid">
+                        <span> DEPENDENCIES </span>
+
+                        <span> COMPILE </span>
+
+                        <span> TEST </span>
+
+                        <span> PACKAGE </span>
+                      </div>
+
+                      <span class="flow-arrow"> ↓ </span>
+
+                      <div class="artifact-box">tech-journey-api.jar</div>
+                    </div>
+                  </div>
+                }
+
+                <!-- BOOT -->
+
+                @case ('BOOT') {
+                  <div class="visual-stage">
+                    <span class="visual-label"> SPRING BOOT STARTUP </span>
+
+                    <div class="vertical-flow">
+                      <div class="flow-node">JAR</div>
+
+                      <span class="flow-arrow"> ↓ </span>
+
+                      <div class="flow-node">JVM</div>
+
+                      <span class="flow-arrow"> ↓ </span>
+
+                      <div class="flow-node">main()</div>
+
+                      <span class="flow-arrow"> ↓ </span>
+
+                      <div class="flow-node active-node">SpringApplication.run()</div>
+
+                      <span class="flow-arrow"> ↓ </span>
+
+                      <div class="context-box">APPLICATION CONTEXT</div>
+                    </div>
+                  </div>
+                }
+
+                <!-- SCAN -->
+
+                @case ('SCAN') {
+                  <div class="visual-stage">
+                    <span class="visual-label"> COMPONENT SCANNING </span>
+
+                    <div class="scan-container">
+                      <div>
+                        <span> &#64;RestController </span>
+
+                        <strong> ✓ FOUND </strong>
+                      </div>
+
+                      <div>
+                        <span> &#64;Service </span>
+
+                        <strong> ✓ FOUND </strong>
+                      </div>
+
+                      <div>
+                        <span> &#64;Component </span>
+
+                        <strong> ✓ FOUND </strong>
+                      </div>
+
+                      <div>
+                        <span> Repository </span>
+
+                        <strong> ✓ FOUND </strong>
+                      </div>
+
+                      <div>
+                        <span> &#64;RestControllerAdvice </span>
+
+                        <strong> ✓ FOUND </strong>
+                      </div>
+                    </div>
+                  </div>
+                }
+
+                <!-- INJECT -->
+
+                @case ('INJECT') {
+                  <div class="visual-stage">
+                    <span class="visual-label"> SPRING CONTAINER </span>
+
+                    <div class="dependency-stack">
+                      <div class="bean-card">
+                        CONTROLLER
+
+                        <span> Bean Created </span>
+                      </div>
+
+                      <div class="injection-line">↓ inject</div>
+
+                      <div class="bean-card">
+                        SERVICE
+
+                        <span> Bean Created </span>
+                      </div>
+
+                      <div class="injection-line">↓ inject</div>
+
+                      <div class="bean-card">
+                        REPOSITORY
+
+                        <span> Proxy Created </span>
+                      </div>
+                    </div>
+                  </div>
+                }
+
+                <!-- CONFIGURE -->
+
+                @case ('CONFIGURE') {
+                  <div class="visual-stage">
+                    <span class="visual-label"> AUTO-CONFIGURATION </span>
+
+                    <div class="configuration-grid">
+                      <div class="config-card">
+                        <span> WEB STARTER </span>
+
+                        <strong> DETECTED </strong>
+                      </div>
+
+                      <div class="config-card">
+                        <span> SPRING MVC </span>
+
+                        <strong> ✓ CONFIGURED </strong>
+                      </div>
+
+                      <div class="config-card">
+                        <span> JACKSON </span>
+
+                        <strong> ✓ CONFIGURED </strong>
+                      </div>
+
+                      <div class="config-card">
+                        <span> DATA SOURCE </span>
+
+                        <strong> ✓ CONFIGURED </strong>
+                      </div>
+
+                      <div class="config-card">
+                        <span> HIBERNATE </span>
+
+                        <strong> ✓ CONFIGURED </strong>
+                      </div>
+
+                      <div class="config-card">
+                        <span> WEB SERVER </span>
+
+                        <strong> ✓ CONFIGURED </strong>
+                      </div>
+                    </div>
+                  </div>
+                }
+
+                <!-- RUN -->
+
+                @case ('RUN') {
+                  <div class="visual-stage">
+                    <span class="visual-label"> APPLICATION STARTING </span>
+
+                    <div class="runtime-flow">
+                      <div class="runtime-node">APPLICATION CONTEXT</div>
+
+                      <span class="flow-arrow"> ↓ </span>
+
+                      <div class="runtime-node">WEB SERVER</div>
+
+                      <span class="flow-arrow"> ↓ </span>
+
+                      <div class="runtime-node">SPRING MVC</div>
+
+                      <span class="flow-arrow"> ↓ </span>
+
+                      <div class="runtime-node active-node">CONTROLLERS READY</div>
+                    </div>
+                  </div>
+                }
+
+                <!-- INITIALIZING -->
+
+                @default {
+                  <div class="starting-state">
+                    <div class="loader-ring"></div>
+
+                    <span> INITIALIZING... </span>
+                  </div>
+                }
+              }
+            }
+
+            <!-- =========================
+                 ONLINE
+                 ========================= -->
+
+            @if (bootComplete()) {
+              <div class="online-state">
+                <div class="online-orb">
+                  <span></span>
+                </div>
+
+                <span class="online-label"> TECH JOURNEY API </span>
+
+                <h3>ONLINE</h3>
+
+                <div class="system-summary">
+                  <span>
+                    JAVA
+
+                    <strong> 17 </strong>
+                  </span>
+
+                  <span>
+                    SPRING BOOT
+
+                    <strong> 4.1.1 </strong>
+                  </span>
+
+                  <span>
+                    BUILD
+
+                    <strong> MAVEN </strong>
+                  </span>
+
+                  <span>
+                    DATABASE
+
+                    <strong> H2 </strong>
+                  </span>
+                </div>
+              </div>
+            }
+          </div>
+
+          <!-- =========================
+               CURRENT STAGE
+               ========================= -->
+
+          <aside class="stage-info-panel">
+            @if (currentStage(); as stage) {
+              <span class="stage-info-eyebrow"> CURRENT STAGE </span>
+
+              <div class="current-stage-number">
+                {{ stage.number }}
+              </div>
+
+              <h3>
+                {{ stage.title }}
+              </h3>
+
+              <h4>
+                {{ stage.subtitle }}
+              </h4>
+
+              <p>
+                {{ stage.description }}
+              </p>
+            } @else {
+              <span class="stage-info-eyebrow"> SYSTEM </span>
+
+              <h3>INITIALIZING</h3>
+
+              <p>Preparing the Spring Boot startup sequence.</p>
+            }
+
+            @if (bootComplete()) {
+              <div class="complete-message">
+                <span> ✓ </span>
+
+                <div>
+                  <strong> Application Ready </strong>
+
+                  <p>
+                    Spring has assembled the application and the API is ready to receive requests.
+                  </p>
+                </div>
+              </div>
+            }
+          </aside>
+        </div>
+
+        <!-- ACTIONS -->
+
+        <div class="boot-actions">
+          <button type="button" class="restart-button" (click)="restartBoot()">
+            ↻ RESTART BOOT
+          </button>
+        </div>
+      </div>
+    }
+  </section>
+
+  <!-- =========================
+       02 — UNDERSTAND
+       ========================= -->
+
+  <section class="lab-layer understand-layer">
+    <div class="layer-heading">
+      <div class="layer-number">02</div>
+
+      <div>
+        <span class="layer-label"> UNDERSTAND </span>
+
+        <h2>Follow Spring Boot Startup</h2>
+
+        <p>
+          Spring Boot makes application startup feel simple, but several responsibilities are being
+          performed underneath that single startup command.
+        </p>
+      </div>
+    </div>
+
+    <div class="lifecycle-pipeline">
+      @for (stage of stages; track stage.key; let last = $last) {
+        <div class="lifecycle-stage-wrapper">
+          <article class="lifecycle-stage">
+            <span class="lifecycle-stage-number">
+              {{ stage.number }}
+            </span>
+
+            <div>
+              <strong>
+                {{ stage.title }}
+              </strong>
+
+              <span>
+                {{ stage.subtitle }}
+              </span>
+
+              <p>
+                {{ stage.description }}
+              </p>
+            </div>
+          </article>
+
+          @if (!last) {
+            <div class="lifecycle-arrow" aria-hidden="true">↓</div>
+          }
+        </div>
+      }
+    </div>
+
+    <aside class="responsibility-callout">
+      <span class="callout-label"> WHO DOES WHAT? </span>
+
+      <div class="responsibility-grid">
+        <div>
+          <strong> MAVEN </strong>
+
+          <span> Dependencies • Compile • Test • Package </span>
+        </div>
+
+        <div>
+          <strong> SPRING </strong>
+
+          <span> Beans • Container • Dependency Injection </span>
+        </div>
+
+        <div>
+          <strong> SPRING BOOT </strong>
+
+          <span> Startup • Auto-Configuration • Web Setup </span>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- =========================
+       03 — ENGINEER
+       ========================= -->
+
+  <section class="lab-layer engineer-layer">
+    <div class="layer-heading engineer-heading">
+      <div class="layer-number">03</div>
+
+      <div>
+        <span class="layer-label"> ENGINEER </span>
+
+        <h2>Look Under the Covers</h2>
+
+        <p>
+          Connect the visual startup sequence to the Spring Boot configuration and Java code that
+          make it happen.
+        </p>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="engineer-toggle"
+      [class.open]="implementationOpen()"
+      [attr.aria-expanded]="implementationOpen()"
+      (click)="toggleImplementation()"
+    >
+      <span>
+        {{ implementationOpen() ? 'HIDE IMPLEMENTATION' : 'VIEW IMPLEMENTATION' }}
+      </span>
+
+      <span class="toggle-icon" aria-hidden="true">
+        {{ implementationOpen() ? '−' : '+' }}
+      </span>
+    </button>
+
+    @if (implementationOpen()) {
+      <div class="engineer-content">
+        <div class="implementation-placeholder">
+          <span class="implementation-eyebrow"> SPRING BOOT IMPLEMENTATION </span>
+
+          <h3>Application Startup</h3>
+
+          <p>
+            This area will connect the lifecycle visualization to the real Tech Journey
+            implementation: Maven configuration, application startup, component scanning, dependency
+            injection, Spring Data, and auto-configuration.
+          </p>
+        </div>
+      </div>
+    }
+  </section>
+
+  <button type="button" class="back-to-experiments-button">← BACK TO EXPERIMENTS</button>
+</section>

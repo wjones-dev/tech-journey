@@ -1,0 +1,1474 @@
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   SPRING BOOT LIFECYCLE
+   Experiment-specific styles only.
+   Shared Engineering Lab styles live in styles.css.
+   ========================================================= */
+
+
+/* =========================
+   BOOT LAUNCH
+   ========================= */
+
+.boot-launch-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 0.72fr)
+    minmax(420px, 1.28fr);
+
+  gap: 30px;
+
+  align-items: stretch;
+}
+
+
+/* =========================
+   BOOT CONTROL PANEL
+   ========================= */
+
+.boot-control-panel {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+
+.offline-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 18px;
+
+  color: #8095a6;
+
+  font-size: 0.64rem;
+  font-weight: 900;
+
+  letter-spacing: 0.1rem;
+}
+
+
+.offline-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #435967;
+}
+
+
+.boot-control-panel h3 {
+  margin:
+    0 0 10px;
+
+  color: #edf8ff;
+
+  font-size: 1.35rem;
+}
+
+
+.boot-control-panel p {
+  margin:
+    0 0 22px;
+
+  color: #8297a8;
+
+  font-size: 0.8rem;
+
+  line-height: 1.65;
+}
+
+
+/* =========================
+   RUN BUTTON
+   ========================= */
+
+.run-button {
+  width: 100%;
+
+  min-height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.52);
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(44, 176, 219, 0.18),
+      rgba(85, 91, 230, 0.17)
+    );
+
+  color: #c5f7ff;
+
+  font-family: inherit;
+
+  font-size: 0.74rem;
+  font-weight: 900;
+
+  letter-spacing: 0.08rem;
+
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+.run-button:hover {
+  transform:
+    translateY(-1px);
+
+  border-color: #69e6ff;
+
+  box-shadow:
+    0 0 22px rgba(105, 230, 255, 0.07);
+}
+
+
+/* =========================
+   POWER VISUAL
+   ========================= */
+
+.boot-launch-visual {
+  display: flex;
+
+  min-height: 340px;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 24px;
+
+  padding: 30px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 16px;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(76, 138, 165, 0.16),
+      transparent 54%
+    ),
+    rgba(0, 0, 0, 0.2);
+}
+
+
+.visual-label {
+  color: #69e6ff;
+
+  font-size: 0.63rem;
+  font-weight: 900;
+
+  letter-spacing: 0.16rem;
+}
+
+
+.power-core {
+  position: relative;
+
+  display: flex;
+
+  width: 155px;
+  height: 155px;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+}
+
+
+.power-ring {
+  position: absolute;
+
+  inset: 0;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.5);
+
+  border-radius: 50%;
+
+  animation:
+    springPowerPulse 2.4s
+    ease-in-out infinite;
+}
+
+
+.power-ring-inner {
+  inset: 22px;
+
+  border-color:
+    rgba(105, 230, 255, 0.18);
+
+  animation-delay:
+    0.35s;
+}
+
+
+.power-center {
+  width: 54px;
+  height: 54px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.75);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(105, 230, 255, 0.58),
+      rgba(105, 230, 255, 0.08)
+    );
+
+  box-shadow:
+    0 0 30px rgba(105, 230, 255, 0.27);
+}
+
+
+.boot-launch-status {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 8px;
+}
+
+
+.boot-launch-status span {
+  padding:
+    6px 9px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.12);
+
+  border-radius: 999px;
+
+  background:
+    rgba(105, 230, 255, 0.035);
+
+  color: #71899a;
+
+  font-size: 0.56rem;
+  font-weight: 900;
+
+  letter-spacing: 0.08rem;
+}
+
+
+/* =========================
+   BOOT CONSOLE
+   ========================= */
+
+.boot-console {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+
+/* =========================
+   STAGE RAIL
+   ========================= */
+
+.stage-rail {
+  display: grid;
+
+  grid-template-columns:
+    repeat(6, minmax(0, 1fr));
+
+  gap: 7px;
+}
+
+
+.stage-step {
+  display: grid;
+
+  grid-template-columns:
+    auto 1fr auto;
+
+  gap: 7px;
+
+  align-items: center;
+
+  min-width: 0;
+
+  padding:
+    11px 10px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.075);
+
+  border-radius: 9px;
+
+  background:
+    rgba(0, 0, 0, 0.14);
+
+  opacity: 0.45;
+
+  transition:
+    opacity 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+
+.stage-step.active {
+  opacity: 1;
+
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(105, 230, 255, 0.62);
+
+  background:
+    rgba(105, 230, 255, 0.09);
+
+  box-shadow:
+    0 0 18px rgba(105, 230, 255, 0.06);
+}
+
+
+.stage-step.complete {
+  opacity: 0.92;
+
+  border-color:
+    rgba(105, 230, 255, 0.2);
+}
+
+
+.stage-number {
+  color: #5daec1;
+
+  font-size: 0.56rem;
+  font-weight: 900;
+}
+
+
+.stage-name {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: #a9bbc8;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  letter-spacing: 0.05rem;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+.stage-status {
+  color: #69e6ff;
+
+  font-size: 0.65rem;
+}
+
+
+/* =========================
+   BOOT WORKSPACE
+   ========================= */
+
+.boot-workspace {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.65fr)
+    minmax(230px, 0.65fr);
+
+  min-height: 430px;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.075);
+
+  border-radius: 16px;
+
+  background:
+    rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================
+   BOOT VISUAL
+   ========================= */
+
+.boot-visual-panel {
+  position: relative;
+
+  display: flex;
+
+  min-height: 430px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 28px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(76, 138, 165, 0.13),
+      transparent 58%
+    );
+}
+
+
+.visual-stage {
+  display: flex;
+
+  width: 100%;
+  max-width: 580px;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 22px;
+
+  animation:
+    springStageEnter 420ms ease;
+}
+
+
+/* =========================
+   STARTUP FLOW
+   ========================= */
+
+.build-flow,
+.vertical-flow,
+.runtime-flow,
+.dependency-stack {
+  display: flex;
+
+  width: 100%;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+
+.flow-node,
+.runtime-node,
+.context-box,
+.artifact-box,
+.bean-card {
+  width:
+    min(100%, 310px);
+
+  padding:
+    12px 16px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 9px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #a9bbc8;
+
+  text-align: center;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  letter-spacing: 0.05rem;
+
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+.active-node,
+.context-box {
+  border-color:
+    rgba(105, 230, 255, 0.5);
+
+  background:
+    rgba(105, 230, 255, 0.075);
+
+  color: #dffaff;
+
+  box-shadow:
+    0 0 22px rgba(105, 230, 255, 0.06);
+}
+
+
+.artifact-box {
+  border-color:
+    rgba(105, 230, 255, 0.24);
+
+  color: #bfeef6;
+}
+
+
+.flow-arrow,
+.injection-line {
+  color:
+    rgba(105, 230, 255, 0.4);
+
+  font-size: 0.75rem;
+}
+
+
+/* =========================
+   MAVEN PROCESS
+   ========================= */
+
+.mini-process-grid {
+  display: grid;
+
+  width: 100%;
+  max-width: 430px;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 7px;
+}
+
+
+.mini-process-grid span {
+  padding:
+    9px 5px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.08);
+
+  border-radius: 7px;
+
+  background:
+    rgba(105, 230, 255, 0.035);
+
+  color: #71899a;
+
+  text-align: center;
+
+  font-size: 0.56rem;
+  font-weight: 900;
+
+  letter-spacing: 0.04rem;
+}
+
+
+/* =========================
+   COMPONENT SCAN
+   ========================= */
+
+.scan-container {
+  display: grid;
+
+  width: 100%;
+  max-width: 520px;
+
+  gap: 8px;
+}
+
+
+.scan-container div {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding:
+    12px 14px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.075);
+
+  border-radius: 8px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  animation:
+    springScanFound 500ms ease;
+}
+
+
+.scan-container span {
+  color: #a7bac7;
+
+  font-size: 0.72rem;
+}
+
+
+.scan-container strong {
+  flex-shrink: 0;
+
+  color: #69e6ff;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  letter-spacing: 0.05rem;
+}
+
+
+/* =========================
+   BEANS / INJECTION
+   ========================= */
+
+.bean-card {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.bean-card span {
+  color: #71899a;
+
+  font-size: 0.61rem;
+  font-weight: 600;
+}
+
+
+/* =========================
+   AUTO-CONFIGURATION
+   ========================= */
+
+.configuration-grid {
+  display: grid;
+
+  width: 100%;
+  max-width: 520px;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 9px;
+}
+
+
+.config-card {
+  display: flex;
+
+  min-height: 76px;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 10px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.075);
+
+  border-radius: 9px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+
+.config-card span {
+  color: #a8bbc7;
+
+  font-size: 0.67rem;
+  font-weight: 800;
+}
+
+
+.config-card strong {
+  color: #69e6ff;
+
+  font-size: 0.57rem;
+  font-weight: 900;
+
+  letter-spacing: 0.05rem;
+}
+
+
+/* =========================
+   INITIALIZING
+   ========================= */
+
+.starting-state {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 18px;
+
+  color: #8197a7;
+
+  font-size: 0.66rem;
+  font-weight: 900;
+
+  letter-spacing: 0.14rem;
+}
+
+
+.loader-ring {
+  width: 62px;
+  height: 62px;
+
+  border:
+    2px solid rgba(105, 230, 255, 0.12);
+
+  border-top-color:
+    #69e6ff;
+
+  border-radius: 50%;
+
+  animation:
+    springSpin 900ms linear infinite;
+}
+
+
+/* =========================
+   ONLINE
+   ========================= */
+
+.online-state {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  animation:
+    springStageEnter 500ms ease;
+}
+
+
+.online-orb {
+  display: flex;
+
+  width: 94px;
+  height: 94px;
+
+  margin-bottom: 20px;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.34);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 32px rgba(105, 230, 255, 0.08);
+}
+
+
+.online-orb span {
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  background: #69e6ff;
+
+  box-shadow:
+    0 0 8px rgba(105, 230, 255, 0.9),
+    0 0 22px rgba(105, 230, 255, 0.42);
+}
+
+
+.online-label {
+  color: #8fa6b5;
+
+  font-size: 0.63rem;
+  font-weight: 900;
+
+  letter-spacing: 0.16rem;
+}
+
+
+.online-state h3 {
+  margin:
+    6px 0 20px;
+
+  color: #edfaff;
+
+  font-size: 2rem;
+
+  letter-spacing: 0.18rem;
+}
+
+
+.system-summary {
+  display: grid;
+
+  width: 100%;
+  max-width: 460px;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 7px;
+}
+
+
+.system-summary span {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  padding: 9px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.055);
+
+  border-radius: 7px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #667d8d;
+
+  font-size: 0.52rem;
+  font-weight: 800;
+}
+
+
+.system-summary strong {
+  color: #dcecf5;
+
+  font-size: 0.66rem;
+}
+
+
+/* =========================
+   CURRENT STAGE INFO
+   ========================= */
+
+.stage-info-panel {
+  padding:
+    30px 24px;
+
+  border-left:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  background:
+    rgba(255, 255, 255, 0.018);
+}
+
+
+.stage-info-eyebrow {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #69e6ff;
+
+  font-size: 0.59rem;
+  font-weight: 900;
+
+  letter-spacing: 0.12rem;
+}
+
+
+.current-stage-number {
+  margin-bottom: 8px;
+
+  color:
+    rgba(105, 230, 255, 0.17);
+
+  font-size: 2.3rem;
+  font-weight: 900;
+}
+
+
+.stage-info-panel h3 {
+  margin:
+    0 0 5px;
+
+  color: #edf8ff;
+
+  font-size: 1.25rem;
+}
+
+
+.stage-info-panel h4 {
+  margin:
+    0 0 14px;
+
+  color: #7fc7d7;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+
+.stage-info-panel p {
+  margin: 0;
+
+  color: #8196a7;
+
+  font-size: 0.78rem;
+
+  line-height: 1.65;
+}
+
+
+.complete-message {
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 26px;
+
+  padding-top: 18px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+.complete-message > span {
+  color: #69e6ff;
+}
+
+
+.complete-message strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #dcecf5;
+
+  font-size: 0.72rem;
+}
+
+
+.complete-message p {
+  color: #728898;
+
+  font-size: 0.69rem;
+}
+
+
+/* =========================
+   BOOT ACTIONS
+   ========================= */
+
+.boot-actions {
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+
+.restart-button {
+  padding:
+    10px 15px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.18);
+
+  border-radius: 9px;
+
+  background:
+    rgba(105, 230, 255, 0.035);
+
+  color: #80bfcf;
+
+  font-family: inherit;
+
+  font-size: 0.62rem;
+  font-weight: 900;
+
+  letter-spacing: 0.07rem;
+
+  cursor: pointer;
+
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    background 160ms ease;
+}
+
+
+.restart-button:hover {
+  border-color:
+    rgba(105, 230, 255, 0.4);
+
+  background:
+    rgba(105, 230, 255, 0.07);
+
+  color: #bceefa;
+}
+
+
+/* =========================
+   UNDERSTAND
+   ========================= */
+
+.lifecycle-pipeline {
+  max-width: 780px;
+
+  margin:
+    0 auto;
+}
+
+
+.lifecycle-stage-wrapper {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.lifecycle-stage {
+  display: grid;
+
+  grid-template-columns:
+    44px minmax(0, 1fr);
+
+  gap: 15px;
+
+  padding:
+    16px 18px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 12px;
+
+  background:
+    rgba(0, 0, 0, 0.14);
+}
+
+
+.lifecycle-stage-number {
+  display: flex;
+
+  width: 36px;
+  height: 36px;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.18);
+
+  border-radius: 9px;
+
+  background:
+    rgba(105, 230, 255, 0.05);
+
+  color: #69e6ff;
+
+  font-size: 0.63rem;
+  font-weight: 900;
+}
+
+
+.lifecycle-stage strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #edf8ff;
+
+  font-size: 0.82rem;
+}
+
+
+.lifecycle-stage div > span {
+  display: block;
+
+  color: #7db5c3;
+
+  font-size: 0.67rem;
+  font-weight: 700;
+}
+
+
+.lifecycle-stage p {
+  margin:
+    7px 0 0;
+
+  color: #7f94a6;
+
+  font-size: 0.76rem;
+
+  line-height: 1.55;
+}
+
+
+.lifecycle-arrow {
+  height: 24px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color:
+    rgba(105, 230, 255, 0.4);
+}
+
+
+/* =========================
+   WHO DOES WHAT
+   ========================= */
+
+.responsibility-callout {
+  max-width: 780px;
+
+  margin:
+    28px auto 0;
+
+  padding:
+    18px;
+
+  border:
+    1px solid rgba(105, 230, 255, 0.12);
+
+  border-radius: 12px;
+
+  background:
+    rgba(105, 230, 255, 0.035);
+}
+
+
+.responsibility-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+
+.responsibility-grid div {
+  padding:
+    13px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 9px;
+
+  background:
+    rgba(0, 0, 0, 0.12);
+}
+
+
+.responsibility-grid strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #dffaff;
+
+  font-size: 0.66rem;
+}
+
+
+.responsibility-grid span {
+  color: #718797;
+
+  font-size: 0.68rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   ENGINEER PLACEHOLDER
+   ========================= */
+
+.implementation-placeholder {
+  padding: 26px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(105, 230, 255, 0.045),
+      rgba(255, 255, 255, 0.015)
+    );
+}
+
+
+.implementation-eyebrow {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #69e6ff;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  letter-spacing: 0.11rem;
+}
+
+
+.implementation-placeholder h3 {
+  margin:
+    0 0 10px;
+
+  color: #edfaff;
+
+  font-size: 1.3rem;
+}
+
+
+.implementation-placeholder p {
+  max-width: 720px;
+
+  margin: 0;
+
+  color: #8ea3b3;
+
+  line-height: 1.65;
+}
+
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes springPowerPulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+
+    transform:
+      scale(0.96);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+      scale(1.04);
+  }
+
+}
+
+
+@keyframes springStageEnter {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+@keyframes springScanFound {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0);
+  }
+
+}
+
+
+@keyframes springSpin {
+
+  to {
+    transform:
+      rotate(360deg);
+  }
+
+}
+
+
+/* =========================
+   TABLET / MOBILE
+   ========================= */
+
+@media (max-width: 900px) {
+
+  .boot-launch-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .stage-rail {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+
+  .boot-workspace {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .stage-info-panel {
+    border-left: 0;
+
+    border-top:
+      1px solid rgba(255, 255, 255, 0.07);
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .boot-launch-visual {
+    min-height: 280px;
+
+    padding: 22px;
+  }
+
+
+  .responsibility-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+}
+
+
+@media (max-width: 520px) {
+
+  .stage-rail {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .stage-name {
+    font-size: 0.55rem;
+  }
+
+
+  .boot-visual-panel {
+    min-height: 380px;
+
+    padding:
+      22px 14px;
+  }
+
+
+  .stage-info-panel {
+    padding:
+      22px 18px;
+  }
+
+
+  .mini-process-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .configuration-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .system-summary {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .lifecycle-stage {
+    grid-template-columns:
+      36px minmax(0, 1fr);
+
+    padding:
+      14px 12px;
+  }
+
+
+  .lifecycle-stage-number {
+    width: 32px;
+    height: 32px;
+  }
+
+}

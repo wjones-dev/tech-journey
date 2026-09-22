@@ -13,33 +13,6 @@
   gap: 22px;
 }
 
-.back-to-experiments-button {
-  align-self: flex-start;
-
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-  font-size: 0.72rem;
-  font-weight: 700;
-
-  letter-spacing: 0.12rem;
-
-  cursor: pointer;
-
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.back-to-experiments-button:hover {
-  color: #087eae;
-
-  transform:
-    translateX(-3px);
-}
-
 .java-console-header {
   display: flex;
   align-items: flex-start;

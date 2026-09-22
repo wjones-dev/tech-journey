@@ -74,7 +74,7 @@ export class LabTechnologyComponent {
     {
       key: 'ATARI',
 
-      number: '1983',
+      number: '01',
 
       eyebrow: 'GAMING TECHNOLOGY',
 
@@ -90,7 +90,7 @@ export class LabTechnologyComponent {
     {
       key: 'HOME_COMPUTERS',
 
-      number: '1985',
+      number: '02',
 
       eyebrow: 'PERSONAL COMPUTING',
 
@@ -106,7 +106,7 @@ export class LabTechnologyComponent {
     {
       key: 'NAPSTER',
 
-      number: '1999',
+      number: '03',
 
       eyebrow: 'MUSIC • NETWORKING • P2P',
 
@@ -131,7 +131,7 @@ readonly webExperiments:
   {
     key: 'EARLY_WEB',
 
-    number: '1993–96',
+    number: '01',
 
     eyebrow: 'EARLY WEB DEVELOPMENT',
 
@@ -147,7 +147,7 @@ readonly webExperiments:
   {
     key: 'ANGULAR',
 
-    number: '2016',
+    number: '02',
 
     eyebrow: 'MODERN WEB DEVELOPMENT',
 
@@ -197,7 +197,7 @@ readonly webExperiments:
       description:
         'Follow a request through Controller, Service, JPA, H2, DTO mapping, and exception handling.',
 
-      available: false,
+      available: true,
     },
 
 
@@ -228,7 +228,7 @@ readonly cloudDevOpsExperiments:
   {
     key: 'AWS_CLOUD',
 
-    number: '2018',
+    number: '01',
 
     eyebrow: 'AWS / CLOUD COMPUTING',
 
@@ -244,7 +244,7 @@ readonly cloudDevOpsExperiments:
   {
     key: 'CONTAINERS_ORCHESTRATION',
 
-    number: '2020',
+    number: '02',
 
     eyebrow: 'CONTAINERS & ORCHESTRATION',
 
@@ -260,7 +260,7 @@ readonly cloudDevOpsExperiments:
   {
     key: 'CICD_CLOUD_NATIVE',
 
-    number: '2022',
+    number: '03',
 
     eyebrow: 'CI/CD & CLOUD-NATIVE DEVELOPMENT',
 
@@ -284,7 +284,7 @@ readonly aiExperiments:
   {
     key: 'AGENTIC_AI',
 
-    number: '2026',
+    number: '01',
 
     eyebrow: 'AGENTIC AI / AI ENGINEERING',
 
