@@ -23,9 +23,25 @@ export class TechnologyDetailComponent {
   detail = signal<TechnologyDetail | null>(null);
 
   previousEvent = signal<TimelineEvent | null>(null);
+
   nextEvent = signal<TimelineEvent | null>(null);
 
   concepts = computed(() => this.detail()?.concepts ?? []);
+
+  /*
+   * Reuse the current technology artwork as the atmospheric
+   * background for the detail page.
+   *
+   * When detail() changes, Angular automatically recalculates
+   * this value and updates the page background.
+   */
+  technologyBackground = computed(() => {
+    const imageUrl = this.detail()?.imageUrl;
+
+    return imageUrl
+      ? `url("${imageUrl}")`
+      : 'none';
+  });
 
   constructor() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -82,7 +98,11 @@ export class TechnologyDetailComponent {
 
         const currentIndex = sortedEvents.findIndex((item) => item.id === currentId);
 
-        this.previousEvent.set(currentIndex > 0 ? sortedEvents[currentIndex - 1] : null);
+        this.previousEvent.set(
+          currentIndex > 0
+            ? sortedEvents[currentIndex - 1]
+            : null,
+        );
 
         this.nextEvent.set(
           currentIndex >= 0 && currentIndex < sortedEvents.length - 1

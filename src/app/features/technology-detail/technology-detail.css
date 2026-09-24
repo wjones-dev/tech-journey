@@ -2,39 +2,115 @@
   display: block;
 }
 
+
+/* =========================
+   TECHNOLOGY DETAIL PAGE
+   ========================= */
+
 .technology-detail {
+  position: relative;
+
+  isolation: isolate;
+
   min-height: 100vh;
 
   padding: 70px 30px 120px;
 
-  background:
-    radial-gradient(circle at 75% 15%, rgba(94, 231, 255, 0.12), transparent 28%),
-    radial-gradient(circle at 15% 75%, rgba(139, 92, 246, 0.1), transparent 32%), #05070d;
+  overflow-x: hidden;
+
+  background: #05070d;
 
   color: #ffffff;
 }
 
-.technology-image {
-  position: relative;
-  z-index: 2;
 
-  display: block;
+/*
+ * Dynamic technology atmosphere.
+ *
+ * The current technology image is reused as a large,
+ * blurred background image behind the page.
+ */
+.technology-detail::before {
+  content: '';
 
-  width: 100%;
-  height: auto;
+  position: fixed;
 
-  max-width: 395px;
-  max-height: 300px;
-  margin-top: 5px;
+  inset: -40px;
 
-  border-radius: 14px;
+  z-index: -2;
+
+  background-image: var(--technology-bg);
+
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+
+  transform: scale(1.08);
+
+  opacity: 0.62;
+  filter: blur(12px) saturate(1.35) brightness(1.08);
+
+  pointer-events: none;
 }
 
+
+/*
+ * Dark museum lighting layer.
+ *
+ * This keeps the page connected visually to the Museum
+ * while allowing each technology image to influence
+ * the atmosphere underneath.
+ */
+.technology-detail::after {
+  content: '';
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 76% 18%,
+      rgba(94, 231, 255, 0.13),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 15% 72%,
+      rgba(78, 88, 160, 0.12),
+      transparent 34%
+    ),
+   linear-gradient(
+  180deg,
+  rgba(3, 6, 12, 0.38) 0%,
+  rgba(4, 7, 13, 0.5) 48%,
+  rgba(3, 6, 11, 0.64) 100%
+)
+}
+
+
+/* =========================
+   PAGE SHELL
+   ========================= */
+
 .detail-shell {
+  position: relative;
+
+  z-index: 1;
+
   width: min(1180px, 100%);
 
   margin: 0 auto;
 }
+
+
+/* =========================
+   BACK BUTTON
+   ========================= */
 
 .back-button {
   display: inline-flex;
@@ -51,7 +127,7 @@
 
   background: transparent;
 
-  color: #7f899c;
+  color: #8995a8;
 
   font-family: inherit;
   font-size: 0.68rem;
@@ -72,6 +148,7 @@
   transform: translateX(-4px);
 }
 
+
 /* =========================
    HERO
    ========================= */
@@ -79,7 +156,9 @@
 .detail-hero {
   display: grid;
 
-  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  grid-template-columns:
+    minmax(0, 1.2fr)
+    minmax(320px, 0.8fr);
 
   gap: 70px;
 
@@ -99,6 +178,9 @@
   font-weight: 800;
 
   letter-spacing: 0.16rem;
+
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.45);
 }
 
 .title-row {
@@ -119,16 +201,22 @@
   line-height: 0.95;
 
   letter-spacing: -0.06em;
+
+  text-shadow:
+    0 5px 24px rgba(0, 0, 0, 0.52);
 }
 
 .year {
   padding-bottom: 12px;
 
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.42);
 
   font-family: monospace;
 
   font-size: 1rem;
+
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-description {
@@ -136,15 +224,19 @@
 
   margin: 30px 0 0;
 
-  color: #a5adbd;
+  color: #c0cad6;
 
   font-size: 1.08rem;
 
   line-height: 1.8;
+
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.55);
 }
 
+
 /* =========================
-   VISUAL
+   TECHNOLOGY VISUAL
    ========================= */
 
 .visual-panel {
@@ -161,15 +253,26 @@
 
   overflow: hidden;
 
-  border: 1px solid rgba(94, 231, 255, 0.18);
+  border:
+    1px solid rgba(94, 231, 255, 0.22);
 
   border-radius: 28px;
 
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10, 18, 31, 0.78),
+      rgba(5, 10, 19, 0.68)
+    );
 
-  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter:
+    blur(14px);
 
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
+  backdrop-filter:
+    blur(14px);
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.35);
 }
 
 .visual-glow {
@@ -180,9 +283,34 @@
 
   border-radius: 50%;
 
-  background: rgba(94, 231, 255, 0.18);
+  background:
+    rgba(94, 231, 255, 0.18);
 
-  filter: blur(65px);
+  filter:
+    blur(65px);
+}
+
+.technology-image {
+  position: relative;
+
+  z-index: 2;
+
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-width: 395px;
+  max-height: 300px;
+
+  margin-top: 5px;
+
+  border-radius: 14px;
+
+  filter:
+    drop-shadow(
+      0 18px 30px rgba(0, 0, 0, 0.35)
+    );
 }
 
 .technology-mark {
@@ -216,7 +344,11 @@
   font-weight: 800;
 
   letter-spacing: 0.16rem;
+
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.45);
 }
+
 
 /* =========================
    INFO PANELS
@@ -225,7 +357,8 @@
 .detail-grid {
   display: grid;
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
 
   gap: 24px;
 
@@ -235,11 +368,26 @@
 .info-panel {
   padding: 34px;
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border:
+    1px solid rgba(185, 215, 230, 0.14);
 
   border-radius: 22px;
 
-  background: rgba(255, 255, 255, 0.025);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(9, 17, 29, 0.74),
+      rgba(5, 11, 20, 0.66)
+    );
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
+  backdrop-filter:
+    blur(12px);
+
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.22);
 }
 
 .info-panel h2 {
@@ -248,73 +396,19 @@
   font-size: 1.55rem;
 
   letter-spacing: -0.03em;
+
+  text-shadow:
+    0 3px 16px rgba(0, 0, 0, 0.4);
 }
 
 .info-panel p {
   margin: 0;
 
-  color: #9ca6b8;
+  color: #bac5d2;
 
   line-height: 1.8;
 }
 
-/* =========================
-   CONCEPTS
-   ========================= */
-
-.concept-section {
-  margin-bottom: 70px;
-}
-
-.concept-grid {
-  display: grid;
-
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-
-  gap: 16px;
-
-  margin-top: 24px;
-}
-
-.concept-card {
-  min-height: 120px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: space-between;
-
-  padding: 22px;
-
-  border: 1px solid rgba(255, 255, 255, 0.07);
-
-  border-radius: 16px;
-
-  background: linear-gradient(145deg, rgba(94, 231, 255, 0.045), rgba(255, 255, 255, 0.018));
-
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease;
-}
-
-.concept-card:hover {
-  transform: translateY(-4px);
-
-  border-color: rgba(94, 231, 255, 0.3);
-}
-
-.concept-card span {
-  color: rgba(255, 255, 255, 0.22);
-
-  font-family: monospace;
-}
-
-.concept-card strong {
-  color: #dce4ef;
-
-  font-size: 0.95rem;
-}
 
 /* =========================
    META
@@ -331,14 +425,20 @@
 
   padding: 24px 0;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top:
+    1px solid rgba(255, 255, 255, 0.1);
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.1);
 }
 
 .meta-value {
   color: #dce4ef;
+
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.4);
 }
+
 
 /* =========================
    ACTIONS
@@ -378,34 +478,58 @@
 }
 
 .primary-action {
-  border: 1px solid rgba(94, 231, 255, 0.45);
+  border:
+    1px solid rgba(94, 231, 255, 0.48);
 
-  background: rgba(94, 231, 255, 0.08);
+  background:
+    rgba(14, 39, 50, 0.68);
 
   color: #ffffff;
+
+  -webkit-backdrop-filter:
+    blur(10px);
+
+  backdrop-filter:
+    blur(10px);
 
   cursor: pointer;
 
   transition:
     transform 0.25s ease,
     background 0.25s ease,
+    border-color 0.25s ease,
     box-shadow 0.25s ease;
 }
 
 .primary-action:hover {
-  transform: translateY(-3px);
+  transform:
+    translateY(-3px);
 
-  background: rgba(94, 231, 255, 0.14);
+  border-color:
+    rgba(94, 231, 255, 0.7);
 
-  box-shadow: 0 12px 35px rgba(94, 231, 255, 0.12);
+  background:
+    rgba(22, 66, 79, 0.78);
+
+  box-shadow:
+    0 12px 35px rgba(94, 231, 255, 0.14);
 }
 
 .secondary-action {
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
 
-  background: rgba(255, 255, 255, 0.025);
+  background:
+    rgba(8, 16, 27, 0.6);
 
-  color: rgba(255, 255, 255, 0.35);
+  color:
+    rgba(255, 255, 255, 0.4);
+
+  -webkit-backdrop-filter:
+    blur(10px);
+
+  backdrop-filter:
+    blur(10px);
 
   cursor: not-allowed;
 }
@@ -415,10 +539,93 @@
 
   border-radius: 5px;
 
-  background: rgba(255, 255, 255, 0.05);
+  background:
+    rgba(255, 255, 255, 0.06);
 
   font-size: 0.52rem;
 }
+
+
+/* =========================
+   CONCEPTS
+   ========================= */
+
+.concept-section {
+  margin-bottom: 70px;
+}
+
+.concept-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-top: 24px;
+}
+
+.concept-card {
+  min-height: 120px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 22px;
+
+  border:
+    1px solid rgba(185, 215, 230, 0.13);
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10, 20, 33, 0.68),
+      rgba(5, 12, 22, 0.58)
+    );
+
+  -webkit-backdrop-filter:
+    blur(10px);
+
+  backdrop-filter:
+    blur(10px);
+
+  box-shadow:
+    0 14px 38px rgba(0, 0, 0, 0.16);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.concept-card:hover {
+  transform:
+    translateY(-4px);
+
+  border-color:
+    rgba(94, 231, 255, 0.38);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(15, 34, 47, 0.78),
+      rgba(7, 19, 29, 0.68)
+    );
+}
+
+.concept-card strong {
+  color: #dce4ef;
+
+  font-size: 0.95rem;
+
+  line-height: 1.45;
+}
+
 
 /* =========================
    TECHNOLOGY NAVIGATION
@@ -426,19 +633,24 @@
 
 .technology-navigation {
   position: relative;
+
   z-index: 3;
 
   width: 100%;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
 
   gap: 24px;
 
   margin-top: 8px;
+
   padding-top: 18px;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top:
+    1px solid rgba(255, 255, 255, 0.08);
 }
 
 .nav-side {
@@ -451,6 +663,7 @@
 
 .technology-nav-button {
   display: flex;
+
   align-items: center;
 
   gap: 12px;
@@ -467,7 +680,7 @@
 
   cursor: pointer;
 
-  opacity: 0.55;
+  opacity: 0.65;
 
   transition:
     opacity 0.25s ease,
@@ -477,11 +690,13 @@
 .technology-nav-button:hover {
   opacity: 1;
 
-  transform: translateX(-3px);
+  transform:
+    translateX(-3px);
 }
 
 .technology-nav-button.next:hover {
-  transform: translateX(3px);
+  transform:
+    translateX(3px);
 }
 
 .nav-arrow {
@@ -492,11 +707,13 @@
 
   line-height: 1;
 
-  text-shadow: 0 0 14px rgba(94, 231, 255, 0.35);
+  text-shadow:
+    0 0 14px rgba(94, 231, 255, 0.35);
 }
 
 .nav-info {
   display: flex;
+
   flex-direction: column;
 
   gap: 3px;
@@ -516,7 +733,7 @@
 }
 
 .nav-title {
-  color: #aab5c5;
+  color: #b6c1cf;
 
   font-size: 0.7rem;
   font-weight: 600;
@@ -528,18 +745,67 @@
   color: #ffffff;
 }
 
+
 /* =========================
-   MOBILE
+   TABLET / MOBILE
    ========================= */
 
 @media (max-width: 800px) {
+
+  /*
+   * Slightly strengthen the dark layer on mobile.
+   *
+   * This prevents the technology image from competing
+   * with the stacked text and cards.
+   */
   .technology-detail {
-    padding: 40px 22px 90px;
+    padding:
+      40px 22px 90px;
   }
+
+  .technology-detail::before {
+    inset: -30px;
+
+    background-position:
+      center top;
+
+   
+
+    transform:
+      scale(1.1);
+
+     opacity: 0.62;
+  filter: blur(12px) saturate(1.35) brightness(1.08);
+  }
+
+  .technology-detail::after {
+    background:
+      radial-gradient(
+        circle at 65% 12%,
+        rgba(94, 231, 255, 0.12),
+        transparent 28%
+      ),
+        linear-gradient(
+  180deg,
+  rgba(3, 6, 12, 0.38) 0%,
+  rgba(4, 7, 13, 0.5) 48%,
+  rgba(3, 6, 11, 0.64) 100%
+)
+  }
+
+
+  /* =========================
+     MOBILE BACK BUTTON
+     ========================= */
 
   .back-button {
     margin-bottom: 45px;
   }
+
+
+  /* =========================
+     MOBILE HERO
+     ========================= */
 
   .detail-hero {
     grid-template-columns: 1fr;
@@ -557,27 +823,88 @@
     gap: 10px;
   }
 
+  .title-row h1 {
+    font-size:
+      clamp(3rem, 15vw, 5rem);
+  }
+
   .year {
     padding-bottom: 0;
   }
 
+  .hero-description {
+    margin-top: 24px;
+
+    font-size: 1rem;
+
+    line-height: 1.75;
+  }
+
+
+  /* =========================
+     MOBILE VISUAL
+     ========================= */
+
   .visual-panel {
     min-height: 280px;
+
+    border-radius: 22px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(8, 17, 29, 0.84),
+        rgba(4, 10, 19, 0.76)
+      );
   }
+
+  .technology-image {
+    max-width: 330px;
+
+    max-height: 250px;
+  }
+
+
+  /* =========================
+     MOBILE INFO
+     ========================= */
 
   .detail-grid {
     grid-template-columns: 1fr;
+
+    gap: 18px;
+
+    margin-bottom: 55px;
   }
 
-  .concept-grid {
-    grid-template-columns: 1fr;
+  .info-panel {
+    padding: 28px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(8, 17, 29, 0.82),
+        rgba(4, 10, 19, 0.74)
+      );
   }
+
+
+  /* =========================
+     MOBILE META
+     ========================= */
 
   .technology-meta {
     align-items: flex-start;
 
     flex-direction: column;
+
+    gap: 10px;
   }
+
+
+  /* =========================
+     MOBILE ACTIONS
+     ========================= */
 
   .detail-actions {
     flex-direction: column;
@@ -588,5 +915,134 @@
     width: 100%;
 
     justify-content: center;
+  }
+
+
+  /* =========================
+     MOBILE CONCEPTS
+     ========================= */
+
+  .concept-section {
+    margin-bottom: 55px;
+  }
+
+  .concept-grid {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .concept-card {
+    min-height: 92px;
+
+    background:
+        linear-gradient(
+  180deg,
+  rgba(3, 6, 12, 0.38) 0%,
+  rgba(4, 7, 13, 0.5) 48%,
+  rgba(3, 6, 11, 0.64) 100%
+)
+  }
+
+
+  /* =========================
+     MOBILE NAVIGATION
+     ========================= */
+
+  .technology-navigation {
+    gap: 12px;
+
+    padding-top: 16px;
+  }
+
+  .technology-nav-button {
+    gap: 7px;
+
+    padding:
+      8px 4px;
+  }
+
+  .nav-title {
+    font-size: 0.64rem;
+  }
+
+  .nav-arrow {
+    font-size: 1.7rem;
+  }
+}
+
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 480px) {
+
+  .technology-detail {
+    padding:
+      34px 18px 75px;
+  }
+
+  .technology-detail::before {
+    opacity:
+      0.2;
+  }
+
+  .back-button {
+    margin-bottom: 38px;
+  }
+
+  .detail-hero {
+    gap: 32px;
+
+    margin-bottom: 50px;
+  }
+
+  .title-row h1 {
+    font-size:
+      clamp(2.8rem, 16vw, 4.2rem);
+  }
+
+  .visual-panel {
+    min-height: 250px;
+
+    padding:
+      22px 16px;
+  }
+
+  .technology-image {
+    max-width: 280px;
+
+    max-height: 220px;
+  }
+
+  .info-panel {
+    padding: 24px;
+  }
+
+  .concept-card {
+    min-height: 82px;
+
+    padding: 20px;
+  }
+
+  .technology-navigation {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr);
+
+    gap: 8px;
+  }
+
+  .technology-nav-button {
+    max-width: 100%;
+  }
+
+  .nav-info {
+    min-width: 0;
+  }
+
+  .nav-title {
+    overflow-wrap: anywhere;
   }
 }

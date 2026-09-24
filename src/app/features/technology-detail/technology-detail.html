@@ -1,5 +1,8 @@
 @if (event(); as technology) {
-  <section class="technology-detail">
+  <section
+  class="technology-detail"
+  [style.--technology-bg]="technologyBackground()"
+>
     <div class="detail-shell">
       <button type="button" class="back-button" (click)="backToTimeline()">
         <span aria-hidden="true"> ← </span>
