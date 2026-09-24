@@ -455,10 +455,5 @@ Instead of simply listing technologies such as Angular, Java, Spring Boot, REST,
 
 ---
 
-## Author
-
-**William Jones**
-
-Software Engineer
 
 Tech Journey is an ongoing project and will continue to evolve as additional technologies and engineering experiments are added.
